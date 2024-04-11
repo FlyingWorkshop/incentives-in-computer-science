@@ -48,6 +48,7 @@ Winter 2023}
 \newtheorem*{remark}{Remark}
 
 \newenvironment{mech}[1]{\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title={#1}]}{\end{tcolorbox}}
+\newenvironment{practice}{\begin{tcolorbox}[colback=blue!5!white,colframe=blue!75!black,title=Practice]}{\end{tcolorbox}}
 
 \begin{document}
 
@@ -66,7 +67,7 @@ Winter 2023}
 
 \newpage
 
-\section{One-Sided Matching (1/9/2023)}
+\section{One-Sided Matching}
 
 Model:
 \begin{itemize}
@@ -146,7 +147,7 @@ One issue with this: dictatorship can have a large affect on others. Suppose the
 
 \newpage
 
-\section{Two-Sided Matching (1/11/2023)}
+\section{Two-Sided Matching}
 After medical school, med students start their internship called a ``residency''. Each (prospective) doctor has preferences over hospitals and each hospital has preferences over doctors. How should doctors and hospitals be matched?
 
 The biggest difference between residency matching and dorms is that we now have two sided preferences. Another difference: dorm assignments are all through Stanford's centralized system, but there is nothing stopping doctors and hospitals from matching on their own as an outside option.
@@ -307,18 +308,25 @@ Why do hospitals still use safety picks?
 	\item Reputation/ego: hospitals publish a ``number needed to fill'' number, the lowest rank in a hospital's list of a doctor matched to the hospital.
 \end{itemize}
 
-Another situation where two-sided matching comes up is in college admissions: students apply and colleges decide who to accept. In the US, application fees and the time it takes to write applications restricts how many applications a student can submit. In other countries, there is a single standardized test that determines admissions.
+Another situation where two-sided matching comes up is in college admissions: students apply and colleges decide who to accept. 
+In the US, application fees and the time it takes to write applications restricts how many applications a student can submit.
+In other countries, there is a single standardized test that determines admissions.
 
 Even when there is no outside option, deferred acceptance is fast to run and is used to match packets to servers.	
 
 \newpage
 
-\section{Top Trading Cycles (1/18/2023)}
+\section{Top Trading Cycles}
 From before, we had two mechanisms for two different models of matching:
 \begin{itemize}
 	\item Random Serial Dictatorship for one sided matching;
 	\item Deferred Acceptance for two sided matching.
 \end{itemize}
+
+\begin{remark}
+	Clarification: Strategyproofness is a guarantee against a single agent deviating from a truthful strategy.
+	It is does not say anything about collusion. A mechanism can be strategyproof but not collusion-proof.
+\end{remark}
 
 This lecture: what happens if people are already endowed with a good? For instance, Stanford PhD students are allowed to renew housing every year. However, they can re-enter the lottery at a low priority if they choose not to renew. The issue: students might get a room worse than their current room if they enter the lottery. This mechanism is not strategyproof and leads to sub-optimal assignments. 
 
@@ -333,20 +341,37 @@ Input: $n$ students and $n$ rooms; each student has a current room and preferenc
 	\end{enumerate}
 \end{mech}
 
+We call this problem the \textit{housing assignment problem with \textbf{incumbency}}. 
+
+\begin{definition}[Directed Bipartite Graph]
+	Informally, a directed bipartite graph is a graph with directed edges (arrows) and two disjoint groups (the two sides in a market, e.g., students and houses)
+\end{definition}
+
 \begin{theorem}[Runtime of TTC]
 	Top trading cycles runs in $O(n^2)$ time, where $n$ is the number of students/rooms. 
 \end{theorem}
 
 \begin{proof}
-	Constructing the graph takes $O(n)$ time. Drawing edges also takes $O(n)$ time. To find cycles, we can start at any node and follow the path traced by directed edges. Since every node has an outward-facing directed edge and there are a finite number of nodes, we will eventually visit some node twice; this gives a cycle.\footnote{To formalize this, we can use the pigeonhole principle: take a path of length $2n+1$; there are a total of $2n$ nodes so at least one node must have been visited twice or more.} We need to pass through at most $2n+1$ nodes so finding a cycle will take $O(n)$ time. Finally, every run of the while-loop removes at least one student so there are $O(n)$ iterations. As such, total runtime is
+	Constructing the graph takes $O(n)$ time. Drawing edges also takes $O(n)$ time. 
+	To find cycles, we can start at any node and follow the path traced by directed edges. Since every node has an outward-facing directed edge and there are a finite number of nodes, we will eventually visit some node twice; this gives a cycle.\footnote{To formalize this, we can use the pigeonhole principle: take a path of length $2n+1$; there are a total of $2n$ nodes so at least one node must have been visited twice or more.} 
+	We need to pass through at most $2n+1$ nodes so finding a cycle will take $O(n)$ time. Finally, every run of the while-loop removes at least one student so there are $O(n)$ iterations. As such, total runtime is
 	$$(O(n)+O(n)+O(n)) \cdot O(n) = O(n^2).$$
+\end{proof}
+
+\begin{proof}
+	To find all cycles, we run the strongly connected components (SCC) algorithm.\footnote{Tarjan's algorithm runs in $O(|V| + |E|)$, but every node has degree at most $2$, so $|E| \leq |2V|$ and complexity is $O(n)$ where $n = |V|$.} 
+	(Lemma: Every SCC with vertex $>1$ is a cycle).
+	So each iteration runs in $O(n)$ time. 
+	Each iteration removes $\geq 1$ students,
+	so at most $O(n)$ iterations total.
+	Total running time: $O(n^2)$.
 \end{proof}
 
 \begin{remark}
 	Since each of the $n$ students reports a preference list of length $n$, input size is $n^2$ so runtime is linear in input size. 
 \end{remark}
 
-\begin{definition}[Individual Rationality]
+\begin{definition}[Individual Rationality (IR)]
 	A mechanism is individually rational if no agent is worse off after participating in the mechanism. 
 \end{definition}
 
@@ -363,17 +388,21 @@ Input: $n$ students and $n$ rooms; each student has a current room and preferenc
 \end{theorem}
 
 \begin{proof}
-	For any individual $i$, TTC is equivalent to the following:
-	\begin{enumerate}
-		\item Run TTC for all individuals and objects other than $i$;
-		\item Have individual $i$ choose among all remaining objects.
-	\end{enumerate}
-	This is equivalent to TTC as $i$'s actions will never affect any cycles that form that do not use $i$ regardless of whether or not $i$ is truthful. Then, all remaining preferences must create chains that point to $i$, so no matter which item $i$ points to, a cycle will be formed. As such, $i$ should always point to their most preferred item among items that are still unmatched. 
+	% This is the old proof, this was incorrect 
+	% For any individual $i$, TTC is equivalent to the following:
+	% \begin{enumerate}
+	% 	\item Run TTC for all individuals and objects other than $i$;
+	% 	\item Have individual $i$ choose among all remaining objects.
+	% \end{enumerate}
+	% This is equivalent to TTC as $i$'s actions will never affect any cycles that form that do not use $i$ regardless of whether or not $i$ is truthful. Then, all remaining preferences must create chains that point to $i$, so no matter which item $i$ points to, a cycle will be formed. As such, $i$ should always point to their most preferred item among items that are still unmatched. 
+	
+	Consider any student $s$ and room $r$ that is better than their assignment in TTC.
+	By contradiction: $s$ misreports, then receives $r$. 
+	Let $i$ be the round where $r$ forms a cycle in TTC with honest reports.
+	We try to find the round $j$ where $s$ received $r$ in TTC with dishonest reports.
+	We know that $j > i$ otherwise $s$ would've been able to receive $r$ honestly (intuitively, )
+	% TODO: finish this proof once formal version comes up on Ed
 \end{proof}
-
-\begin{remark}
-	This proof is flawed. Will be updated when instructor posts a corrected proof.
-\end{remark}
 
 \begin{theorem}[Efficiency of TTC]
 	The TTC allocation is Pareto-optimal. 
@@ -386,7 +415,9 @@ Input: $n$ students and $n$ rooms; each student has a current room and preferenc
 \end{proof}
 
 \subsection{Top Trading Cycles and Chains}
-What happens when a student graduates? They give up their old room but do not enter the market for new rooms. Similarly, there can be new students that do not yet have a room. Solution: combine ideas from TTC and RSD to get ``You want my house, I get your turn''.
+What happens when a student graduates? They give up their old room but do not enter the market for new rooms. 
+Similarly, there can be new students that do not yet have a room. 
+Solution: combine ideas from TTC and RSD to get ``You want my house, I get your turn''.
 
 \begin{mech}{Top Trading Cycles with Chains}
 	\begin{enumerate}
@@ -394,8 +425,8 @@ What happens when a student graduates? They give up their old room but do not en
 		\item In student $i$'s turn, mark $i$ as visited and...
 		\begin{enumerate}
 			\item If $i$'s top available room is unoccupied, assign that room to $i$ and free $i$'s old room.
-			\item Else-If the top available room is occupied by an unvisited student $j$, move $j$ before $i$ in the order.
-			\item Else-If the top available room is occupied by a visited student $j$, we have found a cycle.
+			\item Else-If the top available room is occupied by an \textit{unvisited} student $j$, move $j$ before $i$ in the order.
+			\item Else-If the top available room is occupied by a \textit{visited} student $j$, we have found a cycle.
 		\end{enumerate}
 	\end{enumerate}
 \end{mech}
@@ -403,13 +434,25 @@ What happens when a student graduates? They give up their old room but do not en
 This new mechanism still has the same nice properties: it's strategyproof, Pareto-optimal, individual rational, and has good runtime.
 
 \subsection{TTC(C) in Practice}
-Why is TTCC not used in practice? Running it once is strategyproof, but running it over multiple years is not. Students may try to get a popular room that they do not like to use it to get an even more preferred room the year after. This increases demand for perceived ``popular'' rooms even more.
+Why is TTCC not used in practice? 
+Running it once is strategyproof, but running it over multiple years is not. 
+Students may try to get a popular room that they do not like to use it to get an even more preferred room the year after. 
+This increases demand for perceived ``popular'' rooms even more.
 
-Another application: school choice. New Orleans Recovery School District used TTC to assign K and 9-th grade students to schools in 2011-12. In public schools, some students have priorities (they have a sibling at the school or are in the district) that they can own and use to trade for in TTC. Next year, they switched to Deferred Acceptance. Explanation given by the board meeting was that DA is simpler to explain to parents and students. 
+Another application: school choice. New Orleans Recovery School District used TTC to assign K and 9-th
+grade students to schools in 2011-12. In public schools, some students have priorities 
+(they have a sibling at the school or are in the district) that they can own and use to trade for in TTC. 
+Next year, they switched to Deferred Acceptance. 
+Explanation given by the board meeting was that DA is simpler to explain to parents and students. 
+DA also has good publicity (2012 Nobel prize). 
 
-College admissions are different: universities have preferences over applicants that are a better fit. As such, it doesn't make much sense to allow a Stanford admit to trade their admission for a Harvard admittance. 
+College admissions are different: universities have preferences over applicants that are a better fit. 
+As such, it doesn't make much sense to allow a Stanford admit to trade their admission for a Harvard admittance. 
 
-Kidney transplants: over 100,000 people on the waitlist for a kidney transplant. Most humans have two healthy kidneys and can donate one before they die. However, there are blood type and other biological compatibility issues so even if a patient has a willing donor, it could be the case that the donor cannot donate to the patient. Solution: kidney exchange, if patient $x$'s donor can donate to patient $y$ and patient $y$'s donor can donate to patient $x$, then the two patient-donor pairs can swap donors. Some other concerns in this setting:
+Kidney transplants: over 100,000 people on the waitlist for a kidney transplant. Most humans have two healthy kidneys and can donate one before they die. However, there are blood type and other biological compatibility issues so even if a patient has a willing donor, it could be the case that the donor cannot donate to the patient. 
+
+Solution: kidney exchange, if patient $x$'s donor can donate to patient $y$ and patient $y$'s donor can donate 
+dto patient $x$, then the two patient-donor pairs can swap donors. Some other concerns in this setting:
 \begin{itemize}
 	\item Strategyproofness is less of a concern: preferences are more determined purely based on blood type, etc. than personal preferences. 
 	\item People who are closer to death could have a higher priority.
@@ -425,11 +468,15 @@ However, there is a logistical challenge with long cycles: an entire cycle has t
 	\item Multi-Organ exchange: trade a piece of liver for a kidney. 
 \end{itemize}
 
+\begin{practice}
+	More notes in the \href{https://flyingworkshop.github.io/market-design/book/house-allocation-and-kidney-exchange.html?highlight=top+trading#top-trading-cycles}{ECON 136 course reader}. Practice exercises \href{https://flyingworkshop.github.io/market-design/book/practice.html}{here}.
+\end{practice}
+
 \newpage
 
-\section{Equilibria in Games (1/23/2023)}
+\section{Equilibria in Games}
 
-In the mechanisms so far (except hospitals in Deferred Acceptance), agents had dominant strategies (best responses regardless of others' actions). Today, we analyze what agents should do when there is no dominant strategy. 
+In the mechanisms so far (except hospitals in Deferred Acceptance), agents had dominant strategies (best responses regardless of others' actions).Today, we analyze what agents should do when there is no dominant strategy. 
 
 \begin{example}[Penalty Kicks]
 	Kicker can kick left or right. Goalie can jump left or right. Probabilities of scoring are in the following table: 
@@ -440,28 +487,35 @@ In the mechanisms so far (except hospitals in Deferred Acceptance), agents had d
 			Jump Right & $0.9$ & $0.2$ \\ \hline
 		\end{tabular}
 	\end{table}
-	If the kicker kicks left, the goalie wants to jump left. But then, the kicker would want to kick right. Repeating this reasoning, there is no pure strategy equilibrium.
+	If the kicker kicks left, the goalie wants to jump left. 
+	But then, the kicker would want to kick right. 
+	Repeating this reasoning, there is no pure strategy equilibrium.
 \end{example}
 
 \begin{proof}[Solution]
-	Kick left/right with probability $0.6,0.4$. Jump left/right with probability $0.7,0.3$. Expected change to get a goal kicking left and kicking right are both $0.62$. Expected chance to let a goal in jumping left and jumping right are both $0.62$. As such, neither the kicker nor the goalie has an incentive to deviate from their mixed strategies. 
+	Assume we have: kick left/right with probability $0.6,0.4$ and jump left/right with probability $0.7,0.3$. Then the expected change to get a goal kicking left and kicking right are both $0.62$. Expected chance to let a goal in jumping left and jumping right are both $0.62$. As such, neither the kicker nor the goalie has an incentive to deviate from their mixed strategies. 
 \end{proof}
 
+\begin{definition}[Pure Strategy]
+	A pure strategy fully specifies how a player will play a game. Similar to a policy in RL and sequential decision making.
+\end{definition}
+
+\begin{definition}[Strategy Space/Set]
+	A player's strategy set is the set of pure strategies available to a player
+\end{definition}
+	
 \begin{definition}[Mixed Strategy]
 	A mixed strategy is a probability distribution over pure strategies. 
 \end{definition}
 
 \begin{definition}[Nash Equilibrium]
-	A profile of (possibly randomized) strategies such that no player has any profitable deviation keeping the other players' strategies fixed. 
+	A profile of (possibly randomized) strategies such that no player has any profitable deviation keeping the other players' strategies fixed.
+	Equivalently, a pair of (possibly randomized) strategies, such that neither player has an incentive to deviate.
 \end{definition}
 
 \subsection{Equilibrium in 2-Player Zero-sum Games}
 
-Assumptions:
-\begin{itemize}
-	\item $2$ players; 
-	\item the sum of payoffs for players one and two is always equal to zero.
-\end{itemize}
+Assumptions: (1) $2$ players and (2) the sum of payoffs for players one and two is always equal to zero (zero-sum game).
 
 Let $S_1$ denote player one's strategy space and let $S_2$ denote player two's strategy space. Also, let $u(s_1,s_2)$ denote player one's payoff (so player two's payoff is $-u$). Then, player one solves
 $$\max_{s_1 \in S_1} \min_{s_2 \in S_2} u(s_1,s_2)$$
@@ -490,7 +544,7 @@ Even though linear programming is ``fast'', it's not so nice in actual play.
 \begin{example}[Poker]
 	Consider ``Heads Up'' two player poker. There are $10^161$ states which would be impossible to compute explicitly. Due to incomplete information, it does not suffice to only compute what happens at the current state (since my beliefs about what my opponents will do depends on their beliefs of what hand I have, which includes off-path possibilities).
 	
-	\textbf{Insight 1: blueprint.} Can use $10^50$ space to store an approximation strategy. Use this approximation strategy to play the current hand.
+	\textbf{Insight 1: blueprint.} Can use 50TB space to store a single approximation strategy ($10^13$ states). Use this approximation strategy to play the current hand.
 	
 	\textbf{Insight 2: regret minimization.} Define regret to be the payoff lost from not taking some action in hindsight. The regret minimization algorithm plays the game repeatedly, updating strategy so 
 	$$\frac{\text{regret}}{\text{number of games}} \to 0.$$
@@ -529,7 +583,7 @@ Bad news:
 \begin{example}[Grade Game]
 	Two people do a group project. Grades are assigned as follows:
 	\begin{enumerate}
-		\item You send $x \in \{2,...,99\}$ and your partner sends $y$ from the same set.
+		\item You send $x \in \{2,\dots,99\}$ and your partner sends $y$ from the same set.
 		\item Assign grades by:
 		\begin{itemize}
 			\item If $x = y$ then your grade is $x$;
@@ -537,7 +591,7 @@ Bad news:
 			\item If $x > y$ your grade is $\min \{x,y\}-2$.
 		\end{itemize}
 	\end{enumerate}
-	Unique Nash equilibrium: $x = y = 2$.
+	Unique Nash equilibrium: $x = y = 2$. Game theorists call this the ``Traveler's Dilemma Game.''
 \end{example}
 
 \begin{example}[Intersection Game]
@@ -557,7 +611,9 @@ Bad news:
 \end{example}
 
 \begin{definition}[Correlated Equilibrium]
-	A correlating device sends each player a secret signal from a publicly known correlated distribution. Each player would rather follow the signal than play another action. 
+	% A correlating device (e.g., a stoplight) sends each player a secret signal from a publicly known correlated distribution. 
+	% Each player would rather follow the signal than play another action. 
+	A correlated distribution of actions that every player would rather follow (e.g., a stop light)
 \end{definition}
 
 Good news about correlated equilibria: 
@@ -569,7 +625,7 @@ Good news about correlated equilibria:
 Bad news:
 \begin{itemize}
 	\item Just like Nash eq, sometimes it's not unique or doesn't make sense.
-	\item Not n equilibrium without a correlating device. 
+	\item Not an equilibrium without a correlating device. 
 \end{itemize}
 
 What happens if there is commitment? EG intersection game except the opponent is a dog who will always play go. Then, you will always choose to wait for the dog to go first.
