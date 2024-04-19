@@ -1,4 +1,4 @@
-name: Numpy Hello
+name: Migrate HTML
 
 on:
   push:
