@@ -15,4 +15,4 @@ For additional resources, check out the [AGT textbook](https://www.cs.cmu.edu/~s
 
 ## Contributing
 
-The course reader is built around [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). To contribute, it will be helpful to familiarize yourself with (in order of importance):$\LaTeX$, Markdown, Python, Sphinx, and some basic HTML. 
+The course reader is built around [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). To contribute, it will be helpful to familiarize yourself with (in order of importance): LaTeX, Markdown, Python, Sphinx, and some basic HTML. 
