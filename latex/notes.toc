@@ -1,0 +1,63 @@
+\contentsline {section}{\numberline {1}One-Sided Matching}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Properties of Serial Dictatorship}{4}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Two-Sided Matching}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Deferred Acceptance}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Deferred Acceptance in Practice}{8}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Top Trading Cycles}{9}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Top Trading Cycles and Chains}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}TTC(C) in Practice}{10}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Equilibria in Games}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Equilibrium in 2-Player Zero-sum Games}{12}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Aside: Max-Min Strategies}{12}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Nash Eq in (non-zero sum) Games}{13}{subsection.4.3}%
+\contentsline {section}{\numberline {5}P2P File-sharing Dilemma}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Repeated Games}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Repeated Games with Discounting}{15}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}BitTorrent Strategies}{16}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Market Equilibrium}{17}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Unit-Demand Market Model}{17}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Properties of Competitive Equilibrium}{18}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Market Failures (2/1/2023)}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Externalities and Public Goods}{20}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Transaction Costs}{20}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Market Thickness}{20}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Timing Issues}{21}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Information Asymmetries}{21}{subsection.7.5}%
+\contentsline {section}{\numberline {8}Single-Unit Auctions (2/6/2023)}{23}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Case of One Buyer}{23}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Case of Multiple Buyers}{23}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Revenue Maximization}{24}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Sponsored Search Auctions (2/8/2023)}{26}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Vickrey-Clarke-Groves Mechanism}{26}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Unnatural Equilibria}{27}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}GSP vs VCG in Practice}{27}{subsection.9.3}%
+\contentsline {section}{\numberline {10}Pacing Equilibrium in First-Price Auction Markets (Guest Lecture)}{29}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Model}{29}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Properties of FPPE}{29}{subsection.10.2}%
+\contentsline {section}{\numberline {11}Prediction Markets and Information Cascades (2/22/2023)}{31}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Liquidity in Prediction Markets}{31}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Information Cascades}{32}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Legal Issues of Prediction Markets}{32}{subsection.11.3}%
+\contentsline {section}{\numberline {12}Fixing Congestion with Dollars and Data (Guest Lecture)}{33}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Urban Congestion}{33}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Large-scale Nudge Engines}{33}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Singapore MRT}{34}{subsection.12.3}%
+\contentsline {section}{\numberline {13}Proof-of-Work Blockchains (3/1/2023)}{35}{section.13}%
+\contentsline {subsection}{\numberline {13.1}(Simplified) Bitcoin Protocol}{35}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Incentive Issues with Big Miners}{36}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Selfish Mining}{36}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Big Miners in Practice}{37}{subsection.13.4}%
+\contentsline {section}{\numberline {14}Proof of Stake (3/6/2023)}{38}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Cryptographic Preliminaries}{38}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Approaches to Implementing Proof-of-Stake}{39}{subsection.14.2}%
+\contentsline {section}{\numberline {15}Security Markets (3/8/2023)}{40}{section.15}%
+\contentsline {subsection}{\numberline {15.1}High Frequency Trading Arms Race}{40}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Stock Markets}{40}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}Market Failure Fixes}{40}{subsection.15.3}%
+\contentsline {subsection}{\numberline {15.4}Blockchain Flashboys}{41}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}Miners’ Extractable Value (MEV)}{41}{subsection.15.5}%
+\contentsline {section}{\numberline {16}Envy and Fairness (3/13/2023)}{43}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Formalizing Fair Allocations}{43}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Dominant Resource Fairness}{44}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}DRF in Practice}{44}{subsection.16.3}%
+\contentsline {section}{\numberline {17}Course Selection (3/15/2023)}{46}{section.17}%
