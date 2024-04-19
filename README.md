@@ -15,6 +15,4 @@ For additional resources, check out the [AGT textbook](https://www.cs.cmu.edu/~s
 
 ## Contributing
 
-The course reader is built around [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). To contribute, it will be helpful to familiarize yourself with (in order of importance):[$\LaTeX$](https://www.latex-project.org/)[^1], [Markdown](https://www.markdownguide.org/), Python, [Sphinx](https://www.sphinx-doc.org/en/master/), and some basic HTML. 
-
-[^1]: JupyterBook uses [MathJax](https://docs.mathjax.org/en/latest/).
+The course reader is built around [Jupyter Book](https://jupyterbook.org/en/stable/intro.html). To contribute, it will be helpful to familiarize yourself with (in order of importance):$\LaTeX$, Markdown, Python, Sphinx, and some basic HTML. 
