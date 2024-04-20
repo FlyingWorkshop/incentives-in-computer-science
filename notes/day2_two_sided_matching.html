@@ -1,0 +1,785 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Two-Sided Matching &#8212; Incentives in Computer Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/mech.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day2_two_sided_matching';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="One-Sided Matching" href="day1_one_sided_markets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Incentives in Computer Science - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Incentives in Computer Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../mega.html">Mega</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="day1_one_sided_markets.html">One-Sided Matching</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Two-Sided Matching</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/FlyingWorkshop/CS269I" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day2_two_sided_matching.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notes/day2_two_sided_matching.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Two-Sided Matching</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deferred-acceptance">Deferred Acceptance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deferred-acceptance-in-practice">Deferred Acceptance in Practice</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="two-sided-matching">
+<h1>Two-Sided Matching<a class="headerlink" href="#two-sided-matching" title="Link to this heading">#</a></h1>
+<p>After medical school, med students start their internship called a
+“residency”. Each (prospective) doctor has preferences over hospitals
+and each hospital has preferences over doctors. How should doctors and
+hospitals be matched?</p>
+<p>The biggest difference between residency matching and dorms is that we
+now have two sided preferences. Another difference: dorm assignments are
+all through Stanford’s centralized system, but there is nothing stopping
+doctors and hospitals from matching on their own as an outside option.</p>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Match)</p>
+<section class="definition-content" id="proof-content">
+<p>Consider a two-sided matching market with <span class="math notranslate nohighlight">\(I\)</span>
+being participants on one side and <span class="math notranslate nohighlight">\(J\)</span> being participants on the other
+side. Each <span class="math notranslate nohighlight">\(i \in I\)</span> has preferences over <span class="math notranslate nohighlight">\(J\)</span> and each <span class="math notranslate nohighlight">\(j \in J\)</span> has
+preferences over <span class="math notranslate nohighlight">\(I\)</span>. A match <span class="math notranslate nohighlight">\(M\)</span> is a function <span class="math notranslate nohighlight">\(I \cup J \to I \cup J\)</span>
+where <span class="math notranslate nohighlight">\(M(i) \in J\)</span> is <span class="math notranslate nohighlight">\(i\)</span>’s match, <span class="math notranslate nohighlight">\(M(i) = i\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is unmatched; and
+<span class="math notranslate nohighlight">\(M(j) \in I\)</span> is <span class="math notranslate nohighlight">\(j\)</span>’s match, <span class="math notranslate nohighlight">\(M(j) = j\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is unmatched.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 7 </span> (Blocking Pair)</p>
+<section class="definition-content" id="proof-content">
+<p>Given a match <span class="math notranslate nohighlight">\(M\)</span>, the pair (doctor <span class="math notranslate nohighlight">\(i\)</span>, hospital <span class="math notranslate nohighlight">\(j\)</span>) forms a blocking pair if they prefer each other to
+their assignment in <span class="math notranslate nohighlight">\(M\)</span>.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 8 </span> (Stable Matching)</p>
+<section class="definition-content" id="proof-content">
+<p>A matching <span class="math notranslate nohighlight">\(M\)</span> is stable if there are no blocking pairs. Equivalently, for every unmatched pair <span class="math notranslate nohighlight">\((i,j)\)</span> it
+must be true that either:</p>
+<ul class="simple">
+<li><p>Doctor <span class="math notranslate nohighlight">\(i\)</span> prefers Hospital <span class="math notranslate nohighlight">\(M(i)\)</span> over Hospital <span class="math notranslate nohighlight">\(j\)</span> or;</p></li>
+<li><p>Hospital <span class="math notranslate nohighlight">\(j\)</span> prefers Doctor <span class="math notranslate nohighlight">\(M(j)\)</span> over Doctor <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+</ul>
+</section>
+</div><section id="deferred-acceptance">
+<h2>Deferred Acceptance<a class="headerlink" href="#deferred-acceptance" title="Link to this heading">#</a></h2>
+<p>Main idea behind this algorithm: try to match each doctor to their
+favorite choice. If there ever is a blocking pair, switch the matching.
+In practice, each hospital accepts more than one doctor. For now, we
+assume that each hospital only has one spot (but the algorithm and
+results can be extended into the multiple spots case).</p>
+<div class="proof algorithm admonition" id="algorithm-3">
+<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Deferred Acceptance)</p>
+<section class="algorithm-content" id="proof-content">
+<p>While there is an unmatched doctor <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Try to match doctor <span class="math notranslate nohighlight">\(i\)</span> with the next-favorite hospital <span class="math notranslate nohighlight">\(j\)</span> in their
+list;</p></li>
+<li><p>If hospital <span class="math notranslate nohighlight">\(j\)</span> does not yet have a doctor then hospital <span class="math notranslate nohighlight">\(j\)</span> and
+doctor <span class="math notranslate nohighlight">\(i\)</span> (tentatively) match and both are happy with this match;</p></li>
+<li><p>Else-if hospital <span class="math notranslate nohighlight">\(j\)</span> is already matched with doctor <span class="math notranslate nohighlight">\(i'\)</span> and prefers
+their current match <span class="math notranslate nohighlight">\(i'\)</span> to doctor <span class="math notranslate nohighlight">\(i\)</span>, then doctor <span class="math notranslate nohighlight">\(i\)</span> remains
+unmatched;</p></li>
+<li><p>Else-if hospital <span class="math notranslate nohighlight">\(j\)</span> is already matched with doctor <span class="math notranslate nohighlight">\(i'\)</span> and prefers
+doctor <span class="math notranslate nohighlight">\(i\)</span> to their current match <span class="math notranslate nohighlight">\(i'\)</span>, then doctor <span class="math notranslate nohighlight">\(i\)</span> and hospital
+<span class="math notranslate nohighlight">\(j\)</span> match making them both happier off while doctor <span class="math notranslate nohighlight">\(i'\)</span> is now
+unmatched.</p></li>
+</ol>
+</section>
+</div><p>For an example, consider applying deferred acceptance to matching
+students to universities. Suppose there were three universities,
+Stanford (S), the University of Michigan (M), and Tsinghua (T). Also,
+suppose there are three students, Alex (A), Bill (B), and Carl (C).
+Suppose students have preferences</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+	A: S \succ M \succ T \\
+	B: S \succ T \succ M \\
+	C: M \succ T \succ S
+\end{aligned}
+\end{split}\]</div>
+<p>and universities have preferences</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+	S: B \succ C \succ A \\
+	M: A \succ C \succ B \\
+	T: A \succ B \succ C
+\end{aligned}
+\end{split}\]</div>
+<p>In the first round, Alex and Bill both apply to
+Stanford. Stanford prefers Bill (to Carl) to Alex so Bill’s application
+is tentatively accepted. Alex is rejected, and removes Stanford from his
+preference list. Only Carl applies to Michigan, so Carl’s application is
+also tentatively accepted. In the second round, only Alex needs to apply
+again, and Alex applies to Michigan. Now, Michigan compares Alex with
+Carl (from round one) and likes Alex more, so Alex is now tentatively
+accepted and Carl is rejected. As such, Carl strikes Michigan from his
+list of acceptable universities. In the third round, Carl applies to
+Tsinghua. This is the only application Tsinghua has received, so it is
+tentatively accepted. In the next round, there are no rejected students
+so no new applications are made. As such, the algorithm finishes. This
+process can be summarized in the following table, where green denotes
+tentative acceptance and red denotes rejection.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(2\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(3\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(A\)</span></p></td>
+<td><p><span style="color:red">S</span></p></td>
+<td><p><span style="color:green"> M </span></p></td>
+<td><p><span style="color:green"> M </span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(B\)</span></p></td>
+<td><p><span style="color:green"> S </span></p></td>
+<td><p><span style="color:green"> S </span></p></td>
+<td><p><span style="color:green"> S </span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(C\)</span></p></td>
+<td><p><span style="color:green"> M </span></p></td>
+<td><p><span style="color:red"> M </span></p></td>
+<td><p><span style="color:green"> T </span></p></td>
+</tr>
+</tbody>
+</table>
+<div class="proof theorem admonition" id="theorem-4">
+<p class="admonition-title"><span class="caption-number">Theorem 3 </span> (Runtime of Deferred Acceptance)</p>
+<section class="theorem-content" id="proof-content">
+<p>Deferred Acceptance runs in <span class="math notranslate nohighlight">\(O(n^2)\)</span> time.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Each iteration of the while loop takes <span class="math notranslate nohighlight">\(O(1)\)</span> time. At every
+iteration, each doctor proposes to a new hospital. As no doctor and
+hospital ever try to match more than one, there are <span class="math notranslate nohighlight">\(n^2\)</span> possible
+(doctor, hospital) pairs so there are at most <span class="math notranslate nohighlight">\(n^2\)</span> iterations. Thus,
+overall runtime is <span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 4 </span> (DA is stable)</p>
+<section class="theorem-content" id="proof-content">
+<p>The deferred acceptance algorithm outputs a complete stable matching.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  The theorem follows from the following three claims:</p>
+<ol class="arabic simple">
+<li><p>At every iteration, the current match is stable with respect to
+non-free doctors and hospitals.</p></li>
+<li><p>Once a hospital is matched, it remains matched (but possibly to a
+different doctor) until the end of the algorithm</p></li>
+<li><p>At the end of the algorithm, every doctor and hospital is matched.</p></li>
+</ol>
+<p><strong>Claim one.</strong> Towards a contradiction, suppose <span class="math notranslate nohighlight">\((d,h)\)</span> is a blocking
+pair. Thus, <span class="math notranslate nohighlight">\(d\)</span> is currently matched to a hospital worse than <span class="math notranslate nohighlight">\(h\)</span>. This
+implies that <span class="math notranslate nohighlight">\(d\)</span> already tried to match with <span class="math notranslate nohighlight">\(h\)</span>. There are two cases:
+either <span class="math notranslate nohighlight">\(h\)</span> refused <span class="math notranslate nohighlight">\(d\)</span>, or <span class="math notranslate nohighlight">\(h\)</span> initially matched with <span class="math notranslate nohighlight">\(d\)</span> but left them
+later. In either case, <span class="math notranslate nohighlight">\(h\)</span> is currently matched with a doctor better
+than <span class="math notranslate nohighlight">\(d\)</span> so <span class="math notranslate nohighlight">\((d,h)\)</span> cannot be a blocking pair.</p>
+<p><strong>Claim two.</strong> Clear from the algorithm: only way for a matched hospital
+to change is if there is a better doctor that proposes to them, in which
+case they will match with the better doctor.</p>
+<p><strong>Claim three.</strong> Towards a contradiction, suppose <span class="math notranslate nohighlight">\((d,h)\)</span> is free. At
+the end of the algorithm <span class="math notranslate nohighlight">\(d\)</span> must have proposed to <span class="math notranslate nohighlight">\(h\)</span> already, so <span class="math notranslate nohighlight">\(h\)</span>
+must either be matched with <span class="math notranslate nohighlight">\(d\)</span> or a doctor better than <span class="math notranslate nohighlight">\(d\)</span>. In either
+case, <span class="math notranslate nohighlight">\((d,h)\)</span> thus cannot be free.</p>
+</div>
+<div class="proof theorem admonition" id="theorem-6">
+<p class="admonition-title"><span class="caption-number">Theorem 5 </span> (Efficiency of Stable Matchings)</p>
+<section class="theorem-content" id="proof-content">
+<p>Every stable matching is Pareto-optimal.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Suppose <span class="math notranslate nohighlight">\(A\)</span> is stable and let <span class="math notranslate nohighlight">\(B\)</span> be any other matching.
+Consider a doctor-hospital pair matched in <span class="math notranslate nohighlight">\(B\)</span> but not matched in <span class="math notranslate nohighlight">\(A\)</span>.
+By stability of <span class="math notranslate nohighlight">\(A\)</span>, either the doctor or hospital (or both) prefers
+their match under <span class="math notranslate nohighlight">\(A\)</span> to their match under <span class="math notranslate nohighlight">\(B\)</span>.</p>
+</div>
+<p>There are many possible stable matchings that are possible, but which is
+best?</p>
+<div class="proof theorem admonition" id="theorem-7">
+<p class="admonition-title"><span class="caption-number">Theorem 6 </span> (Proposing Optimality)</p>
+<section class="theorem-content" id="proof-content">
+<p>The matching returned by doctor-proposing Deferred Acceptance is doctor-optimal.</p>
+</section>
+</div><p>As a corollary of this result, we have:</p>
+<div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 7 </span> (Proposing Strategyproofness)</p>
+<section class="theorem-content" id="proof-content">
+<p>Doctor-proposing Deferred Acceptance is strategyproof for doctors.</p>
+</section>
+</div><p>On the other hand, hospitals are not quite as happy with
+doctor-proposing deferred acceptance.</p>
+<div class="proof theorem admonition" id="theorem-9">
+<p class="admonition-title"><span class="caption-number">Theorem 8 </span> (Receiving Non-Optimality)</p>
+<section class="theorem-content" id="proof-content">
+<p>The matching returned by
+doctor-proposing Deferred Acceptance is the worst stable matching for hospitals.</p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-10">
+<p class="admonition-title"><span class="caption-number">Theorem 9 </span> (Receiving Non-Strategyproofness)</p>
+<section class="theorem-content" id="proof-content">
+<p>It is not always best for hospitals to truthfully reveal their preferences.</p>
+</section>
+</div></section>
+<section id="deferred-acceptance-in-practice">
+<h2>Deferred Acceptance in Practice<a class="headerlink" href="#deferred-acceptance-in-practice" title="Link to this heading">#</a></h2>
+<p>Historically, residency matches proceeded as follows:</p>
+<ul class="simple">
+<li><p>In the 1950’s, National Resident Match Program used a
+deferred-acceptance like algorithm. At this time, there were very
+few female or openly gay doctors.</p></li>
+<li><p>In the 1960’s, there were more couples that want to be near each
+other. As such, doctors no longer have ranked preferences over
+hospitals: individual preferences now also depends on what your
+partner’s outcome is.</p></li>
+<li><p>In the 1980’s, negative results were developed:</p>
+<ol class="arabic simple">
+<li><p>A stable matching may not even exist;</p></li>
+<li><p>This matching problem is a <span class="math notranslate nohighlight">\(NP\)</span>-complete computational problem.</p></li>
+</ol>
+</li>
+<li><p>In the 1990’s, an extension of the Deferred Acceptance algorithm
+that resolved the couples issue was put into practice.</p></li>
+</ul>
+<p>How do hospitals rank doctors?</p>
+<ul class="simple">
+<li><p>Interviews: but this process is costly, as doctors still need to
+strategize over which doctors to interview.</p></li>
+<li><p>Standardized tests: maybe not anymore, since the main test (USMLE)
+changed to pass-fail.</p></li>
+<li><p>Safety choices: hospitals might list some “safety” doctors, but
+using safety choices is never safer for hospitals (this is provably
+true).</p></li>
+</ul>
+<div class="proof theorem admonition" id="theorem-11">
+<p class="admonition-title"><span class="caption-number">Theorem 10 </span> (No Improvements from Safety Choices)</p>
+<section class="theorem-content" id="proof-content">
+<p>Hospitals
+misreporting preferences by moving their <span class="math notranslate nohighlight">\(i\)</span>th preferred doctor to a
+higher position cannot help with matching with doctor of rank <span class="math notranslate nohighlight">\(i\)</span> or
+better.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Until doctor <span class="math notranslate nohighlight">\(i\)</span> tries to match with this hospital, the
+manipulation has no effect. After doctor <span class="math notranslate nohighlight">\(i\)</span> tries to match with this
+hospital, they can only be replaced by someone better. As such, either
+this hospital would have gotten doctor <span class="math notranslate nohighlight">\(i\)</span> anyways, or this hospital is
+stuck with doctor <span class="math notranslate nohighlight">\(i\)</span> opposed to someone better.</p>
+</div>
+<p>Why do hospitals still use safety picks?</p>
+<ul class="simple">
+<li><p>Hospitals don’t know this theorem.</p></li>
+<li><p>Reputation/ego: hospitals publish a “number needed to fill” number,
+the lowest rank in a hospital’s list of a doctor matched to the
+hospital.</p></li>
+</ul>
+<p>Another situation where two-sided matching comes up is in college
+admissions: students apply and colleges decide who to accept. In the US,
+application fees and the time it takes to write applications restricts
+how many applications a student can submit. In other countries, there is
+a single standardized test that determines admissions.</p>
+<p>Even when there is no outside option, deferred acceptance is fast to run
+and is used to match packets to servers.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="day1_one_sided_markets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">One-Sided Matching</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deferred-acceptance">Deferred Acceptance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deferred-acceptance-in-practice">Deferred Acceptance in Practice</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eric Gao, Logan Mondal Bhamidipaty, Aviad Rubinstein
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
