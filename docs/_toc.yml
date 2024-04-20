@@ -4,6 +4,6 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: mega
+- file: notes/day1_one_sided_markets
+- file: notes/day2_two_sided_matching
