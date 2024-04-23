@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>One-Sided Matching &#8212; Incentives in Computer Science</title>
+    <title>Equilibria in Games &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day1_one_sided_markets';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day4_game_eq';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Two-Sided Matching" href="day2_two_sided_matching.html" />
-    <link rel="prev" title="Algorithmic Game Theory" href="../intro.html" />
+    <link rel="next" title="P2P File-sharing Dilemma" href="day5_file_sharing.html" />
+    <link rel="prev" title="Top Trading Cycles" href="day3_ttc.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,10 +181,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">One-Sided Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day1_one_sided_markets.html">One-Sided Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2_two_sided_matching.html">Two-Sided Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day3_ttc.html">Top Trading Cycles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="day4_game_eq.html">Equilibria in Games</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Equilibria in Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day5_file_sharing.html">P2P File-sharing Dilemma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day6_market_eq.html">Market Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day7_market_failures.html">Market Failures</a></li>
@@ -259,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day1_one_sided_markets.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day4_game_eq.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +289,7 @@
       
       
       
-      <li><a href="../_sources/notes/day1_one_sided_markets.md" target="_blank"
+      <li><a href="../_sources/notes/day4_game_eq.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>One-Sided Matching</h1>
+    <h1>Equilibria in Games</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,7 +383,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-in-2-player-zero-sum-games">Equilibrium in 2-Player Zero-sum Games</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-max-min-strategies">Aside: Max-Min Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nash-equilibrium-in-non-zero-sum-games">Nash Equilibrium in (non-zero sum) Games</a></li>
 </ul>
             </nav>
         </div>
@@ -395,130 +397,284 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="one-sided-matching">
-<h1>One-Sided Matching<a class="headerlink" href="#one-sided-matching" title="Link to this heading">#</a></h1>
-<p>Model:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="equilibria-in-games">
+<h1>Equilibria in Games<a class="headerlink" href="#equilibria-in-games" title="Link to this heading">#</a></h1>
+<p>In the mechanisms so far (except hospitals in Deferred Acceptance),
+agents had dominant strategies (best responses regardless of others’
+actions).Today, we analyze what agents should do when there is no
+dominant strategy.</p>
+<div class="proof example admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">Example 1 </span></p>
+<section class="example-content" id="proof-content">
+<p>Kicker can kick left or right. Goalie can jump left or right. Probabilities of scoring are in the following table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>Kick Left</p></th>
+<th class="head text-center"><p>Kick Right</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jump Left</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.5\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.8\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Jump Right</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.9\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>If the kicker kicks left, the goalie wants to jump left. But then, the
+kicker would want to kick right. Repeating this reasoning, there is no
+pure strategy equilibrium.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. <em>Solution.</em> Assume we have: kick left/right with probability <span class="math notranslate nohighlight">\(0.6,0.4\)</span>
+and jump left/right with probability <span class="math notranslate nohighlight">\(0.7,0.3\)</span>. Then the expected change
+to get a goal kicking left and kicking right are both <span class="math notranslate nohighlight">\(0.62\)</span>. Expected
+chance to let a goal in jumping left and jumping right are both <span class="math notranslate nohighlight">\(0.62\)</span>.
+As such, neither the kicker nor the goalie has an incentive to deviate
+from their mixed strategies.</p>
+</div>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 11 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A pure strategy fully specifies how a player will play a game. Similar
+to a policy in RL and sequential decision making.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 12 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A player’s strategy set is the set of pure strategies available to a
+player</p>
+</section>
+</div><div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 13 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A mixed strategy is a probability distribution over pure strategies.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 14 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A profile of (possibly randomized) strategies such that no player has
+any profitable deviation keeping the other players’ strategies fixed.
+Equivalently, a pair of (possibly randomized) strategies, such that
+neither player has an incentive to deviate.</p>
+</section>
+</div><section id="equilibrium-in-2-player-zero-sum-games">
+<h2>Equilibrium in 2-Player Zero-sum Games<a class="headerlink" href="#equilibrium-in-2-player-zero-sum-games" title="Link to this heading">#</a></h2>
+<p>Assumptions: (1) <span class="math notranslate nohighlight">\(2\)</span> players and (2) the sum of payoffs for players one
+and two is always equal to zero (zero-sum game).</p>
+<p>Let <span class="math notranslate nohighlight">\(S_1\)</span> denote player one’s strategy space and let <span class="math notranslate nohighlight">\(S_2\)</span> denote player
+two’s strategy space. Also, let <span class="math notranslate nohighlight">\(u(s_1,s_2)\)</span> denote player one’s payoff
+(so player two’s payoff is <span class="math notranslate nohighlight">\(-u\)</span>). Then, player one solves</p>
+<div class="math notranslate nohighlight">
+\[\max_{s_1 \in S_1} \min_{s_2 \in S_2} u(s_1,s_2)\]</div>
+<p>while player two solves</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{s_2 \in S_2} \max_{s_1 \in S_2} -u(s_1,s_2).
+\]</div>
+<div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 15 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>In a two player zero-sum game, the max-min payoff for player one is
+equal to the Nash equilibrium payoff, which is equal to the min-max
+payoff for player two (von Neumann, 1928).</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  Comes from linear programming and duality (similar to the
+equivalence between max-flow and min-cut from 161). Can also be derived
+from the Min-Max Theorem of VNM.</p>
+</div>
+</section>
+<section id="aside-max-min-strategies">
+<h2>Aside: Max-Min Strategies<a class="headerlink" href="#aside-max-min-strategies" title="Link to this heading">#</a></h2>
+<p>For more, see presentation from KLB at UCB.</p>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 15 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Extensive form games have the following:</p>
 <ul class="simple">
-<li><p>there are <span class="math notranslate nohighlight">\(n\)</span> students, each with some preference over residences</p></li>
-<li><p>there are <span class="math notranslate nohighlight">\(m\)</span> dorms, each with some capacity</p></li>
+<li><p>Game Node: possible current states of the game.</p></li>
+<li><p>Game Tree: graph representing which game nodes are reachable from
+which other game nodes.</p></li>
+<li><p>Information Set: all game nodes consistent with/indistinguishable
+from my current node given my information.</p></li>
 </ul>
-<p>We want to assign students to dorms. One possible solution is to
-maximize the sum of utilities:</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 1 </span> (Utility Maximization)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Create a bipartite graph with one side being students and the other side being residencies with with edges from students to dorm with edge weight equal to how much student <span class="math notranslate nohighlight">\(i\)</span> likes dorm <span class="math notranslate nohighlight">\(j\)</span></p></li>
-<li><p>Find the max-weight matching (i.e., <a class="reference external" href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Algorithm</a>)</p></li>
-</ol>
 </section>
-</div><p>The issue: each student has an incentive to exaggerate how much they
-like their favorite dorm and undercut how much they like other dorms.</p>
-<p>As such, finding the matching that maximizes happiness was the right
-solution concept, but failed to take incentives into account. Another
-possible algorithm is serial dictatorship:</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 2 </span> (Serial Dictatorship)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Students are sorted by some fixed order (random, seniority,
-alphabetically, etc.)</p></li>
-<li><p>Go through the list in order and each student selects their most
-preferred available dorm</p></li>
-</ol>
+</div><p>Even though linear programming is “fast”, it’s not so nice in actual
+play.</p>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 2 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider “Heads Up” two player poker. There are <span class="math notranslate nohighlight">\(10^161\)</span> states which
+would be impossible to compute explicitly. Due to incomplete
+information, it does not suffice to only compute what happens at the
+current state (since my beliefs about what my opponents will do depends
+on their beliefs of what hand I have, which includes off-path
+possibilities).</p>
+<p><strong>Insight 1: blueprint.</strong> Can use 50TB space to store a single
+approximation strategy (<span class="math notranslate nohighlight">\(10^13\)</span> states). Use this approximation strategy
+to play the current hand.</p>
+<p><strong>Insight 2: regret minimization.</strong> Define regret to be the payoff lost
+from not taking some action in hindsight. The regret minimization
+algorithm plays the game repeatedly, updating strategy so</p>
+<div class="math notranslate nohighlight">
+\[\frac{\text{regret}}{\text{number of games}} \to 0.\]</div>
 </section>
-</div><p>Is this any better? There can still be students who are unhappy with their result under serial dictatorship.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A mechanism consists of three things: a method of collecting inputs from
-agents, an algorithm that acts on the inputs, and an action that is
-taken based on the output of the algorithm.</p>
-</section>
-</div><div class="proof remark admonition" id="remark-3">
-<p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
-<section class="remark-content" id="proof-content">
-<p>All three components are important: for instance, students’ beliefs of
-how the algorithm works or how the action is taken would affect how they
-respond to the way inputs are collected.</p>
-</section>
-</div><section id="properties-of-serial-dictatorship">
-<h2>Properties of Serial Dictatorship<a class="headerlink" href="#properties-of-serial-dictatorship" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="strategyproof_label">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A mechanism is strategyproof if it is in every agent’s best interest to
-act truthfully.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A mechanism is dominant strategy incentive compatible if it is a dominant strategy for each participant to act truthfully. In particular, this means that being truthful is a best response to any possible strategy profile of other players.</p>
-</section>
-</div><div class="proof theorem admonition" id="theorem-6">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
+</div><div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 16 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The Serial Dictatorship mechanism is dominant strategy incentive
-compatible: it is in every student’s best interest to choose their
-favorite available dorm in their term.</p>
+<p>In two-player zero-sum games, both players using regret minimization
+converges to Nash equilibrium.</p>
 </section>
-</div><div class="proof admonition" id="proof">
-<p>Proof.  Your room choice will not affect what rooms are available by
-the time your turn comes. When it gets to your turn, what you choose is
-what you get, so it is best to choose your favorite room among available
-options.</p>
-</div>
-<div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O'\)</span> is a Pareto improvement over outcome <span class="math notranslate nohighlight">\(O\)</span> if all agents
-either strictly prefer <span class="math notranslate nohighlight">\(O'\)</span> to <span class="math notranslate nohighlight">\(O\)</span> or are indifferent between the two,
-with at least one strict preference.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O\)</span> is Pareto optimal if there are no Pareto improvements
-from <span class="math notranslate nohighlight">\(O\)</span>.<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-</section>
-</div><p>In other words, an outcome is Pareto optimal if you can’t make anyone
-happier without making someone sadder.</p>
+</div></section>
+<section id="nash-equilibrium-in-non-zero-sum-games">
+<h2>Nash Equilibrium in (non-zero sum) Games<a class="headerlink" href="#nash-equilibrium-in-non-zero-sum-games" title="Link to this heading">#</a></h2>
+<p>Suppose the goalie tries to maximize the probability of a save minus the
+probability of a goal, so they goalie’s payoffs are now</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head text-center"><p>Kick Left</p></th>
+<th class="head text-center"><p>Kick Right</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jump Left</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-0.1\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-0.8\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Jump Right</p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(-0.9\)</span></p></td>
+<td class="text-center"><p><span class="math notranslate nohighlight">\(0.4\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>Good news:</p>
 <div class="proof theorem admonition" id="theorem-9">
-<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 17 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The outcome under serial dictatorship (with any ordering of students) is
-Pareto optimal.<a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p>In every finite game there exists a Nash equilibrium in possibly
+degenerate mixed strategies.</p>
 </section>
-</div><div class="proof admonition" id="proof">
-<p>Proof.  Let the serial dictatorship outcome be <span class="math notranslate nohighlight">\(O\)</span>. Towards a
-contradiction, suppose <span class="math notranslate nohighlight">\(O\)</span> is not Pareto optimal, and there exists some
-outcome <span class="math notranslate nohighlight">\(O'\)</span> that is a Pareto improvement over <span class="math notranslate nohighlight">\(O\)</span>. Consider the first
-student that gets a different outcome under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>. Since all
-students before this student are assigned the same room, the set of
-available rooms for this student is the same under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>.
-However, the student chooses their favorite room under <span class="math notranslate nohighlight">\(O\)</span>, so the room
-they receive under <span class="math notranslate nohighlight">\(O'\)</span> must be worse.</p>
-</div>
-<p>One issue with this: dictatorship can have a large affect on others.
-Suppose there are ten students and the first eight have chosen rooms <span class="math notranslate nohighlight">\(1\)</span>
-to <span class="math notranslate nohighlight">\(8\)</span>. Also, suppose student nine has room <span class="math notranslate nohighlight">\(9\)</span> as their <span class="math notranslate nohighlight">\(9\)</span>th favorite
-room and room <span class="math notranslate nohighlight">\(10\)</span> as their <span class="math notranslate nohighlight">\(10\)</span>th favorite room while student ten has
-room <span class="math notranslate nohighlight">\(9\)</span> as their favorite room and room <span class="math notranslate nohighlight">\(10\)</span> as their least favorite
-room. If student nine chooses room <span class="math notranslate nohighlight">\(9\)</span> over room <span class="math notranslate nohighlight">\(10\)</span> they only gain a
-small improvement, but student ten is now forced to pick room <span class="math notranslate nohighlight">\(10\)</span> over
-room <span class="math notranslate nohighlight">\(9\)</span> which is a large jump in their preferences.</p>
-<hr class="footnotes docutils" />
+</div><p>Bad news:</p>
+<ul class="simple">
+<li><p>Not equal to max-min/min-max payoffs;</p></li>
+<li><p>Not unique;</p></li>
+<li><p>Not approached by regret minimization;</p></li>
+<li><p>Intractable to compute, even approximately;</p></li>
+<li><p>Some mixed strategy equilibria don’t make sense.</p></li>
+</ul>
+<div class="proof example admonition" id="example-10">
+<p class="admonition-title"><span class="caption-number">Example 3 </span></p>
+<section class="example-content" id="proof-content">
+<p>Two people do a group project. Grades are assigned as follows:</p>
+<ol class="arabic simple">
+<li><p>You send <span class="math notranslate nohighlight">\(x \in \{2,\dots,99\}\)</span> and your partner sends <span class="math notranslate nohighlight">\(y\)</span> from the
+same set.</p></li>
+<li><p>Assign grades by:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x = y\)</span> then your grade is <span class="math notranslate nohighlight">\(x\)</span>;</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x &lt; y\)</span> then your grade is <span class="math notranslate nohighlight">\(\min \{x,y\}+2\)</span>;</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x &gt; y\)</span> your grade is <span class="math notranslate nohighlight">\(\min \{x,y\}-2\)</span>.</p></li>
+</ul>
+</li>
+</ol>
+<p>Unique Nash equilibrium: <span class="math notranslate nohighlight">\(x = y = 2\)</span>. Game theorists call this the
+“Traveler’s Dilemma Game.”</p>
+</section>
+</div><div class="proof example admonition" id="example-11">
+<p class="admonition-title"><span class="caption-number">Example 4 </span></p>
+<section class="example-content" id="proof-content">
+<p>Consider two cars arriving at an intersection. Payoffs are:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Go</p></th>
+<th class="head"><p>Wait</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Go</p></td>
+<td><p><span class="math notranslate nohighlight">\((-99,-99)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((1,0)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Wait</p></td>
+<td><p><span class="math notranslate nohighlight">\((0,1)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\((0,0)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Two asymmetric equilibria: (Go, Wait) and (Wait, Go).</p></li>
+<li><p>Symmetric equilibrium: Both go with one percent chance and wait with
+one percent chance.</p></li>
+<li><p>Correlated Equilibrium: (Go, Wait) with fifty percent chance and
+(Wait, Go) with fifty percent chance.</p></li>
+</ul>
+</section>
+</div><div class="proof definition admonition" id="definition-12">
+<p class="admonition-title"><span class="caption-number">Definition 16 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A correlated distribution of actions that every player would rather
+follow (e.g., a stop light)</p>
+</section>
+</div><p>Good news about correlated equilibria:</p>
+<ul class="simple">
+<li><p>Can be computed efficiently (through linear programming or regret
+minimization).</p></li>
+<li><p>If everyone runs regret minimization, play converges to the set of
+correlated equilibria (cannot converge to a correlated equilibrium
+itself without a correlating device).</p></li>
+</ul>
+<p>Bad news:</p>
+<ul class="simple">
+<li><p>Just like Nash eq, sometimes it’s not unique or doesn’t make sense.</p></li>
+<li><p>Not an equilibrium without a correlating device.</p></li>
+</ul>
+<p>What happens if there is commitment? EG intersection game except the
+opponent is a dog who will always play go. Then, you will always choose
+to wait for the dog to go first.</p>
+<div class="proof definition admonition" id="definition-13">
+<p class="admonition-title"><span class="caption-number">Definition 17 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Strategy profile (Leader’s strategy, Follower’s strategy) such that</p>
+<ol class="arabic simple">
+<li><p>Follower’s strategy is optimal given Leader’s strategy;</p></li>
+<li><p>Payoff is optimal for leader among all pairs satisfying <span class="math notranslate nohighlight">\(\#1\)</span>.<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+</ol>
+</section>
+</div><div class="proof remark admonition" id="remark-14">
+<p class="admonition-title"><span class="caption-number">Remark 4 </span></p>
+<section class="remark-content" id="proof-content">
+<p>The Leader’s strategy may be a sub-optimal response to follower’s
+strategy. However, commitment power means that the leader’s Stackelberg
+Equilibrium is greater than their utility in any correlated equilibrium.
+Finally, the follower’s strategy is deterministic without loss of
+generality (so there exists an efficient linear programming alg to solve
+this).</p>
+</section>
+</div><div class="proof example admonition" id="example-15">
+<p class="admonition-title"><span class="caption-number">Example 5 </span></p>
+<section class="example-content" id="proof-content">
+<p>Defenders commit to defense strategy (and is a leader); attackers can
+plan attack after observing defenders’ strategies. Some settings:</p>
+<ul class="simple">
+<li><p>Airport security</p></li>
+<li><p>Infrastructure</p></li>
+<li><p>Cyber-security</p></li>
+<li><p>Anti-Poaching</p></li>
+</ul>
+</section>
+</div><hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id3" role="doc-footnote">
+<aside class="footnote brackets" id="id2" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Pareto Optimality must be defined with respect to particular
-preferences. As such, it is difficult to conceptualize if an outcome
-is Pareto optimal if truthful preferences are unknown.</p>
-</aside>
-<aside class="footnote brackets" id="id4" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>This result only holds if every students’ preferences over dorms
-is strict (no student can be indifferent between dorms).</p>
+<p>Strong vs Weak Stackelberg: which way we break follower
+indifference against or for the leader.</p>
 </aside>
 </aside>
 </section>
@@ -555,20 +711,20 @@ is strict (no student can be indifferent between dorms).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="day3_ttc.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Algorithmic Game Theory</p>
+        <p class="prev-next-title">Top Trading Cycles</p>
       </div>
     </a>
     <a class="right-next"
-       href="day2_two_sided_matching.html"
+       href="day5_file_sharing.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Two-Sided Matching</p>
+        <p class="prev-next-title">P2P File-sharing Dilemma</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -588,7 +744,9 @@ is strict (no student can be indifferent between dorms).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equilibrium-in-2-player-zero-sum-games">Equilibrium in 2-Player Zero-sum Games</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-max-min-strategies">Aside: Max-Min Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nash-equilibrium-in-non-zero-sum-games">Nash Equilibrium in (non-zero sum) Games</a></li>
 </ul>
   </nav></div>
 

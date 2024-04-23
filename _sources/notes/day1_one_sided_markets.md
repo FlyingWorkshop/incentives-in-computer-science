@@ -52,6 +52,7 @@ respond to the way inputs are collected.
 ## Properties of Serial Dictatorship
 
 ```{prf:definition}
+:label: strategyproof_label
 A mechanism is strategyproof if it is in every agent's best interest to
 act truthfully.
 ```

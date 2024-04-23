@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>One-Sided Matching &#8212; Incentives in Computer Science</title>
+    <title>Market Equilibrium &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day1_one_sided_markets';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day6_market_eq';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Two-Sided Matching" href="day2_two_sided_matching.html" />
-    <link rel="prev" title="Algorithmic Game Theory" href="../intro.html" />
+    <link rel="next" title="Market Failures" href="day7_market_failures.html" />
+    <link rel="prev" title="P2P File-sharing Dilemma" href="day5_file_sharing.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,12 +181,12 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">One-Sided Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day1_one_sided_markets.html">One-Sided Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2_two_sided_matching.html">Two-Sided Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day3_ttc.html">Top Trading Cycles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day4_game_eq.html">Equilibria in Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day5_file_sharing.html">P2P File-sharing Dilemma</a></li>
-<li class="toctree-l1"><a class="reference internal" href="day6_market_eq.html">Market Equilibrium</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Market Equilibrium</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day7_market_failures.html">Market Failures</a></li>
 </ul>
 
@@ -259,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day1_one_sided_markets.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day6_market_eq.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +289,7 @@
       
       
       
-      <li><a href="../_sources/notes/day1_one_sided_markets.md" target="_blank"
+      <li><a href="../_sources/notes/day6_market_eq.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>One-Sided Matching</h1>
+    <h1>Market Equilibrium</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,7 +383,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-demand-market-model">Unit-Demand Market Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-competitive-equilibrium">Properties of Competitive Equilibrium</a></li>
 </ul>
             </nav>
         </div>
@@ -395,132 +396,221 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="one-sided-matching">
-<h1>One-Sided Matching<a class="headerlink" href="#one-sided-matching" title="Link to this heading">#</a></h1>
-<p>Model:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="market-equilibrium">
+<h1>Market Equilibrium<a class="headerlink" href="#market-equilibrium" title="Link to this heading">#</a></h1>
+<p>Previously, we studied situations with no transfers:</p>
+<ol class="arabic simple">
+<li><p>If Stanford housing auctioned rooms, the distribution would look
+much different.</p></li>
+<li><p>It is illegal in all countries (except Iran) to buy organs.</p></li>
+<li><p>Hospitals and students matching with money is subject to anti-trust
+laws.</p></li>
+</ol>
+<p>However, there are issues to restricting markets to operating without
+money.</p>
+<ol class="arabic simple">
+<li><p>Can only work with ordinal opposed to cardinal preferences.</p></li>
+<li><p>Underground markets may arise (college admissions scandals, black
+markets for kidneys).</p></li>
+<li><p>Could be issues with permissions (entering donor lists multiple
+times using bots to try to get a match earlier).</p></li>
+</ol>
+<div class="proof definition admonition" id="definition-0">
+<p class="admonition-title"><span class="caption-number">Definition 19 </span></p>
+<section class="definition-content" id="proof-content">
+<p>We have covered four types of game equilbiria:</p>
 <ul class="simple">
-<li><p>there are <span class="math notranslate nohighlight">\(n\)</span> students, each with some preference over residences</p></li>
-<li><p>there are <span class="math notranslate nohighlight">\(m\)</span> dorms, each with some capacity</p></li>
+<li><p>Nash</p></li>
+<li><p>Correlated</p></li>
+<li><p>Stackelberg</p></li>
+<li><p>Subgame Perfect Equilibrium (SPE)</p></li>
 </ul>
-<p>We want to assign students to dorms. One possible solution is to
-maximize the sum of utilities:</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 1 </span> (Utility Maximization)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Create a bipartite graph with one side being students and the other side being residencies with with edges from students to dorm with edge weight equal to how much student <span class="math notranslate nohighlight">\(i\)</span> likes dorm <span class="math notranslate nohighlight">\(j\)</span></p></li>
-<li><p>Find the max-weight matching (i.e., <a class="reference external" href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Algorithm</a>)</p></li>
-</ol>
+<p>Today, we begin covering <em>market equilibria</em>.</p>
 </section>
-</div><p>The issue: each student has an incentive to exaggerate how much they
-like their favorite dorm and undercut how much they like other dorms.</p>
-<p>As such, finding the matching that maximizes happiness was the right
-solution concept, but failed to take incentives into account. Another
-possible algorithm is serial dictatorship:</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 2 </span> (Serial Dictatorship)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Students are sorted by some fixed order (random, seniority,
-alphabetically, etc.)</p></li>
-<li><p>Go through the list in order and each student selects their most
-preferred available dorm</p></li>
-</ol>
-</section>
-</div><p>Is this any better? There can still be students who are unhappy with their result under serial dictatorship.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+</div><div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 20 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A mechanism consists of three things: a method of collecting inputs from
-agents, an algorithm that acts on the inputs, and an action that is
-taken based on the output of the algorithm.</p>
+<p>There are two main ways to model utility:</p>
+<ul class="simple">
+<li><p>Cardinal: assigns some numeric value to how much someone likes
+something.</p></li>
+<li><p>Ordinal: comparison-based, only assigns some order.</p></li>
+</ul>
+<p>Cardinal utilities tell us more (we can always extract ordinal utilities
+from cardinal utilities, but not the other way around) but humans think
+more in terms of ordinal rankings. Cardinal utilities are also easier to
+work with when doing expected utility calculations and can be normalized
+to be in terms of (usually but not always) money.</p>
 </section>
-</div><div class="proof remark admonition" id="remark-3">
-<p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
+</div><div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 21 </span></p>
+<section class="definition-content" id="proof-content">
+<p>There are two types of goods:</p>
+<ul class="simple">
+<li><p>Fungible goods have many interchangeable units for sale.</p></li>
+<li><p>Idiosyncratic goods are unique.</p></li>
+</ul>
+<p>Many goods are somewhere in between: rides on ride-sharing apps are
+fungible in terms of how the driver doesn’t matter too much, but can
+also be idiosyncratic in terms of caring about where you go.</p>
+</section>
+</div><div class="proof definition admonition" id="definition-3">
+<p class="admonition-title"><span class="caption-number">Definition 22 </span></p>
+<section class="definition-content" id="proof-content">
+<p>From economics,</p>
+<ul class="simple">
+<li><p>A demand curve plots the total quantity of a good consumers are
+willing to buy at all price levels.</p></li>
+<li><p>A supply curve plots the total quantity of a good firms are willing
+to sell at all price levels.</p></li>
+</ul>
+<p>By tradition, price is plotted on the <span class="math notranslate nohighlight">\(y\)</span>-axis and quantity is plotted
+on the <span class="math notranslate nohighlight">\(x\)</span>-axis.</p>
+</section>
+</div><div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 7 </span></p>
 <section class="remark-content" id="proof-content">
-<p>All three components are important: for instance, students’ beliefs of
-how the algorithm works or how the action is taken would affect how they
-respond to the way inputs are collected.</p>
-</section>
-</div><section id="properties-of-serial-dictatorship">
-<h2>Properties of Serial Dictatorship<a class="headerlink" href="#properties-of-serial-dictatorship" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="strategyproof_label">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A mechanism is strategyproof if it is in every agent’s best interest to
-act truthfully.</p>
+<p>In general, demand is downward sloping (higher quantity demanded as
+price decreases) and supply is upwards sloping (lower quantity supplied
+as price decreases). However, this is not always the case (different
+market structures like a monopoly, weird classes of goods).</p>
 </section>
 </div><div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 23 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A mechanism is dominant strategy incentive compatible if it is a dominant strategy for each participant to act truthfully. In particular, this means that being truthful is a best response to any possible strategy profile of other players.</p>
+<p>The price where the supply and demand curves meet is called the market
+clearing price. At this price, the quantity demanded is equal to
+quantity demanded so all interested buyers and sellers can transact (and
+hence clear the market).</p>
 </section>
-</div><div class="proof theorem admonition" id="theorem-6">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
+</div><section id="unit-demand-market-model">
+<h2>Unit-Demand Market Model<a class="headerlink" href="#unit-demand-market-model" title="Link to this heading">#</a></h2>
+<p>Setting:</p>
+<ol class="arabic">
+<li><p><span class="math notranslate nohighlight">\(m\)</span> different (idiosyncratic) goods for sale;</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> different buyers that will each purchase at most one good (they
+have unit demand);</p></li>
+<li><p>Buyer <span class="math notranslate nohighlight">\(i\)</span> as value <span class="math notranslate nohighlight">\(v_{i,j}\)</span> for purchasing good <span class="math notranslate nohighlight">\(j\)</span>;</p></li>
+<li><p>If buyer <span class="math notranslate nohighlight">\(i\)</span> pays <span class="math notranslate nohighlight">\(p_j\)</span> to acquire good <span class="math notranslate nohighlight">\(j\)</span>, then their payoff is</p>
+<div class="math notranslate nohighlight">
+\[U_{i,j} = v_{i,j} - p_j;\]</div>
+</li>
+<li><p>If buyer <span class="math notranslate nohighlight">\(i\)</span> doesn’t purchase any good, normalize outside utility to be zero:</p>
+<div class="math notranslate nohighlight">
+\[U_{i, \varnothing} = 0.\]</div>
+</li>
+</ol>
+<p>The solution concept we will use:</p>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 24 </span></p>
+<section class="definition-content" id="proof-content">
+<p>A competitive equilibrium is a price vector <span class="math notranslate nohighlight">\(p = (p_1,...,p_m)\)</span> and a
+matching <span class="math notranslate nohighlight">\(M: \{1,2,...,n\} \to \{1,2,...,m\}\)</span> of buyers to goods such
+that:</p>
+<ol class="arabic">
+<li><p>Each buyer is matched with their favorite good given prices <span class="math notranslate nohighlight">\(p\)</span>: for
+all <span class="math notranslate nohighlight">\(i,j\)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[v_{i,M(i)} - p_{M(i)} &gt; v_{i,j} - p_j;\]</div>
+</li>
+<li><p>If no buyer is matched with good <span class="math notranslate nohighlight">\(j\)</span> then <span class="math notranslate nohighlight">\(p_j = 0\)</span>;</p></li>
+<li><p>Buyer <span class="math notranslate nohighlight">\(i\)</span> is unmatched if for all goods <span class="math notranslate nohighlight">\(j\)</span>, we have
+<span class="math notranslate nohighlight">\(v_{i,j} - p_j &lt; 0\)</span>.</p></li>
+</ol>
+</section>
+</div><div class="proof remark admonition" id="remark-7">
+<p class="admonition-title"><span class="caption-number">Remark 8 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Conditions (1) and (3) implies that buyer <span class="math notranslate nohighlight">\(i\)</span> is unmatched if <em>and only
+if</em> for all goods <span class="math notranslate nohighlight">\(j\)</span>, we have <span class="math notranslate nohighlight">\(v_{i,j} - p_j &lt; 0\)</span>. Then, this stronger
+condition is equivalent to individual rationality: for all buyers <span class="math notranslate nohighlight">\(i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[v_{i,M(i)} - p_i \geq 0.\]</div>
+</section>
+</div><p>In addition to equilibrium, we also care about welfare:</p>
+<div class="proof definition admonition" id="definition-8">
+<p class="admonition-title"><span class="caption-number">Definition 25 </span></p>
+<section class="definition-content" id="proof-content">
+<p>The social welfare of an allocation <span class="math notranslate nohighlight">\(M\)</span> is the sum of buyers’ values:</p>
+<div class="math notranslate nohighlight">
+\[U(M) = \sum_i v_{i,M(i)}.\]</div>
+</section>
+</div><div class="proof remark admonition" id="remark-9">
+<p class="admonition-title"><span class="caption-number">Remark 9 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Prices are not included because the total cost to buyers is equal to
+total profit of sellers.</p>
+</section>
+</div></section>
+<section id="properties-of-competitive-equilibrium">
+<h2>Properties of Competitive Equilibrium<a class="headerlink" href="#properties-of-competitive-equilibrium" title="Link to this heading">#</a></h2>
+<div class="proof theorem admonition" id="theorem-10">
+<p class="admonition-title"><span class="caption-number">Theorem 18 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The Serial Dictatorship mechanism is dominant strategy incentive
-compatible: it is in every student’s best interest to choose their
-favorite available dorm in their term.</p>
+<p>If <span class="math notranslate nohighlight">\((p,M)\)</span> is a competitive equilibrium, then <span class="math notranslate nohighlight">\(M\)</span> is a matching that
+maximizes social welfare: if <span class="math notranslate nohighlight">\(M'\)</span> is any matching, we have</p>
+<div class="math notranslate nohighlight">
+\[\sum_i v_{i,M(i)} \geq \sum_i v_{i,M'(i)}.\]</div>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof.  Your room choice will not affect what rooms are available by
-the time your turn comes. When it gets to your turn, what you choose is
-what you get, so it is best to choose your favorite room among available
-options.</p>
+<p>Proof.  By the definition of competitive equilibrium, we know</p>
+<div class="math notranslate nohighlight">
+\[\sum_i (v_{i,M(i)}-p_{M(i)}) \geq \sum_i (v_{i,M'(i)}-p_{M'(i)})\]</div>
+<p>as
+<span class="math notranslate nohighlight">\(v_{i,M(i)}-p_{M(i)} \geq v_{i,M'(i)}-p_{M'(i)}\)</span> for all <span class="math notranslate nohighlight">\(i\)</span>. Then,
+<span class="math notranslate nohighlight">\(\sum_i p_{M(i)} = \sum_i p_{M'(i)}\)</span> as <span class="math notranslate nohighlight">\(M,M'\)</span> are just permutations so
+we get</p>
+<div class="math notranslate nohighlight">
+\[\sum_i v_{i,M(i)} \geq \sum_i v_{i,M'(i)}.\]</div>
 </div>
-<div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O'\)</span> is a Pareto improvement over outcome <span class="math notranslate nohighlight">\(O\)</span> if all agents
-either strictly prefer <span class="math notranslate nohighlight">\(O'\)</span> to <span class="math notranslate nohighlight">\(O\)</span> or are indifferent between the two,
-with at least one strict preference.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O\)</span> is Pareto optimal if there are no Pareto improvements
-from <span class="math notranslate nohighlight">\(O\)</span>.<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-</section>
-</div><p>In other words, an outcome is Pareto optimal if you can’t make anyone
-happier without making someone sadder.</p>
-<div class="proof theorem admonition" id="theorem-9">
-<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
+<div class="proof theorem admonition" id="theorem-11">
+<p class="admonition-title"><span class="caption-number">Theorem 19 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The outcome under serial dictatorship (with any ordering of students) is
-Pareto optimal.<a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p>In the unit-demand market model with finite prices and finite
+increments, there will always exist a competitive equilibrium.</p>
+</section>
+</div><div class="proof remark admonition" id="remark-12">
+<p class="admonition-title"><span class="caption-number">Remark 10 </span></p>
+<section class="remark-content" id="proof-content">
+<p>In more nuanced models, competitive equilibrium does not necessarily
+exist.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof.  Let the serial dictatorship outcome be <span class="math notranslate nohighlight">\(O\)</span>. Towards a
-contradiction, suppose <span class="math notranslate nohighlight">\(O\)</span> is not Pareto optimal, and there exists some
-outcome <span class="math notranslate nohighlight">\(O'\)</span> that is a Pareto improvement over <span class="math notranslate nohighlight">\(O\)</span>. Consider the first
-student that gets a different outcome under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>. Since all
-students before this student are assigned the same room, the set of
-available rooms for this student is the same under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>.
-However, the student chooses their favorite room under <span class="math notranslate nohighlight">\(O\)</span>, so the room
-they receive under <span class="math notranslate nohighlight">\(O'\)</span> must be worse.</p>
+<p>Proof.  We will construct a Deferred Acceptance with Prices algorithm
+that gets us to competitive equilibrium. For each buyer, construct a
+list of all (good, price) options ordered by utility (we can truncate
+this list by not including anything worse than (receive nothing, pay
+nothing), which is always an option). At each iteration of the
+algorithm, every unmatched buyer whose next-favorite option is <span class="math notranslate nohighlight">\((j,p)\)</span>
+proposes price <span class="math notranslate nohighlight">\(p\)</span> to good <span class="math notranslate nohighlight">\(j\)</span>. Then, good <span class="math notranslate nohighlight">\(j\)</span> tentatively accepts <span class="math notranslate nohighlight">\(p\)</span>
+(in the deferred acceptance sense) if it is higher than the prices it
+was previously offered. This algorithm will always terminate by the same
+reasoning as why deferred acceptance always terminates. The resulting
+match and prices when this algorithm terminates is a competitive
+equilibrium:</p>
+<ol class="arabic simple">
+<li><p>Every buyer is matched with their favorite (good, price) pair as any
+other pair must have led to the buyer being rejected at some
+previous stage.</p></li>
+<li><p>Each unmatched good has a price of zero as a good is unmatched if
+and only if it was never proposed to.</p></li>
+</ol>
 </div>
-<p>One issue with this: dictatorship can have a large affect on others.
-Suppose there are ten students and the first eight have chosen rooms <span class="math notranslate nohighlight">\(1\)</span>
-to <span class="math notranslate nohighlight">\(8\)</span>. Also, suppose student nine has room <span class="math notranslate nohighlight">\(9\)</span> as their <span class="math notranslate nohighlight">\(9\)</span>th favorite
-room and room <span class="math notranslate nohighlight">\(10\)</span> as their <span class="math notranslate nohighlight">\(10\)</span>th favorite room while student ten has
-room <span class="math notranslate nohighlight">\(9\)</span> as their favorite room and room <span class="math notranslate nohighlight">\(10\)</span> as their least favorite
-room. If student nine chooses room <span class="math notranslate nohighlight">\(9\)</span> over room <span class="math notranslate nohighlight">\(10\)</span> they only gain a
-small improvement, but student ten is now forced to pick room <span class="math notranslate nohighlight">\(10\)</span> over
-room <span class="math notranslate nohighlight">\(9\)</span> which is a large jump in their preferences.</p>
-<hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id3" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Pareto Optimality must be defined with respect to particular
-preferences. As such, it is difficult to conceptualize if an outcome
-is Pareto optimal if truthful preferences are unknown.</p>
-</aside>
-<aside class="footnote brackets" id="id4" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>This result only holds if every students’ preferences over dorms
-is strict (no student can be indifferent between dorms).</p>
-</aside>
-</aside>
+<div class="proof remark admonition" id="remark-13">
+<p class="admonition-title"><span class="caption-number">Remark 11 </span></p>
+<section class="remark-content" id="proof-content">
+<p>DA with prices runs in <span class="math notranslate nohighlight">\(O(n \cdot m \cdot k)\)</span> time where <span class="math notranslate nohighlight">\(k\)</span> is the
+number of price increments.</p>
+</section>
+</div><div class="proof proposition admonition" id="proposition-14">
+<p class="admonition-title"><span class="caption-number">Proposition 1 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>Deferred acceptance with prices is strategyproof and optimal for buyers.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  Follows directly from the same reasoning used to analyze
+deferred acceptance.</p>
+</div>
 </section>
 </section>
 
@@ -555,20 +645,20 @@ is strict (no student can be indifferent between dorms).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="day5_file_sharing.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Algorithmic Game Theory</p>
+        <p class="prev-next-title">P2P File-sharing Dilemma</p>
       </div>
     </a>
     <a class="right-next"
-       href="day2_two_sided_matching.html"
+       href="day7_market_failures.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Two-Sided Matching</p>
+        <p class="prev-next-title">Market Failures</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -588,7 +678,8 @@ is strict (no student can be indifferent between dorms).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unit-demand-market-model">Unit-Demand Market Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-competitive-equilibrium">Properties of Competitive Equilibrium</a></li>
 </ul>
   </nav></div>
 

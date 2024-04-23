@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>One-Sided Matching &#8212; Incentives in Computer Science</title>
+    <title>Top Trading Cycles &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,11 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day1_one_sided_markets';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day3_ttc';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Two-Sided Matching" href="day2_two_sided_matching.html" />
-    <link rel="prev" title="Algorithmic Game Theory" href="../intro.html" />
+    <link rel="next" title="Equilibria in Games" href="day4_game_eq.html" />
+    <link rel="prev" title="Two-Sided Matching" href="day2_two_sided_matching.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,9 +181,9 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">One-Sided Matching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day1_one_sided_markets.html">One-Sided Matching</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day2_two_sided_matching.html">Two-Sided Matching</a></li>
-<li class="toctree-l1"><a class="reference internal" href="day3_ttc.html">Top Trading Cycles</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Top Trading Cycles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day4_game_eq.html">Equilibria in Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day5_file_sharing.html">P2P File-sharing Dilemma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day6_market_eq.html">Market Equilibrium</a></li>
@@ -259,7 +259,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day1_one_sided_markets.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day3_ttc.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -289,7 +289,7 @@
       
       
       
-      <li><a href="../_sources/notes/day1_one_sided_markets.md" target="_blank"
+      <li><a href="../_sources/notes/day3_ttc.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -373,7 +373,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>One-Sided Matching</h1>
+    <h1>Top Trading Cycles</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -383,7 +383,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#top-trading-cycles-and-chains">Top Trading Cycles and Chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ttc-c-in-practice">TTC(C) in Practice</a></li>
 </ul>
             </nav>
         </div>
@@ -395,130 +396,235 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="one-sided-matching">
-<h1>One-Sided Matching<a class="headerlink" href="#one-sided-matching" title="Link to this heading">#</a></h1>
-<p>Model:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="top-trading-cycles">
+<h1>Top Trading Cycles<a class="headerlink" href="#top-trading-cycles" title="Link to this heading">#</a></h1>
+<p>From before, we had two mechanisms for two different models of matching:</p>
 <ul class="simple">
-<li><p>there are <span class="math notranslate nohighlight">\(n\)</span> students, each with some preference over residences</p></li>
-<li><p>there are <span class="math notranslate nohighlight">\(m\)</span> dorms, each with some capacity</p></li>
+<li><p>Random Serial Dictatorship for one sided matching;</p></li>
+<li><p>Deferred Acceptance for two sided matching.</p></li>
 </ul>
-<p>We want to assign students to dorms. One possible solution is to
-maximize the sum of utilities:</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 1 </span> (Utility Maximization)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Create a bipartite graph with one side being students and the other side being residencies with with edges from students to dorm with edge weight equal to how much student <span class="math notranslate nohighlight">\(i\)</span> likes dorm <span class="math notranslate nohighlight">\(j\)</span></p></li>
-<li><p>Find the max-weight matching (i.e., <a class="reference external" href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Algorithm</a>)</p></li>
-</ol>
-</section>
-</div><p>The issue: each student has an incentive to exaggerate how much they
-like their favorite dorm and undercut how much they like other dorms.</p>
-<p>As such, finding the matching that maximizes happiness was the right
-solution concept, but failed to take incentives into account. Another
-possible algorithm is serial dictatorship:</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 2 </span> (Serial Dictatorship)</p>
-<section class="axiom-content" id="proof-content">
-<ol class="arabic simple">
-<li><p>Students are sorted by some fixed order (random, seniority,
-alphabetically, etc.)</p></li>
-<li><p>Go through the list in order and each student selects their most
-preferred available dorm</p></li>
-</ol>
-</section>
-</div><p>Is this any better? There can still be students who are unhappy with their result under serial dictatorship.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A mechanism consists of three things: a method of collecting inputs from
-agents, an algorithm that acts on the inputs, and an action that is
-taken based on the output of the algorithm.</p>
-</section>
-</div><div class="proof remark admonition" id="remark-3">
-<p class="admonition-title"><span class="caption-number">Remark 1 </span></p>
+<div class="proof remark admonition" id="remark-0">
+<p class="admonition-title"><span class="caption-number">Remark 2 </span></p>
 <section class="remark-content" id="proof-content">
-<p>All three components are important: for instance, students’ beliefs of
-how the algorithm works or how the action is taken would affect how they
-respond to the way inputs are collected.</p>
+<p>Clarification: Strategyproofness is a guarantee against a single agent
+deviating from a truthful strategy. It is does not say anything about
+collusion. A mechanism can be strategyproof but not collusion-proof.</p>
 </section>
-</div><section id="properties-of-serial-dictatorship">
-<h2>Properties of Serial Dictatorship<a class="headerlink" href="#properties-of-serial-dictatorship" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="strategyproof_label">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+</div><p>This lecture: what happens if people are already endowed with a good?
+For instance, Stanford PhD students are allowed to renew housing every
+year. However, they can re-enter the lottery at a low priority if they
+choose not to renew. The issue: students might get a room worse than
+their current room if they enter the lottery. This mechanism is not
+strategyproof and leads to sub-optimal assignments.</p>
+<div class="proof axiom admonition" id="axiom-1">
+<p class="admonition-title"><span class="caption-number">Axiom 3 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>Top Trading Cycles Input: <span class="math notranslate nohighlight">\(n\)</span> students and <span class="math notranslate nohighlight">\(n\)</span> rooms; each student has a
+current room and preferences over all <span class="math notranslate nohighlight">\(n\)</span> rooms.<br />
+<br />
+While there are still unmatched students and rooms:</p>
+<ol class="arabic simple">
+<li><p>Create a graph with each unmatched room being a node and each
+unmatched student being a node;</p></li>
+<li><p>Draw a directed edge from each room to the student that owns the
+room;</p></li>
+<li><p>Draw a directed edge from each student to their most preferred
+available room;</p></li>
+<li><p>Remove any cycles that form and trade along the directed edges.</p></li>
+</ol>
+</section>
+</div><p>We call this problem the <em>housing assignment problem with
+<strong>incumbency</strong></em>.</p>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 9 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A mechanism is strategyproof if it is in every agent’s best interest to
-act truthfully.</p>
+<p>Informally, a directed bipartite graph is a graph with directed edges
+(arrows) and two disjoint groups (the two sides in a market, e.g.,
+students and houses)</p>
+</section>
+</div><div class="proof theorem admonition" id="theorem-3">
+<p class="admonition-title"><span class="caption-number">Theorem 11 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>Top trading cycles runs in <span class="math notranslate nohighlight">\(O(n^2)\)</span> time, where <span class="math notranslate nohighlight">\(n\)</span> is the number of
+students/rooms.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  Constructing the graph takes <span class="math notranslate nohighlight">\(O(n)\)</span> time. Drawing edges also
+takes <span class="math notranslate nohighlight">\(O(n)\)</span> time. To find cycles, we can start at any node and follow
+the path traced by directed edges. Since every node has an
+outward-facing directed edge and there are a finite number of nodes, we
+will eventually visit some node twice; this gives a cycle.<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> We need
+to pass through at most <span class="math notranslate nohighlight">\(2n+1\)</span> nodes so finding a cycle will take <span class="math notranslate nohighlight">\(O(n)\)</span>
+time. Finally, every run of the while-loop removes at least one student
+so there are <span class="math notranslate nohighlight">\(O(n)\)</span> iterations. As such, total runtime is
+$<span class="math notranslate nohighlight">\((O(n)+O(n)+O(n)) \cdot O(n) = O(n^2).\)</span>$</p>
+</div>
+<div class="proof admonition" id="proof">
+<p>Proof.  To find all cycles, we run the strongly connected components
+(SCC) algorithm.<a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> (Lemma: Every SCC with vertex <span class="math notranslate nohighlight">\(&gt;1\)</span> is a cycle). So
+each iteration runs in <span class="math notranslate nohighlight">\(O(n)\)</span> time. Each iteration removes <span class="math notranslate nohighlight">\(\geq 1\)</span>
+students, so at most <span class="math notranslate nohighlight">\(O(n)\)</span> iterations total. Total running time:
+<span class="math notranslate nohighlight">\(O(n^2)\)</span>.</p>
+</div>
+<div class="proof remark admonition" id="remark-4">
+<p class="admonition-title"><span class="caption-number">Remark 3 </span></p>
+<section class="remark-content" id="proof-content">
+<p>Since each of the <span class="math notranslate nohighlight">\(n\)</span> students reports a preference list of length <span class="math notranslate nohighlight">\(n\)</span>,
+input size is <span class="math notranslate nohighlight">\(n^2\)</span> so runtime is linear in input size.</p>
 </section>
 </div><div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 10 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A mechanism is dominant strategy incentive compatible if it is a dominant strategy for each participant to act truthfully. In particular, this means that being truthful is a best response to any possible strategy profile of other players.</p>
+<p>A mechanism is individually rational if no agent is worse off after
+participating in the mechanism.</p>
 </section>
 </div><div class="proof theorem admonition" id="theorem-6">
-<p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 12 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The Serial Dictatorship mechanism is dominant strategy incentive
-compatible: it is in every student’s best interest to choose their
-favorite available dorm in their term.</p>
+<p>The top trading cycles mechanism is individually rational.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof.  Your room choice will not affect what rooms are available by
-the time your turn comes. When it gets to your turn, what you choose is
-what you get, so it is best to choose your favorite room among available
-options.</p>
+<p>Proof.  A student trades their room if and only if they are getting a better room.</p>
 </div>
-<div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O'\)</span> is a Pareto improvement over outcome <span class="math notranslate nohighlight">\(O\)</span> if all agents
-either strictly prefer <span class="math notranslate nohighlight">\(O'\)</span> to <span class="math notranslate nohighlight">\(O\)</span> or are indifferent between the two,
-with at least one strict preference.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
-<section class="definition-content" id="proof-content">
-<p>An outcome <span class="math notranslate nohighlight">\(O\)</span> is Pareto optimal if there are no Pareto improvements
-from <span class="math notranslate nohighlight">\(O\)</span>.<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
-</section>
-</div><p>In other words, an outcome is Pareto optimal if you can’t make anyone
-happier without making someone sadder.</p>
-<div class="proof theorem admonition" id="theorem-9">
-<p class="admonition-title"><span class="caption-number">Theorem 2 </span></p>
+<div class="proof theorem admonition" id="theorem-7">
+<p class="admonition-title"><span class="caption-number">Theorem 13 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The outcome under serial dictatorship (with any ordering of students) is
-Pareto optimal.<a class="footnote-reference brackets" href="#id4" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p>Top trading cycles is strategyproof.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof.  Let the serial dictatorship outcome be <span class="math notranslate nohighlight">\(O\)</span>. Towards a
-contradiction, suppose <span class="math notranslate nohighlight">\(O\)</span> is not Pareto optimal, and there exists some
-outcome <span class="math notranslate nohighlight">\(O'\)</span> that is a Pareto improvement over <span class="math notranslate nohighlight">\(O\)</span>. Consider the first
-student that gets a different outcome under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>. Since all
-students before this student are assigned the same room, the set of
-available rooms for this student is the same under <span class="math notranslate nohighlight">\(O\)</span> and <span class="math notranslate nohighlight">\(O'\)</span>.
-However, the student chooses their favorite room under <span class="math notranslate nohighlight">\(O\)</span>, so the room
-they receive under <span class="math notranslate nohighlight">\(O'\)</span> must be worse.</p>
+<p>Proof. <strong>Claim 1:</strong> In either run (true or strategic), if <span class="math notranslate nohighlight">\(u\)</span> points at <span class="math notranslate nohighlight">\(v\)</span> at
+any point in the algorithm, it continues to point at <span class="math notranslate nohighlight">\(v\)</span> until <span class="math notranslate nohighlight">\(v\)</span> is
+matched.</p>
+<p>Define <span class="math notranslate nohighlight">\(X:=\text{first time Bee matches with either run}\)</span>.</p>
+<p><strong>Claim 2:</strong> In both runs (true and strategic), the algorithm makes the
+same matches until <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p><strong>Proof:</strong> By induction. At each iteration, if the available
+students/rooms from previous iterations are the same (by induction
+hypothesis), and if it doesn’t match Bee in that iteration, it doesn’t
+matter what Bee reports.</p>
+<p><strong>Claim 3:</strong> In both runs, right before <span class="math notranslate nohighlight">\(X\)</span>, Swamp is unmatched.</p>
+<p><strong>Proof:</strong> In the misreported run it is unmatched because Bee is still
+unmatched, and eventually Bee matches to Swamp. Therefore by Claim 2 it
+is also unmatched in the run with true preferences.</p>
+<p><strong>Claim 4:</strong> Bee matches in the strategic run before it matches in the
+true run.</p>
+<p><strong>Proof:</strong> By Claim 3, right before time <span class="math notranslate nohighlight">\(X\)</span>, Swamp is still available.
+Therefore Bee cannot be pointing at a worse room at time <span class="math notranslate nohighlight">\(X\)</span>. Therefore
+<span class="math notranslate nohighlight">\(X\)</span> is the time when Bee matches in the strategic run.</p>
+<p><strong>Claim 5:</strong> In both runs, at time <span class="math notranslate nohighlight">\(X\)</span> there is a path from Swamp to
+Bee.</p>
+<p><strong>Proof:</strong> In the strategic run, by Claim 4, at time <span class="math notranslate nohighlight">\(X\)</span> Bee matches
+with Swamp, therefore there must be a path from Swamp to Bee. Therefore
+by Claim 2 the path is also there in the true run.</p>
+<p><strong>Claim 6:</strong> In the true run, Swamp is still available when Bee matches.</p>
+<p><strong>Proof:</strong> By Claim 1 the path from Swamp to Bee stays in the graph
+until Bee matches.</p>
 </div>
-<p>One issue with this: dictatorship can have a large affect on others.
-Suppose there are ten students and the first eight have chosen rooms <span class="math notranslate nohighlight">\(1\)</span>
-to <span class="math notranslate nohighlight">\(8\)</span>. Also, suppose student nine has room <span class="math notranslate nohighlight">\(9\)</span> as their <span class="math notranslate nohighlight">\(9\)</span>th favorite
-room and room <span class="math notranslate nohighlight">\(10\)</span> as their <span class="math notranslate nohighlight">\(10\)</span>th favorite room while student ten has
-room <span class="math notranslate nohighlight">\(9\)</span> as their favorite room and room <span class="math notranslate nohighlight">\(10\)</span> as their least favorite
-room. If student nine chooses room <span class="math notranslate nohighlight">\(9\)</span> over room <span class="math notranslate nohighlight">\(10\)</span> they only gain a
-small improvement, but student ten is now forced to pick room <span class="math notranslate nohighlight">\(10\)</span> over
-room <span class="math notranslate nohighlight">\(9\)</span> which is a large jump in their preferences.</p>
+<div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 14 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The TTC allocation is Pareto-optimal.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  The TTC allocation is the same as ordering students by
+iteration when they form a cycle (breaking ties arbitrarily) and then
+running serial dictatorship in that order as every student gets their
+most preferred room at the time they form a cycle.</p>
+<p>We know that serial dictatorship is Pareto-optimal.</p>
+</div>
+<section id="top-trading-cycles-and-chains">
+<h2>Top Trading Cycles and Chains<a class="headerlink" href="#top-trading-cycles-and-chains" title="Link to this heading">#</a></h2>
+<p>What happens when a student graduates? They give up their old room but
+do not enter the market for new rooms. Similarly, there can be new
+students that do not yet have a room. Solution: combine ideas from TTC
+and RSD to get “You want my house, I get your turn”.</p>
+<div class="proof axiom admonition" id="axiom-9">
+<p class="admonition-title"><span class="caption-number">Axiom 4 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>Top Trading Cycles with Chains</p>
+<ol class="arabic simple">
+<li><p>Process all students in random order.</p></li>
+<li><p>In student <span class="math notranslate nohighlight">\(i\)</span>’s turn, mark <span class="math notranslate nohighlight">\(i\)</span> as visited and…</p>
+<ol class="arabic simple">
+<li><p>If <span class="math notranslate nohighlight">\(i\)</span>’s top available room is unoccupied, assign that room to
+<span class="math notranslate nohighlight">\(i\)</span> and free <span class="math notranslate nohighlight">\(i\)</span>’s old room.</p></li>
+<li><p>Else-If the top available room is occupied by an <em>unvisited</em>
+student <span class="math notranslate nohighlight">\(j\)</span>, move <span class="math notranslate nohighlight">\(j\)</span> before <span class="math notranslate nohighlight">\(i\)</span> in the order.</p></li>
+<li><p>Else-If the top available room is occupied by a <em>visited</em>
+student <span class="math notranslate nohighlight">\(j\)</span>, we have found a cycle.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><p>This new mechanism still has the same nice properties: it’s
+strategyproof, Pareto-optimal, individual rational, and has good
+runtime.</p>
+</section>
+<section id="ttc-c-in-practice">
+<h2>TTC(C) in Practice<a class="headerlink" href="#ttc-c-in-practice" title="Link to this heading">#</a></h2>
+<p>Why is TTCC not used in practice? Running it once is strategyproof, but
+running it over multiple years is not. Students may try to get a popular
+room that they do not like to use it to get an even more preferred room
+the year after. This increases demand for perceived “popular” rooms even
+more.</p>
+<p>Another application: school choice. New Orleans Recovery School District
+used TTC to assign K and 9-th grade students to schools in 2011-12. In
+public schools, some students have priorities (they have a sibling at
+the school or are in the district) that they can own and use to trade
+for in TTC. Next year, they switched to Deferred Acceptance. Explanation
+given by the board meeting was that DA is simpler to explain to parents
+and students. DA also has good publicity (2012 Nobel prize).</p>
+<p>College admissions are different: universities have preferences over
+applicants that are a better fit. As such, it doesn’t make much sense to
+allow a Stanford admit to trade their admission for a Harvard
+admittance.</p>
+<p>Kidney transplants: over 100,000 people on the waitlist for a kidney
+transplant. Most humans have two healthy kidneys and can donate one
+before they die. However, there are blood type and other biological
+compatibility issues so even if a patient has a willing donor, it could
+be the case that the donor cannot donate to the patient.</p>
+<p>Solution: kidney exchange, if patient <span class="math notranslate nohighlight">\(x\)</span>’s donor can donate to patient
+<span class="math notranslate nohighlight">\(y\)</span> and patient <span class="math notranslate nohighlight">\(y\)</span>’s donor can donate dto patient <span class="math notranslate nohighlight">\(x\)</span>, then the two
+patient-donor pairs can swap donors. Some other concerns in this
+setting:</p>
+<ul class="simple">
+<li><p>Strategyproofness is less of a concern: preferences are more
+determined purely based on blood type, etc. than personal
+preferences.</p></li>
+<li><p>People who are closer to death could have a higher priority.</p></li>
+<li><p>Not a repeated game, won’t re-donate a received kidney.</p></li>
+<li><p>Stability and incentivizing people to join the central mechanism is
+more important.</p></li>
+</ul>
+<p>However, there is a logistical challenge with long cycles: an entire
+cycle has to be operated on simultaneously. If not, one donor could
+change their mind or get ill and a patient who’s donor has already
+donated would be left without a kidney. On the other hand, long chains
+are fine. Some other considerations:</p>
+<ul class="simple">
+<li><p>Dynamic problem: donors and patients arrive and leave over time and
+in an uncertain manner.</p></li>
+<li><p>Strategic hospitals: some hospitals might want to match kidneys
+internally (due to publicity or financial incentives). When this
+happens, the mechanism is not stable.</p></li>
+<li><p>High failure probability: <span class="math notranslate nohighlight">\(93\%\)</span> of matches actually fail (more
+compatibility issues are tested, donor illness, etc.).</p></li>
+<li><p>Ethical concerns: should we prioritize any patients over another?</p></li>
+<li><p>Multi-Organ exchange: trade a piece of liver for a kidney.</p></li>
+</ul>
 <hr class="footnotes docutils" />
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id3" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Pareto Optimality must be defined with respect to particular
-preferences. As such, it is difficult to conceptualize if an outcome
-is Pareto optimal if truthful preferences are unknown.</p>
+<p>To formalize this, we can use the pigeonhole principle: take a
+path of length <span class="math notranslate nohighlight">\(2n+1\)</span>; there are a total of <span class="math notranslate nohighlight">\(2n\)</span> nodes so at least
+one node must have been visited twice or more.</p>
 </aside>
 <aside class="footnote brackets" id="id4" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>This result only holds if every students’ preferences over dorms
-is strict (no student can be indifferent between dorms).</p>
+<p>Tarjan’s algorithm runs in <span class="math notranslate nohighlight">\(O(|V| + |E|)\)</span>, but every node has
+degree at most <span class="math notranslate nohighlight">\(2\)</span>, so <span class="math notranslate nohighlight">\(|E| \leq |2V|\)</span> and complexity is <span class="math notranslate nohighlight">\(O(n)\)</span>
+where <span class="math notranslate nohighlight">\(n = |V|\)</span>.</p>
 </aside>
 </aside>
 </section>
@@ -555,20 +661,20 @@ is strict (no student can be indifferent between dorms).</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="day2_two_sided_matching.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Algorithmic Game Theory</p>
+        <p class="prev-next-title">Two-Sided Matching</p>
       </div>
     </a>
     <a class="right-next"
-       href="day2_two_sided_matching.html"
+       href="day4_game_eq.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Two-Sided Matching</p>
+        <p class="prev-next-title">Equilibria in Games</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -588,7 +694,8 @@ is strict (no student can be indifferent between dorms).</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-serial-dictatorship">Properties of Serial Dictatorship</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#top-trading-cycles-and-chains">Top Trading Cycles and Chains</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ttc-c-in-practice">TTC(C) in Practice</a></li>
 </ul>
   </nav></div>
 
