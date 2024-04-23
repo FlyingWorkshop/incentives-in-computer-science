@@ -1,8 +1,8 @@
-PWD /Users/logan/VSCodeProjects/CS269I
+PWD /Users/logan/VSCodeProjects/CS269I/latex
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/logan/VSCodeProjects/CS269I/notes.tex
+INPUT /Users/logan/VSCodeProjects/CS269I/latex/notes.tex
 OUTPUT notes.log
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls

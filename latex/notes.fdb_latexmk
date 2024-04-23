@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1713407367.09492 "/Users/logan/VSCodeProjects/CS269I/notes.tex" "notes.pdf" "notes" 1713407369.21287 0
-  "/Users/logan/VSCodeProjects/CS269I/notes.tex" 1713407366.45234 120133 d8dac85fb74cf4016a021926e0674d25 ""
+["pdflatex"] 1713830994.86721 "/Users/logan/VSCodeProjects/CS269I/latex/notes.tex" "notes.pdf" "notes" 1713830996.82632 0
+  "/Users/logan/VSCodeProjects/CS269I/latex/notes.tex" 1713830994.47201 120057 8f81c12f9ed14b159438507d3aa82e2d ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/tfm/jknappen/ec/tcrm0900.tfm" 1136768653 1536 c4f439db76ef96a9c53bc437f35ffe20 ""
@@ -186,10 +186,10 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1712598636.38357 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1712598605 8221442 d2c55aa80e23debe8500cb5d1e9abccf ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "notes.aux" 1713407368.96261 8476 125d21d6428ee63ba47c86f6788aa992 "pdflatex"
-  "notes.out" 1713407368.96477 12105 9f38e81233cbb45c94315fd8889375b5 "pdflatex"
-  "notes.tex" 1713407366.45234 120133 d8dac85fb74cf4016a021926e0674d25 ""
-  "notes.toc" 1713407368.96538 5730 b094777aa6d4841306a4be4ba5b88517 "pdflatex"
+  "notes.aux" 1713830996.62759 8374 28908d361a6d66d13abcab5698d820aa "pdflatex"
+  "notes.out" 1713830996.62978 11514 91e2ea5dcb14cd6e0d2f008cd2d6fc19 "pdflatex"
+  "notes.tex" 1713830994.47201 120057 8f81c12f9ed14b159438507d3aa82e2d ""
+  "notes.toc" 1713830996.63052 5628 244c38fc371b70ebd3373145b49bfddf "pdflatex"
   (generated)
   "notes.aux"
   "notes.log"

@@ -1,0 +1,3 @@
+- get autoformatter for markdown in vscode
+- create autoref script that takes clean markdown and adds references (e.g., strategyproof should become {prf:ref}`strategyproof <strategyproof_label>`)
+- add label attacher code. This should run and take in every prf: environment and check to see if a label exists, if not, ask the user to create a label and then it well append _label to the text and add it.

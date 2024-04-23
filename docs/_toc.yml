@@ -4,6 +4,10 @@
 format: jb-book
 root: intro
 chapters:
-- file: mega
 - file: notes/day1_one_sided_markets
 - file: notes/day2_two_sided_matching
+- file: notes/day3_ttc
+- file: notes/day4_game_eq
+- file: notes/day5_file_sharing
+- file: notes/day6_market_eq
+- file: notes/day7_market_failures
