@@ -5,4 +5,4 @@ Many 21st-century computer science applications require the design of software o
 ```{tableofcontents}
 ```
 
-*This is a digital adaptation of unofficial notes from Eric Gao for Stanford's CS269I: Incentives in Computer Science, updated to include the course content from Spring 2024.*
+*This is a digital adaptation of [unofficial notes](https://github.com/FlyingWorkshop/CS269I/blob/main/latex/notes.pdf) from the amazing [Eric Gao](https://twitter.com/gaoooric) for Stanford's CS269I: Incentives in Computer Science, updated to include the course content from Spring 2024.* 
