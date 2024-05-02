@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Market Failures &#8212; Incentives in Computer Science</title>
+    <title>Sponsored Search Auctions &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day7_market_failures';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/day9_sponsored_search';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Single-Unit Auctions" href="day8_single_auctions.html" />
-    <link rel="prev" title="Market Equilibrium" href="day6_market_eq.html" />
+    <link rel="prev" title="Single-Unit Auctions" href="day8_single_auctions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,9 +186,9 @@
 <li class="toctree-l1"><a class="reference internal" href="day4_game_eq.html">Equilibria in Games</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day5_file_sharing.html">P2P File-sharing Dilemma</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day6_market_eq.html">Market Equilibrium</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Market Failures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day7_market_failures.html">Market Failures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="day8_single_auctions.html">Single-Unit Auctions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="day9_sponsored_search.html">Sponsored Search Auctions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Sponsored Search Auctions</a></li>
 </ul>
 
     </div>
@@ -261,7 +260,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day7_market_failures.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/day9_sponsored_search.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -291,7 +290,7 @@
       
       
       
-      <li><a href="../_sources/notes/day7_market_failures.md" target="_blank"
+      <li><a href="../_sources/notes/day9_sponsored_search.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -375,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Market Failures</h1>
+    <h1>Sponsored Search Auctions</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -385,17 +384,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#externalities-and-public-goods">Externalities and Public Goods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transaction-costs">Transaction Costs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-thickness">Market Thickness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-issues">Timing Issues</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-unraveling">Market Unraveling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploding-offers">Exploding Offers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impatience">Impatience</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-asymmetries">Information Asymmetries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vickrey-clarke-groves-mechanism">Vickrey-Clarke-Groves Mechanism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unnatural-equilibria">Unnatural Equilibria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gsp-vs-vcg-in-practice">GSP vs VCG in Practice</a></li>
 </ul>
             </nav>
         </div>
@@ -407,231 +398,182 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="market-failures">
-<h1>Market Failures<a class="headerlink" href="#market-failures" title="Link to this heading">#</a></h1>
-<p>The assumption we previously made was that free markets naturally
-converge to an optimal outcome. However, this clearly is not always the
-case: market failures arise when markets fail to converge to an optimal
-outcome.</p>
-<section id="externalities-and-public-goods">
-<h2>Externalities and Public Goods<a class="headerlink" href="#externalities-and-public-goods" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="externality">
-<p class="admonition-title"><span class="caption-number">Definition 26 </span></p>
-<section class="definition-content" id="proof-content">
-<p><strong>Externalities</strong> are side effects on individuals other than the buyer
-or seller.</p>
-</section>
-</div><div class="proof definition admonition" id="public-goods">
-<p class="admonition-title"><span class="caption-number">Definition 27 </span></p>
-<section class="definition-content" id="proof-content">
-<p><strong>Public goods</strong> are goods that are accessible and usable by
-everyone but not owned by anyone.</p>
-</section>
-</div><p>For example:</p>
-<ul class="simple">
-<li><p>The environment is a public good, and activities that harm the
-environment (plane tickets) have negative externalities.</p></li>
-<li><p>WiFi bandwidth is a public good, and one person’s usage imposes a
-negative externality of slower connections on others.</p></li>
-</ul>
-<p>Two possible solutions.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="sponsored-search-auctions">
+<h1>Sponsored Search Auctions<a class="headerlink" href="#sponsored-search-auctions" title="Link to this heading">#</a></h1>
+<p>Used to auction ad slots on websites. Model:</p>
+<ol class="arabic">
+<li><p>There are <span class="math notranslate nohighlight">\(N\)</span> slots with slot <span class="math notranslate nohighlight">\(j \in N\)</span> having associated
+click-through rate <span class="math notranslate nohighlight">\(\alpha_j\)</span> which is assumed to only depend on <span class="math notranslate nohighlight">\(j\)</span>
+(so for instance, quality of the ad itself does not matter);</p></li>
+<li><p>There are <span class="math notranslate nohighlight">\(M\)</span> advertisers with advertiser <span class="math notranslate nohighlight">\(i \in M\)</span> having a value
+of <span class="math notranslate nohighlight">\(v_i\)</span> per click;</p></li>
+<li><p>An allocation is a function <span class="math notranslate nohighlight">\(A: N \to M\)</span> that matches the <span class="math notranslate nohighlight">\(i\)</span>th slot
+to the <span class="math notranslate nohighlight">\(A(i)\)</span>th advertiser;</p></li>
+<li><p>Define social welfare to be</p>
+<div class="math notranslate nohighlight">
+\[W(A) = \sum_j v_{A(j)} \alpha_j.\]</div>
+</li>
+</ol>
+<p>What is the optimal allocation <span class="math notranslate nohighlight">\(A\)</span> to maximize <span class="math notranslate nohighlight">\(W\)</span>?</p>
+<div class="proof axiom admonition" id="axiom-0">
+<p class="admonition-title"><span class="caption-number">Axiom 8 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>General Second Price Auction</p>
 <ol class="arabic simple">
-<li><p>Pigouvian tax: a tax on transactions proportional to the externality
-they generate. (e.g., carbon, bags, cigarettes)</p></li>
-<li><p>Coasian bargaining: auction off public goods and rely on the Coarse
-Theorem to achieve social efficiency.<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+<li><p>Ask each advertiser for a bid <span class="math notranslate nohighlight">\(b_i\)</span>;</p></li>
+<li><p>Assign highest bid to first slot, second highest bid to second slot,
+etc;</p></li>
+<li><p>For each slot <span class="math notranslate nohighlight">\(j\)</span>, advertiser <span class="math notranslate nohighlight">\(A(j)\)</span> pays <span class="math notranslate nohighlight">\(b_{A(j+1)}\)</span>.</p></li>
 </ol>
 </section>
-<section id="transaction-costs">
-<h2>Transaction Costs<a class="headerlink" href="#transaction-costs" title="Link to this heading">#</a></h2>
-<p>Also known as market frictions. Sometimes, transactions themselves can
-be costly to execute leading to mutually beneficial transactions not
-being made. For example:</p>
-<ul class="simple">
-<li><p>Agent one has a boat worth <span class="math notranslate nohighlight">\(9,900\)</span> to them and agent two is willing
-to pay <span class="math notranslate nohighlight">\(10,000\)</span>.</p></li>
-<li><p>Agent one can sell the boat to agent two and both would be happier
-off.</p></li>
-<li><p>However, if there is a <span class="math notranslate nohighlight">\(9\%\)</span> sales tax on boats, this transaction
-would not occur.</p></li>
-</ul>
-<p>Transaction costs do not necessarily have to be monetary:</p>
-<ul class="simple">
-<li><p>A hungry student is willing to buy an apple for <span class="math notranslate nohighlight">\(10\)</span> while other
-students have applies worth <span class="math notranslate nohighlight">\(1\)</span> to them.</p></li>
-<li><p>Other students can sell the apple to the hungry student and both
-would be better off.</p></li>
-<li><p>However, there are <em>time/information costs</em> for the hungry student to
-run around and ask other students if they have an apple on them.</p></li>
-</ul>
-<p>Computers, especially the Internet and search have done a lot to reduce transaction cost (e.g., Lyft, Venmo, Tinder).</p>
+</div><div class="proof remark admonition" id="remark-1">
+<p class="admonition-title"><span class="caption-number">Remark 12 </span></p>
+<section class="remark-content" id="proof-content">
+<p>With the special case of one slot <span class="math notranslate nohighlight">\(j=1\)</span>, GSP is equivalent to the second
+price auction.</p>
 </section>
-<section id="market-thickness">
-<h2>Market Thickness<a class="headerlink" href="#market-thickness" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="thick">
-<p class="admonition-title"><span class="caption-number">Definition 28 </span></p>
+</div><p>The allocation rule in step two maximizes
+$<span class="math notranslate nohighlight">\(\sum_j b_{A(j)}\alpha_j.\)</span>$
+However, GSP is not strategyproof: some advertisers may prefer to win a
+lower slot at an even lower price than a higher slot at a high price.</p>
+<section id="vickrey-clarke-groves-mechanism">
+<h2>Vickrey-Clarke-Groves Mechanism<a class="headerlink" href="#vickrey-clarke-groves-mechanism" title="Link to this heading">#</a></h2>
+<div class="proof definition admonition" id="definition-2">
+<p class="admonition-title"><span class="caption-number">Definition 33 </span></p>
 <section class="definition-content" id="proof-content">
-<p>Informally, a thick market has many buyers, a thin market has few buyers.</p>
+<p>The externality of agent <span class="math notranslate nohighlight">\(i\)</span> is the difference in utility for all other
+agents when <span class="math notranslate nohighlight">\(i\)</span> is present versus when <span class="math notranslate nohighlight">\(i\)</span> is not.</p>
 </section>
-</div><p>A market is thick (thin) if there are many (few) buyers and sellers.
-In thick markets, sellers and buyers have lots of options which makes
-prices close to competitive equilibrium. In thin markets, there are few
-buyers and if buyers come they face monopoly prices. Thick markets
-generate welfare-maximizing outcomes while thin markets do not.</p>
-<p>Why are monopolies bad? Monopoly quantity sold is lower than quantity
-sold in competitive equilibrium; prices are higher and consumer surplus
-is lower.</p>
-<p>First welfare theorem holds with reserve prices to cover costs. However,
-sellers setting reserve prices is not <a class="reference internal" href="day1_one_sided_markets.html#strategyproof_label">strategyproof</a>.</p>
-<div class="proof admonition" id="proof">
-<p>Proof.  If reserve prices are nonbinding, then sellers can increase
-reserve prices by <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span> and still sell. If prices are binding,
-then the good is sold at the reserve price which is equal to cost and
-the seller makes zero profit. Assuming the necessary assumptions,
-sellers can increase reserve prices by <span class="math notranslate nohighlight">\(\epsilon\)</span> and make strictly
-positive profit, which is a profitable deviation.</p>
-</div>
-<p>Some ways to get around this:</p>
-<ul class="simple">
-<li><p>As markets become far from monopoly, it converges to a
-seller-strategyproof mechanism (<em>strategyproof-in-the-large</em>).
-However, this requires fungible goods in a thick market.</p></li>
-<li><p>If the seller doesn’t know buyers’ valuations, then it is difficult
-for sellers to set a reserve price. However, sellers collect lots of
-data.</p></li>
-</ul>
-<p>How can markets be thickened?</p>
-<ul class="simple">
-<li><p>Encourage buyers and sellers to join and stay;</p></li>
-<li><p>Merge markets (larger kidney donation markets have typically led to
-better outcomes);</p></li>
-<li><p>Batch transactions: wait a bit for more buyers and sellers to join
-before running transactions (e.g., ride-share, kidney exchange).</p></li>
-</ul>
-</section>
-<section id="timing-issues">
-<h2>Timing Issues<a class="headerlink" href="#timing-issues" title="Link to this heading">#</a></h2>
-<section id="market-unraveling">
-<h3>Market Unraveling<a class="headerlink" href="#market-unraveling" title="Link to this heading">#</a></h3>
-<p><em>Committing to contracts too early</em></p>
-<p>In certain markets, one side has incentives to
-make matches earlier and earlier (to get good students before
-competitions hire them). As a result, before introduction of the
-centralized matching mechanism for matching doctors and residencies even
-first year med students would be matched. However, whether or not a
-first year med student and a residency would be a good match is a bad
-predictor of whether or not the student and the residency is still a
-good match four years later.</p>
-</section>
-<section id="exploding-offers">
-<h3>Exploding Offers<a class="headerlink" href="#exploding-offers" title="Link to this heading">#</a></h3>
-<p>Job offers that require a very short response
-time. In markets where one side needs to look for other candidates if
-turned down, short response times can arise. Amplified when:</p>
-<ul class="simple">
-<li><p>if there is a limited time window for transactions due to regulatory
-issues;</p></li>
-<li><p>if one side of the market can’t absorb variance in the number of
-matches received.</p></li>
-</ul>
-</section>
-<section id="impatience">
-<h3>Impatience<a class="headerlink" href="#impatience" title="Link to this heading">#</a></h3>
-<p>The third timing issue is not waiting for a market to clear. APPIC rules for psychologists in
-the 1970-1990’s:</p>
-<ul class="simple">
-<li><p>All transactions must occur on selection day;</p></li>
-<li><p>Exploding offers are not allowed.</p></li>
-</ul>
-<p>In theory, the result should be similar to Deferred Acceptance. In
-practice, employers didn’t want to propose to candidates who might
-cancel right before the deadline leading to earlier and earlier “safe”
-commits.</p>
-</section>
-<section id="solutions">
-<h3>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h3>
-<p>How to resolve timing issues? Centralized matching systems will help.
-However, setting timing rules often fail due to incentives to violate
-rules being too strong (“Would you like to visit my hospital [wink
-wink]”?) Rules/norms that allow for accepting and then reneging from
-exploding offers removes the incentives to cheat and make exploding
-offers.</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p>Notes on market stability from <a class="reference external" href="https://flyingworkshop.github.io/market-design/book/stability-order-unraveling.html?highlight=exploding+offers">ECON 136: Market Design</a>.</p>
-</div>
-</section>
-</section>
-<section id="information-asymmetries">
-<h2>Information Asymmetries<a class="headerlink" href="#information-asymmetries" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="info_asym_label">
-<p class="admonition-title"><span class="caption-number">Definition 29 </span> (Information Asymmetry)</p>
-<section class="definition-content" id="proof-content">
-<p>Informally, the seller knows something that the buyer doesn’t.</p>
-</section>
-</div><p>Sellers know more about the quality of goods than buyers. As such,
-buyers might buy a good that they thought was worth it, but later find
-out that the good is worse than expected. For example, the market for
-lemons:</p>
-<ul class="simple">
-<li><p>Market for used cars, some good and some bad.</p></li>
-<li><p>Buyers willing to pay more for good cars than bad cars but do not
-know which type of car is which.</p></li>
-<li><p>Sellers willing to sell bad cars for less and do know which car is
-which.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(g \in [0,1]\)</span> be the fraction of cars in the market that are
-good.</p></li>
-<li><p>Let <span class="math notranslate nohighlight">\(h \leq g\)</span> be the fraction of cars that are in good condition
-and also for sale.</p></li>
-</ul>
-<p>One bad equilibrium: only bad cars are sold at a low price and high cars
-aren’t worth being sold at that low price.</p>
-<p>One good equilibrium: if the portion of good cars is high enough, then
-the expected value of a car and hence price of a car is high enough to
-sustain good cars being sold.</p>
-<p>Other examples where asymmetric information comes up:</p>
-<ul class="simple">
-<li><p>Health insurance: buyers know private information about their health
-status, sellers want to sell insurance to healthier individuals.</p></li>
-<li><p>Clickbait: content creators know if a link is clickbait or not while
-users do not. Creators what to maximize clicks, users want to avoid
-clickbait.</p></li>
-</ul>
-<div class="proof definition admonition" id="definition-4">
-<p class="admonition-title"><span class="caption-number">Definition 30 </span> (Moral Hazard)</p>
-<section class="definition-content" id="proof-content">
-<p>A moral hazards occur when there is an incentive for an agent to risks, because
-they do not bear the full costs of their actions. For example, insurance might encourage
-risky behavior.</p>
-</section>
-</div><div class="proof example admonition" id="example-5">
-<p class="admonition-title"><span>Example </span></p>
+</div><div class="proof example admonition" id="example-3">
+<p class="admonition-title"><span class="caption-number">Example 8 </span></p>
 <section class="example-content" id="proof-content">
-<p>As a fun (potentially apocryphal) example, Stanford used to give out free bike helmets to freshmen; however,
-they reportedly stopped doing so because the rate of bike crashes increased, presumably because the helmets
-emboldened new bikers to take more risks.</p>
+<p>Suppose <span class="math notranslate nohighlight">\(v_1 &gt; v_2 &gt; v_3\)</span> and there are two slots. In a welfare-optimal
+outcome, <span class="math notranslate nohighlight">\(1\)</span> gets <span class="math notranslate nohighlight">\(v_1 \alpha_1\)</span> for the top slot, <span class="math notranslate nohighlight">\(2\)</span> gets
+<span class="math notranslate nohighlight">\(v_2 \alpha_2\)</span> for the top slot, and <span class="math notranslate nohighlight">\(3\)</span> gets nothing. If <span class="math notranslate nohighlight">\(1\)</span> were not
+present, <span class="math notranslate nohighlight">\(2\)</span> gets <span class="math notranslate nohighlight">\(v_2 \alpha_1\)</span> and <span class="math notranslate nohighlight">\(3\)</span> gets <span class="math notranslate nohighlight">\(v_3 \alpha_2\)</span>. Thus,
+<span class="math notranslate nohighlight">\(1\)</span>’s externality is</p>
+<div class="math notranslate nohighlight">
+\[(v_2 \alpha_2) - (v_2 \alpha_1 + v_2 \alpha_1).\]</div>
 </section>
-</div><div class="proof definition admonition" id="definition-6">
-<p class="admonition-title"><span class="caption-number">Definition 31 </span> (Adverse Selection)</p>
+</div><div class="proof axiom admonition" id="axiom-4">
+<p class="admonition-title"><span class="caption-number">Axiom 9 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>VCG Mechanism</p>
+<ol class="arabic simple">
+<li><p>Ask each bidder for their valuation;</p></li>
+<li><p>Find the welfare-maximizing allocation with respect to solicited
+bids in step <span class="math notranslate nohighlight">\(1\)</span>;</p></li>
+<li><p>Allocate slots via the welfare-maximizing allocation;</p></li>
+<li><p>For each bidder <span class="math notranslate nohighlight">\(i\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Find the allocation that maximizes welfare for all agents other
+than <span class="math notranslate nohighlight">\(i\)</span>;</p></li>
+<li><p>Set <span class="math notranslate nohighlight">\(i\)</span>’s payment equal to the difference between how satisfied
+everyone else is when <span class="math notranslate nohighlight">\(i\)</span> is present versus when <span class="math notranslate nohighlight">\(i\)</span> is not.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+</div><div class="proof theorem admonition" id="theorem-5">
+<p class="admonition-title"><span class="caption-number">Theorem 24 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>The VCG auction is dominant strategy incentive compatible.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  Bidder <span class="math notranslate nohighlight">\(i\)</span>’s payoff is</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{split}
+    v_i(X) - p_i(X) &amp;= v_i(X) + \sum_{k \neq i} b_k(X) -  \sum_{k \neq i} b_k(X^{-i}).
+\end{split}
+\]</div>
+<p>However, <span class="math notranslate nohighlight">\(\sum_{k \neq i} b_k(X^{-i})\)</span> does not depend on
+the bid <span class="math notranslate nohighlight">\(i\)</span> submits so <span class="math notranslate nohighlight">\(i\)</span>’s maximization problem is equivalent to
+maximizing <span class="math notranslate nohighlight">\(v_i(X) + \sum_{k \neq i} b_k(X)\)</span>. Since the VCG mechanism
+already chooses the socially optimal outcome, it is a dominant strategy
+for all individuals to truthfully report.</p>
+</div>
+<p>In the context of sponsored search auctions, the assignment rule is
+still the same (highest bidder gets first slot, second highest bidder
+gets second slot, etc.) but payments are different. For slot <span class="math notranslate nohighlight">\(\alpha_j\)</span>,
+advertiser <span class="math notranslate nohighlight">\(A(j)\)</span> pays</p>
+<div class="math notranslate nohighlight">
+\[\sum_{k &gt; j} b_{A(k)}(\alpha_{k-1}-\alpha_k).\]</div>
+<p>Another nice property of VCG auctions is that it is envy-free:</p>
+<div class="proof definition admonition" id="definition-6">
+<p class="admonition-title"><span class="caption-number">Definition 34 </span></p>
 <section class="definition-content" id="proof-content">
-<p><strong>Adverse selection</strong>: situations where only the low quality
-goods/lemons stay in the market.</p>
+<p>An assignment <span class="math notranslate nohighlight">\((A,p)\)</span> consisting of an allocation rule and prices is
+envy-free if for all advertisers <span class="math notranslate nohighlight">\(i,j\)</span>, advertiser <span class="math notranslate nohighlight">\(i\)</span> does not envy
+advertiser <span class="math notranslate nohighlight">\(j\)</span>: <span class="math notranslate nohighlight">\(i\)</span>’s utility is (weakly) greater than <span class="math notranslate nohighlight">\(i\)</span>’s utility if
+they got <span class="math notranslate nohighlight">\(j\)</span>’s slot and paid <span class="math notranslate nohighlight">\(j\)</span>’s price.</p>
 </section>
-</div><p>Possible solutions:</p>
+</div><p>In the context of sponsored search auctions, this means that</p>
+<div class="math notranslate nohighlight">
+\[\alpha_{A^{-1}(i)}(v_i-p_i) \geq \alpha_{A^{-1}(j)}(v_i-p_j)\]</div>
+<p>for all <span class="math notranslate nohighlight">\(i,j \in M\)</span>.</p>
+</section>
+<section id="unnatural-equilibria">
+<h2>Unnatural Equilibria<a class="headerlink" href="#unnatural-equilibria" title="Link to this heading">#</a></h2>
+<div class="proof example admonition" id="example-7">
+<p class="admonition-title"><span class="caption-number">Example 9 </span></p>
+<section class="example-content" id="proof-content">
+<p>Suppose there is a single item and there are two bidders with
+<span class="math notranslate nohighlight">\(v_A = 10, v_B = 9\)</span>. One equilibrium is <span class="math notranslate nohighlight">\(b_A = 7, b_B = 100\)</span>. Then, <span class="math notranslate nohighlight">\(B\)</span>
+wins the auction and pays <span class="math notranslate nohighlight">\(\$7\)</span>. This is an equilibrium (exercise for
+the reader to check this).</p>
+</section>
+</div><p>While no bidder has a profitable deviation, this outcome is not envy
+free: <span class="math notranslate nohighlight">\(A\)</span> would rather get <span class="math notranslate nohighlight">\(B\)</span>’s outcome than their current outcome.
+Adding the envy free requirement gets the following:</p>
+<div class="proof theorem admonition" id="theorem-8">
+<p class="admonition-title"><span class="caption-number">Theorem 25 </span></p>
+<section class="theorem-content" id="proof-content">
+<p>There is a correspondence between the following:</p>
 <ul class="simple">
-<li><p>Provide more information to both sides (mandatory disclosures,
-reputation systems);</p></li>
-<li><p>Disallow use of information (universal health care, anti-insider
-trading regulations);</p></li>
-<li><p>Filter out lemons (require warranties).</p></li>
+<li><p>Envy-free equilibria of the GSP action;</p></li>
+<li><p>Competitive market equilibria;</p></li>
+<li><p>Stable matchings between buyers and (price,good) pairs.</p></li>
 </ul>
-<hr class="footnotes docutils" />
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id2" role="doc-footnote">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>‘91 Nobel prize.</p>
-</aside>
-</aside>
+</section>
+</div><p>As such, we can get two immediate corollaries:</p>
+<ul class="simple">
+<li><p>We can efficiently find equilibria using deferred acceptance with
+prices.</p></li>
+<li><p>The buyer-optimal (seller-worst) equilibrium corresponds to VCG
+payments.</p></li>
+</ul>
+</section>
+<section id="gsp-vs-vcg-in-practice">
+<h2>GSP vs VCG in Practice<a class="headerlink" href="#gsp-vs-vcg-in-practice" title="Link to this heading">#</a></h2>
+<p>History:</p>
+<ul class="simple">
+<li><p>In late 1990’s: Overture runs first price auctions;</p></li>
+<li><p>Early 2000’s: Google, Yahoo, Bing start running GSP auctions;</p></li>
+<li><p>Late 2000’s: Facebook runs auctions using VCG;</p></li>
+<li><p>Late 2010’s: Google switches back to first price auctions.</p></li>
+</ul>
+<p>Why the switch back to first price auctions? Many advertisers
+participate in different auctions using the same bids, and given fixed
+bids a first price auction makes more money than GSP, which makes more
+money than VCG.</p>
+<p>Another trend: auctions are sensitive to bidder collusion.</p>
+<ul class="simple">
+<li><p>2005: Bidding software must be authorized by search engine (easy to
+prevent collusion);</p></li>
+<li><p>Early 2010’s: most ad bidding is through a small number of agencies
+(bad for competition and revenue);</p></li>
+<li><p>Late 2010’s: ML based auto-bidders on Google, Bing, etc.</p></li>
+</ul>
+<p>What about now? General move away from explicit auction rules:</p>
+<ul class="simple">
+<li><p>Auction details are highly optimized and hard to understand (a lot
+of things are ML);</p></li>
+<li><p>Big tech companies often know vales better than bidders (so they
+provide in-house bidders);</p></li>
+<li><p>Advertisers exploit the fact that different companies have to
+compete (less incentive to explain rules).</p></li>
+</ul>
 </section>
 </section>
 
@@ -666,22 +608,13 @@ trading regulations);</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="day6_market_eq.html"
+       href="day8_single_auctions.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Market Equilibrium</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="day8_single_auctions.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Single-Unit Auctions</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -699,17 +632,9 @@ trading regulations);</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#externalities-and-public-goods">Externalities and Public Goods</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transaction-costs">Transaction Costs</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-thickness">Market Thickness</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-issues">Timing Issues</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#market-unraveling">Market Unraveling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploding-offers">Exploding Offers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#impatience">Impatience</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-asymmetries">Information Asymmetries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vickrey-clarke-groves-mechanism">Vickrey-Clarke-Groves Mechanism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unnatural-equilibria">Unnatural Equilibria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gsp-vs-vcg-in-practice">GSP vs VCG in Practice</a></li>
 </ul>
   </nav></div>
 
