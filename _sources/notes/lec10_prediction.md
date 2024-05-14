@@ -27,11 +27,11 @@ a continuous limit order book.
 ```
 
 ```{prf:definition}
-Let $Bid$ denote the highest buy order and $Ask$ denote the lowest sell
+Let $\mathrm{Bid}$ denote the highest buy order and $\mathrm{Ask}$ denote the lowest sell
 order. Then, buy and sell orders arrive at any time and trade whenever a
-new buy order is greater than $Ask$ or if a new sell order is less than
-$Bid$. The house (market) keeps any surplus from trade. Define the
-$Spread$ at any point in time to be $Ask-Bid$. Any order that induces a
+new buy order is greater than $\mathrm{Ask}$ or if a new sell order is less than
+$\mathrm{Bid}$. The house (market) keeps any surplus from trade. Define the
+$\mathrm{Spread}$ at any point in time to be $\mathrm{Ask}-\mathrm{Bid}$. Any order that induces a
 trade upon arrival is called a Marketable order, while any order that
 does not induce a trade upon arrival is called a Resting order.
 ```
@@ -108,13 +108,13 @@ Suppose in truth, there are $2/3$ red balls and $1/3$ blue balls. Three
 cases of what happens in the first two rounds:
 
 1.  Correct cascade:
-    $\P{Red, Red} = \frac{2}{3} \cdot \frac{2}{3} = \frac{4}{9}$;
+    $\mathbb{P}({\mathrm{Red}, \mathrm{Red}}) = \frac{2}{3} \cdot \frac{2}{3} = \frac{4}{9}$;
 
 2.  Wrong cascade:
-    $\P{Blue, Blue} = \frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}$;
+    $\mathbb{P}({\mathrm{Blue}, \mathrm{Blue}}) = \frac{1}{3} \cdot \frac{1}{3} = \frac{1}{9}$;
 
 3.  No cascade:
-    $\P{Red, Blue \text{ or } Blue, Red} = \frac{2}{3} \cdot \frac{1}{3} +\frac{1}{3} \cdot \frac{2}{3} = \frac{4}{9}$.
+    $\mathbb{P}({\mathrm{Red}, \mathrm{Blue} \text{ or } \mathrm{Blue}, \mathrm{Red}}) = \frac{2}{3} \cdot \frac{1}{3} +\frac{1}{3} \cdot \frac{2}{3} = \frac{4}{9}$.
 
 Then, the probability of a correct cascade is four times likelier than a
 wrong cascade, so even with infinitely many samples there's a $20\%$
