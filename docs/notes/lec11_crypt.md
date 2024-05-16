@@ -10,8 +10,8 @@ A digital signature consists of the following:
 3.  a verification function verify.
 
 To show agreement with statement $x$, set
-$y \leftarrow sign(x,secret_key)$. Anyone with the public key can then
-$verify(x,y,public_key)$ to make sure the person with the secret key
+$y \leftarrow \mathrm{sign}(x,\mathrm{secret\_key})$. Anyone with the public key can then
+$\mathrm{verify}(x,y, \mathrm{public\_key})$ to make sure the person with the secret key
 agreed with $x$.
 ```
 
@@ -44,7 +44,7 @@ that a transaction happened.
 
 Ledgers are used to verify ownership of capital. In the early 1980's,
 Byzantine protocols (BFT's) can reach consensus if a certain fraction
-(around 1/2 to 2/3) of actors are honest. However, who can join?
+(around $1/2$ to $2/3$) of actors are honest. However, who can join?
 
 ```{prf:definition}
 A network is permissionless if anyone can join or exit at any time.
@@ -75,7 +75,7 @@ What is a nonce? A nonce for a block is valid if the hash for a new
 block (which includes information about payments, hash of previous
 block, and nonce) has $k$ leading zeros. In general,
 
-$$\mathbb{P}{\text{nonce is valid}} = \frac{\text{number of hashes tried}}{2^k}.$$
+$$\mathbb{P}({\text{nonce is valid}}) = \frac{\text{number of hashes tried}}{2^k}.$$
 
 A nonce is one way to establish Proof of Work: it proves that a lot of
 hashes were tried (and some luck was involved). Miners compete to find
@@ -106,10 +106,10 @@ miners. Then, Alice and Bob wait for the next block to be mined.
 What happens if two miners find different nonces for a new block at the
 same time? Two new blocks could be made and there is no longer
 consensus. In this case, the standard protocol is to extend the longest
-chain available: if block $b_t$ and $\hat{b_t}$ both extend $b_{t-1}$
-but $b_t$ has a chain to $b_{t+n}$ while $\hat{b_t}$ has a chain that
-goes to $\hat{b_{t+m}}$ for $m < n$\< then extend $b_t$ over
-$\hat{b_t}$.
+chain available: if block $b_t$ and $\hat{b}_t$ both extend $b_{t-1}$
+but $b_t$ has a chain to $b_{t+n}$ while $\hat{b}_t$ has a chain that
+goes to $\hat{b}_{t+m}$ for $m < n$\< then extend $b_t$ over
+$\hat{b}_t$.
 
 ## Incentive Issues with Big Miners
 
