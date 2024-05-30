@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Proof-of-Work Blockchains &#8212; Incentives in Computer Science</title>
+    <title>Security Markets &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/lec11_crypt';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/lec13_security_markets';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Proof of Stake" href="lec12_pos.html" />
-    <link rel="prev" title="Prediction Markets and Information Cascades" href="lec10_prediction.html" />
+    <link rel="prev" title="Proof of Stake" href="lec12_pos.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,9 +191,9 @@
 <li class="toctree-l1"><a class="reference internal" href="lec8_single_auctions.html">Single-Unit Auctions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec9_sponsored_search.html">Sponsored Search Auctions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec10_prediction.html">Prediction Markets and Information Cascades</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Proof-of-Work Blockchains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lec11_crypt.html">Proof-of-Work Blockchains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Security Markets</a></li>
 </ul>
 
     </div>
@@ -266,7 +265,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/lec11_crypt.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/lec13_security_markets.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +295,7 @@
       
       
       
-      <li><a href="../_sources/notes/lec11_crypt.md" target="_blank"
+      <li><a href="../_sources/notes/lec13_security_markets.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -380,7 +379,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Proof-of-Work Blockchains</h1>
+    <h1>Security Markets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -390,10 +389,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-bitcoin-protocol">(Simplified) Bitcoin Protocol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-issues-with-big-miners">Incentive Issues with Big Miners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selfish-mining">Selfish Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-miners-in-practice">Big Miners in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-frequency-trading-arms-race">High Frequency Trading Arms Race</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stock-markets">Stock Markets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-failure-fixes">Market Failure Fixes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blockchain-flashboys">Blockchain Flashboys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miners-extractable-value-mev">Miners’ Extractable Value (MEV)</a></li>
 </ul>
             </nav>
         </div>
@@ -405,173 +405,192 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="proof-of-work-blockchains">
-<h1>Proof-of-Work Blockchains<a class="headerlink" href="#proof-of-work-blockchains" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="security-markets">
+<h1>Security Markets<a class="headerlink" href="#security-markets" title="Link to this heading">#</a></h1>
+<section id="high-frequency-trading-arms-race">
+<h2>High Frequency Trading Arms Race<a class="headerlink" href="#high-frequency-trading-arms-race" title="Link to this heading">#</a></h2>
+<p>In 2010, Spread Networks invested $300 million to create a new
+straight-line optic fiber cable from Chicago to New York, reducing
+latency from 16ms to 13ms. High frequency traders race to make trades
+first, which is why they value the decrease in latency. However in 2011,
+microwaves brought latency down to 10ms.</p>
+<p>Is this a market failure? From Spread Network’s perspective, the cable
+might have made back its investment (and then some profit), but even
+then the opportunity cost of the investment might have been high as
+well. Furthermore, does high frequency trading in and of itself even
+benefit society?</p>
+</section>
+<section id="stock-markets">
+<h2>Stock Markets<a class="headerlink" href="#stock-markets" title="Link to this heading">#</a></h2>
+<p>We build on the definitions introduced in Section 11 (Prediction Markets
+and Information Cascades).</p>
 <div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 37 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 44 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A digital signature consists of the following:</p>
+<p>Individuals who want to buy/sell stock as a means to store or liquidize
+assets. Naive investors do not have a primary goal of profiting from
+private information.</p>
+</section>
+</div><p>With just naive investors, there can be market frictions: there may not
+be stocks to buy or sell when a naive investor wants to buy or sell.
+Furthermore, the no-trade theorem does not apply as these investors
+derive value from the act of buying or selling itself instead of purely
+caring about the monetary value of their assets.</p>
+<p>As before, liquidity providers leave resting orders and buy low, sell
+high. They provide an intermediary for naive investors to trade with,
+but naive investors lose the spread that liquidity providers gain. As
+such spread is part of naive investors’ transaction costs.</p>
+<p>A stock’s “true” value represents aggregate beliefs about the stock’s
+returns. In equilibrium, a stock’s true value is between the stock’s bid
+and ask prices (otherwise, some agents have a profitable deviation to
+buy or sell the stock). True value may vary depending on external
+events. For example:</p>
 <ol class="arabic simple">
-<li><p>a public key and a secret key;</p></li>
-<li><p>a signature function sign;</p></li>
-<li><p>a verification function verify.</p></li>
+<li><p>Correlated Stocks/Securities: If someone buys gold in Chicago, the
+price of gold in New York increases. If there is demand for security
+<span class="math notranslate nohighlight">\(X\)</span> increases and security <span class="math notranslate nohighlight">\(X\)</span> is correlated with security <span class="math notranslate nohighlight">\(Y\)</span>, then
+the price of <span class="math notranslate nohighlight">\(Y\)</span> will go up.</p></li>
+<li><p>Fed announcements: Fed made announcement on Sept 18, 2013. Markets
+reacted faster than the speed of light.</p></li>
+<li><p>Twitter: Trump tweets (about tariffs, the Fed, covfefe) changed
+stock values.</p></li>
+<li><p>Reddit: wallstreetbets and Gamestop stock.</p></li>
 </ol>
-<p>To show agreement with statement <span class="math notranslate nohighlight">\(x\)</span>, set
-<span class="math notranslate nohighlight">\(y \leftarrow \mathrm{sign}(x,\mathrm{secret\_key})\)</span>. Anyone with the public key can then
-<span class="math notranslate nohighlight">\(\mathrm{verify}(x,y, \mathrm{public\_key})\)</span> to make sure the person with the secret key
-agreed with <span class="math notranslate nohighlight">\(x\)</span>.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 38 </span></p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 45 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A hash function <span class="math notranslate nohighlight">\(H\)</span> such that given some input <span class="math notranslate nohighlight">\(a\)</span>, it is easy to
-compute <span class="math notranslate nohighlight">\(H(a)\)</span> but given some output <span class="math notranslate nohighlight">\(b\)</span>, it is difficult to compute
-<span class="math notranslate nohighlight">\(H^{-1}(b)\)</span>.</p>
+<p>Agents that wait for changes in stock values and rush to trade with
+liquidity providers’ standing orders before those standing orders can be
+canceled. As such, being faster than competitors can be profitable.</p>
 </section>
-</div><p>In general, the fastest way to “invert” a cryptographic hash function is
-to randomly try inputs. To get <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(H(a)\)</span> agrees with <span class="math notranslate nohighlight">\(b\)</span> for
-the first <span class="math notranslate nohighlight">\(k\)</span> bits requires <span class="math notranslate nohighlight">\(2^k\)</span> tries.</p>
-<p>Consider Alice transferring $1 to Bob. If done through a bank or other
-centralized institution, the intermediary can verify that Alice does
-indeed have $1 to give to Bob. However, can this transfer be done
-without a bank?</p>
-<p>Bob may require Alice to verify that the $1 exists and is transferred.
-One way Alice may do this is to provide a history of where the $ has
-been for Bob to track Alice’s history of payments and make sure Alice
-has not already spent the dollar.</p>
+</div><p>In response to snipers, liquidity providers might increase spread to
+decrease sniping opportunities. However, this hurts naive agents by
+increasing their effective transaction costs.</p>
+</section>
+<section id="market-failure-fixes">
+<h2>Market Failure Fixes<a class="headerlink" href="#market-failure-fixes" title="Link to this heading">#</a></h2>
+<p>How can we resolve these market failures?</p>
+<ol class="arabic simple">
+<li><p><strong>Symmetric Speed Bumps:</strong> all orders get delayed by the same
+amount.</p>
+<ul class="simple">
+<li><p>Doesn’t solve the speed arms race, nor does it remove sniping
+risk for liquidity providers.</p></li>
+</ul>
+</li>
+<li><p><strong>Random Speed Bumps:</strong> each order is delayed by some random amount.</p>
+<ul class="simple">
+<li><p>Mostly solves the speed arms race (as luck in random difference
+is more important than speed differences), but makes the sniping
+risk worse: if a single sniper gets lucky, then the sniping
+succeeds.</p></li>
+</ul>
+</li>
+<li><p><strong>Sniper-Only Speed Bumps:</strong> only delay snipers.</p>
+<ul class="simple">
+<li><p>If implemented, this would resolve the speed arms race and
+sniping risk, but it is difficult to determine who is a sniper
+and who is not.</p></li>
+</ul>
+</li>
+<li><p><strong>Frequent Batch Auctions:</strong> batch orders for some short interval
+and find the market-clearing price at each batch.</p>
+<ul class="simple">
+<li><p>Everyone now has time to react to value-changing events as
+orders are prioritized by price instead of arrival (as long as
+the order arrives in the same batch).</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="blockchain-flashboys">
+<h2>Blockchain Flashboys<a class="headerlink" href="#blockchain-flashboys" title="Link to this heading">#</a></h2>
 <div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 39 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 46 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A ledger is an ordered history of payments. A decentralized ledger is
-not controlled by any one entity and can continue to work even if a bank
-is hacked (Robinhood, etc.). Consensus occurs when all entities agree
-that a transaction happened.</p>
+<p>Agreement between two agents for one transaction (borrowing) in the
+current period and a second transaction in some future period (paying
+back, perhaps with interest). If the second transaction does not happen,
+some collateral promised by the first agent is given to the second
+agent.</p>
 </section>
-</div><p>Ledgers are used to verify ownership of capital. In the early 1980’s,
-Byzantine protocols (BFT’s) can reach consensus if a certain fraction
-(around <span class="math notranslate nohighlight">\(1/2\)</span> to <span class="math notranslate nohighlight">\(2/3\)</span>) of actors are honest. However, who can join?</p>
+</div><p>The collateral needs to be sent simultaneously with the first
+transaction (otherwise one agent can abort after getting money).</p>
 <div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 40 </span></p>
+<p class="admonition-title"><span class="caption-number">Definition 47 </span></p>
 <section class="definition-content" id="proof-content">
-<p>A network is permissionless if anyone can join or exit at any time.</p>
+<p>A transaction such that either all steps are executed successfully or
+all steps are canceled.</p>
 </section>
-</div><p>While this is a nice property to have, verification relying on a
-majority of users is useless as anyone can simply create more copies of
-themselves to obtain an artificial majority. Alternatively, votes can be
-tied to more concrete things:</p>
-<ul class="simple">
-<li><p>Proof of Work: 1 cpu equals one vote;</p></li>
-<li><p>Proof of Stake: 1 coin equals one vote;</p></li>
-<li><p>Proof of Space: 1 bit equals one vote.</p></li>
-</ul>
-<section id="simplified-bitcoin-protocol">
-<h2>(Simplified) Bitcoin Protocol<a class="headerlink" href="#simplified-bitcoin-protocol" title="Link to this heading">#</a></h2>
-<p>Ledger is constructed as a chain of blocks. Each block contains:</p>
+</div><p>One application of smart contracts is in decentralized finance (DeFi):
+cryptocurrencies, stocks, and contracts are traded. Limit order books
+and automatic market makers can be automated via smart contracts.</p>
+<div class="proof definition admonition" id="definition-4">
+<p class="admonition-title"><span class="caption-number">Definition 48 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Simultaneously buying low in one market while selling high in another.</p>
+</section>
+</div><p>Arbitrage is especially attractive with decentralized finance:</p>
 <ol class="arabic simple">
-<li><p>Some account of payments or transfers;</p></li>
-<li><p>A cryptographic hash of the previous block;</p></li>
-<li><p>A <em>nonce</em>.</p></li>
+<li><p>Risk-Free Atomic Arbitrage:</p>
+<ul class="simple">
+<li><p>In centralized finance, the arbitrageur takes takes risk (if
+they buy low first, then the high price they wanted to sell at
+may drop before they get to selling).</p></li>
+<li><p>However, bundling buy and sell actions into a single atomic
+transaction resolves this risk.</p></li>
+</ul>
+</li>
+<li><p>Cryptocurrencies are highly volatile, leading to more sniping
+opportunities;</p></li>
+<li><p>Information (code) is made public so full code and state of smart
+contract automated market makers are available. As such, it is easy
+to exploit bugs.</p></li>
 </ol>
-<p>What is a nonce? A nonce for a block is valid if the hash for a new
-block (which includes information about payments, hash of previous
-block, and nonce) has <span class="math notranslate nohighlight">\(k\)</span> leading zeros. In general,</p>
+<div class="proof definition admonition" id="definition-5">
+<p class="admonition-title"><span class="caption-number">Definition 49 </span></p>
+<section class="definition-content" id="proof-content">
+<p>Transacting right before another agent to take advantage of the
+distortionary effects of the latter’s transaction.</p>
+</section>
+</div><p>In general, this is illegal in centralized finance. In decentralized
+finance however, all transactions are made publicly known before blocks
+are mined. Now, suppose miners are also traders and an arbitrageur finds
+an opportunity. If the arbitrageur broadcasts this transaction, then
+miners can execute the same trade on their own account. Miner includes
+the arbitrageur’s transaction on their block but after the miner’s own
+transaction.</p>
+</section>
+<section id="miners-extractable-value-mev">
+<h2>Miners’ Extractable Value (MEV)<a class="headerlink" href="#miners-extractable-value-mev" title="Link to this heading">#</a></h2>
+<p>In DeFi, arbitrageurs compete to be at the top of the next block via
+transaction fees. Then, a miner’s MEV is how much they can charge an
+arbitrageur. Miners receive rewards for each block they mine and
+additional transaction fees. Originally, the value for mining the block
+itself is greater than the MEV, but in recent years block rewards have
+went down (bitcoin rewards halve every 4ish years) while MEVs have gone
+up (arbitrageurs increasing demand for transactions). When MEVs come
+into play, not all blocks are created equal.</p>
+<p>As such, miners can access a new type of fee-sniping attack: if block
+<span class="math notranslate nohighlight">\(\hat{b}\)</span> has a larger MEV than block <span class="math notranslate nohighlight">\(b\)</span>, then miners would prefer to
+mine <span class="math notranslate nohighlight">\(\hat{b}\)</span> over <span class="math notranslate nohighlight">\(b\)</span>. Then, a miner with fraction <span class="math notranslate nohighlight">\(\alpha\)</span> of
+computing power profits from a fee-sniping attack if</p>
 <div class="math notranslate nohighlight">
-\[\mathbb{P}({\text{nonce is valid}}) = \frac{\text{number of hashes tried}}{2^k}.\]</div>
-<p>A nonce is one way to establish Proof of Work: it proves that a lot of
-hashes were tried (and some luck was involved). Miners compete to find
-the first valid nonce and create (“mine”) new blocks. Winners are
-rewarded in the form of a transaction in the new block. The <span class="math notranslate nohighlight">\(k\)</span> leading
-zeros that need to match is adjusted dynamically so each block takes
-around <span class="math notranslate nohighlight">\(10\)</span> minutes to mine in expectation.</p>
-<p>To verify a single payment from Alice to Bob in block <span class="math notranslate nohighlight">\(b_t\)</span>:</p>
+\[\alpha^2 \cdot \text{higher MEV} &gt; \alpha \cdot \text{lower MEV} \iff \alpha &gt; \frac{\text{lower MEV}}{\text{higher MEV}}.\]</div>
+<p>Success probability is even higher if other miners also try to attack
+instead of extending <span class="math notranslate nohighlight">\(b_t\)</span>.</p>
+<p>With selfish tie-breaking, miners want to extend the block with higher
+MEV opposed to the block that was seen first. Furthermore, a miner can
+incentivize other miners to help extend their block by leaving some MEV
+leftover in the next block (known as undercutting). Some possible ways
+to undercut these issues:</p>
 <ol class="arabic simple">
-<li><p>Verify that Alice has signed the payment using Alice’s public key;</p></li>
-<li><p>Verify that Alice has received this $1 in some previous block;</p></li>
-<li><p>Verify that Alice has not spent the $1 in some previous block.</p></li>
+<li><p>Transaction fees distributed among miners that mine the next <span class="math notranslate nohighlight">\(k\)</span>
+blocks;</p></li>
+<li><p>Capped transaction fees;</p></li>
+<li><p>“Burn” transaction fees instead of giving them to miners.</p></li>
 </ol>
-<p>To verify an entire block:</p>
-<ol class="arabic simple">
-<li><p>Verify all payments individually;</p></li>
-<li><p>Verify that <span class="math notranslate nohighlight">\(b_t\)</span> correctly hashes <span class="math notranslate nohighlight">\(b_{t-1}\)</span>;</p></li>
-<li><p>Verify the nonce.</p></li>
-</ol>
-<p>For Alice to send money to Bob, a signed transaction is sent to all
-miners. Then, Alice and Bob wait for the next block to be mined.</p>
-<p>What happens if two miners find different nonces for a new block at the
-same time? Two new blocks could be made and there is no longer
-consensus. In this case, the standard protocol is to extend the longest
-chain available: if block <span class="math notranslate nohighlight">\(b_t\)</span> and <span class="math notranslate nohighlight">\(\hat{b}_t\)</span> both extend <span class="math notranslate nohighlight">\(b_{t-1}\)</span>
-but <span class="math notranslate nohighlight">\(b_t\)</span> has a chain to <span class="math notranslate nohighlight">\(b_{t+n}\)</span> while <span class="math notranslate nohighlight">\(\hat{b}_t\)</span> has a chain that
-goes to <span class="math notranslate nohighlight">\(\hat{b}_{t+m}\)</span> for <span class="math notranslate nohighlight">\(m &lt; n\)</span>&lt; then extend <span class="math notranslate nohighlight">\(b_t\)</span> over
-<span class="math notranslate nohighlight">\(\hat{b}_t\)</span>.</p>
-</section>
-<section id="incentive-issues-with-big-miners">
-<h2>Incentive Issues with Big Miners<a class="headerlink" href="#incentive-issues-with-big-miners" title="Link to this heading">#</a></h2>
-<p>Original idea (2000’s): computing power would be distributed about
-equally over all people so each individual miner has a small fraction of
-total power. However, emergent trends in the 2010’s disincentivized
-this:</p>
-<ol class="arabic simple">
-<li><p>Rise of corporations taking over major computing power (the cloud);</p></li>
-<li><p>Crypto-specific hardware that is much more efficient (and
-expensive);</p></li>
-<li><p>Cheaper energy that miners might have access to;</p></li>
-<li><p>Creation of mining pools where professional miners organize to
-reduce variance in gains from mining.</p></li>
-</ol>
-<p>Recall the longest chain rule: if one miner has access to more than half
-of computing resources, they can take advantage of this to “overwrite”
-blocks they don’t like by forcing a fork in the chain. For instance,
-Alice can pay Bob and encode that in a block that is overwritten as a
-result of a fork, causing the payment to not actually go through.</p>
-<p>Even with <span class="math notranslate nohighlight">\(\alpha &lt; 1/2\)</span> of computing power, Alice can try to carry out
-the same attack and rely on luck: if Alice can mine two blocks before
-any other miner extends the blockchain to the block where Bob gets paid,
-Alice successfully avoids needing to pay Bob. Probability this succeeds
-is <span class="math notranslate nohighlight">\(\alpha^2\)</span>. As such, best practice is to wait <span class="math notranslate nohighlight">\(d &gt; 1\)</span> blocks before
-accepting payment.</p>
-</section>
-<section id="selfish-mining">
-<h2>Selfish Mining<a class="headerlink" href="#selfish-mining" title="Link to this heading">#</a></h2>
-<p>Suppose there is a selfish miner who seeks to break the system.
-Furthermore, suppose their connection is so fast that all longest-chain
-ties are broken in their favor. What can they do? Consider the following
-strategy:</p>
-<ul class="simple">
-<li><p>Mine blocks.</p></li>
-<li><p>If block is mined, do not reveal the new block, but mine follow-ups
-to that block.</p></li>
-<li><p>If another miner mines the next block, reveal the block you have
-already mined.</p></li>
-</ul>
-<p>Nothing is lost by waiting before revealing blocks: since ties are
-broken in favor of the selfish miner, their block is still the block
-that goes through. However, there is some benefit to them: the rest of
-the network wastes time on mining a block that eventually becomes
-orphaned. If the selfish miner has a fraction <span class="math notranslate nohighlight">\(\alpha\)</span> of computing
-power, their <em>effective</em> relative hashrate is
-<span class="math notranslate nohighlight">\(\frac{\alpha}{1-\alpha} &gt; \alpha\)</span> as for every block they mine, other
-honest miners waste a block.</p>
-<p>What if ties were always broken against the selfish miner? In this case,
-the selfish miner risks losing their additional (hidden) progress in
-case of a tie. However, what if the selfish miner can mine two blocks in
-a row to ensure no ties occur? Selfish mining can be profitable in this
-case if <span class="math notranslate nohighlight">\(\alpha &gt; 1/3\)</span> opposed to the previous <span class="math notranslate nohighlight">\(\alpha &gt; 1/2\)</span>.</p>
-<p>This effect becomes more pronounced if the honest miners then respond to
-the selfish miner’s actions: if honest miners know the selfish miner is
-always going to “win”, they might leave the blockchain (to save energy
-or mine other blockchains), leaving the selfish miner with an even
-larger portion of hashrate.</p>
-</section>
-<section id="big-miners-in-practice">
-<h2>Big Miners in Practice<a class="headerlink" href="#big-miners-in-practice" title="Link to this heading">#</a></h2>
-<p>In 2014: <a class="reference external" href="http://GHash.io">GHash.io</a> controlled more than 51% of computing power but did
-not execute attacks. Instead, they encouraged miners to leave to prevent
-the value of bitcoin from dropping. For smaller coins with lower total
-hash rate, the issue is larger since less computational power is needed
-to achieve majority control. Furthermore, attackers may care less about
-the value od smaller coins. The 51% attack happened multiple times to
-“Ethereum Classic”.</p>
+<p>However, arbitrageurs and miners can always make side payments.</p>
 </section>
 </section>
 
@@ -606,22 +625,13 @@ the value od smaller coins. The 51% attack happened multiple times to
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="lec10_prediction.html"
+       href="lec12_pos.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Prediction Markets and Information Cascades</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="lec12_pos.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Proof of Stake</p>
       </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -639,10 +649,11 @@ the value od smaller coins. The 51% attack happened multiple times to
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-bitcoin-protocol">(Simplified) Bitcoin Protocol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-issues-with-big-miners">Incentive Issues with Big Miners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selfish-mining">Selfish Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-miners-in-practice">Big Miners in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-frequency-trading-arms-race">High Frequency Trading Arms Race</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stock-markets">Stock Markets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#market-failure-fixes">Market Failure Fixes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#blockchain-flashboys">Blockchain Flashboys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#miners-extractable-value-mev">Miners’ Extractable Value (MEV)</a></li>
 </ul>
   </nav></div>
 
