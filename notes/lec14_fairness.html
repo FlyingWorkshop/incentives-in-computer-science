@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Proof-of-Work Blockchains &#8212; Incentives in Computer Science</title>
+    <title>Envy and Fairness &#8212; Incentives in Computer Science</title>
   
   
   
@@ -61,11 +61,10 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/lec11_crypt';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notes/lec14_fairness';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Proof of Stake" href="lec12_pos.html" />
-    <link rel="prev" title="Prediction Markets and Information Cascades" href="lec10_prediction.html" />
+    <link rel="prev" title="Security Markets" href="lec13_security_markets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,10 +191,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lec8_single_auctions.html">Single-Unit Auctions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec9_sponsored_search.html">Sponsored Search Auctions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec10_prediction.html">Prediction Markets and Information Cascades</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Proof-of-Work Blockchains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lec11_crypt.html">Proof-of-Work Blockchains</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Envy and Fairness</a></li>
 </ul>
 
     </div>
@@ -267,7 +266,7 @@
       
       
       
-      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/lec11_crypt.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/FlyingWorkshop/CS269I/issues/new?title=Issue%20on%20page%20%2Fnotes/lec14_fairness.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -297,7 +296,7 @@
       
       
       
-      <li><a href="../_sources/notes/lec11_crypt.md" target="_blank"
+      <li><a href="../_sources/notes/lec14_fairness.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -381,7 +380,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Proof-of-Work Blockchains</h1>
+    <h1>Envy and Fairness</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -391,10 +390,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-bitcoin-protocol">(Simplified) Bitcoin Protocol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-issues-with-big-miners">Incentive Issues with Big Miners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selfish-mining">Selfish Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-miners-in-practice">Big Miners in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formalizing-fair-allocations">Formalizing Fair Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dominant-resource-fairness">Dominant Resource Fairness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drf-in-practice">DRF in Practice</a></li>
 </ul>
             </nav>
         </div>
@@ -406,173 +404,200 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="proof-of-work-blockchains">
-<h1>Proof-of-Work Blockchains<a class="headerlink" href="#proof-of-work-blockchains" title="Link to this heading">#</a></h1>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 37 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A digital signature consists of the following:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="envy-and-fairness">
+<h1>Envy and Fairness<a class="headerlink" href="#envy-and-fairness" title="Link to this heading">#</a></h1>
+<p>Consider cake cutting: Alice and Bob want to split a cake, and the cake
+has different toppings (strawberries, chocolate, etc.) over different
+regions. One canonical mechanism is I-cut-you-choose:</p>
 <ol class="arabic simple">
-<li><p>a public key and a secret key;</p></li>
-<li><p>a signature function sign;</p></li>
-<li><p>a verification function verify.</p></li>
+<li><p>One agent cuts the cake;</p></li>
+<li><p>The other picks which slice they want;</p></li>
+<li><p>First agent gets the remaining cake.</p></li>
 </ol>
-<p>To show agreement with statement <span class="math notranslate nohighlight">\(x\)</span>, set
-<span class="math notranslate nohighlight">\(y \leftarrow \mathrm{sign}(x,\mathrm{secret\_key})\)</span>. Anyone with the public key can then
-<span class="math notranslate nohighlight">\(\mathrm{verify}(x,y, \mathrm{public\_key})\)</span> to make sure the person with the secret key
-agreed with <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="proof proposition admonition" id="proposition-0">
+<p class="admonition-title"><span class="caption-number">Proposition 2 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>I-cut-you-choose is not dominant-strategy incentive compatible for the
+cutting agent but is for the choosing agent.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 38 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A hash function <span class="math notranslate nohighlight">\(H\)</span> such that given some input <span class="math notranslate nohighlight">\(a\)</span>, it is easy to
-compute <span class="math notranslate nohighlight">\(H(a)\)</span> but given some output <span class="math notranslate nohighlight">\(b\)</span>, it is difficult to compute
-<span class="math notranslate nohighlight">\(H^{-1}(b)\)</span>.</p>
-</section>
-</div><p>In general, the fastest way to “invert” a cryptographic hash function is
-to randomly try inputs. To get <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(H(a)\)</span> agrees with <span class="math notranslate nohighlight">\(b\)</span> for
-the first <span class="math notranslate nohighlight">\(k\)</span> bits requires <span class="math notranslate nohighlight">\(2^k\)</span> tries.</p>
-<p>Consider Alice transferring $1 to Bob. If done through a bank or other
-centralized institution, the intermediary can verify that Alice does
-indeed have $1 to give to Bob. However, can this transfer be done
-without a bank?</p>
-<p>Bob may require Alice to verify that the $1 exists and is transferred.
-One way Alice may do this is to provide a history of where the $ has
-been for Bob to track Alice’s history of payments and make sure Alice
-has not already spent the dollar.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 39 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A ledger is an ordered history of payments. A decentralized ledger is
-not controlled by any one entity and can continue to work even if a bank
-is hacked (Robinhood, etc.). Consensus occurs when all entities agree
-that a transaction happened.</p>
-</section>
-</div><p>Ledgers are used to verify ownership of capital. In the early 1980’s,
-Byzantine protocols (BFT’s) can reach consensus if a certain fraction
-(around <span class="math notranslate nohighlight">\(1/2\)</span> to <span class="math notranslate nohighlight">\(2/3\)</span>) of actors are honest. However, who can join?</p>
-<div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 40 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A network is permissionless if anyone can join or exit at any time.</p>
-</section>
-</div><p>While this is a nice property to have, verification relying on a
-majority of users is useless as anyone can simply create more copies of
-themselves to obtain an artificial majority. Alternatively, votes can be
-tied to more concrete things:</p>
-<ul class="simple">
-<li><p>Proof of Work: 1 cpu equals one vote;</p></li>
-<li><p>Proof of Stake: 1 coin equals one vote;</p></li>
-<li><p>Proof of Space: 1 bit equals one vote.</p></li>
-</ul>
-<section id="simplified-bitcoin-protocol">
-<h2>(Simplified) Bitcoin Protocol<a class="headerlink" href="#simplified-bitcoin-protocol" title="Link to this heading">#</a></h2>
-<p>Ledger is constructed as a chain of blocks. Each block contains:</p>
-<ol class="arabic simple">
-<li><p>Some account of payments or transfers;</p></li>
-<li><p>A cryptographic hash of the previous block;</p></li>
-<li><p>A <em>nonce</em>.</p></li>
-</ol>
-<p>What is a nonce? A nonce for a block is valid if the hash for a new
-block (which includes information about payments, hash of previous
-block, and nonce) has <span class="math notranslate nohighlight">\(k\)</span> leading zeros. In general,</p>
-<div class="math notranslate nohighlight">
-\[\mathbb{P}({\text{nonce is valid}}) = \frac{\text{number of hashes tried}}{2^k}.\]</div>
-<p>A nonce is one way to establish Proof of Work: it proves that a lot of
-hashes were tried (and some luck was involved). Miners compete to find
-the first valid nonce and create (“mine”) new blocks. Winners are
-rewarded in the form of a transaction in the new block. The <span class="math notranslate nohighlight">\(k\)</span> leading
-zeros that need to match is adjusted dynamically so each block takes
-around <span class="math notranslate nohighlight">\(10\)</span> minutes to mine in expectation.</p>
-<p>To verify a single payment from Alice to Bob in block <span class="math notranslate nohighlight">\(b_t\)</span>:</p>
-<ol class="arabic simple">
-<li><p>Verify that Alice has signed the payment using Alice’s public key;</p></li>
-<li><p>Verify that Alice has received this $1 in some previous block;</p></li>
-<li><p>Verify that Alice has not spent the $1 in some previous block.</p></li>
-</ol>
-<p>To verify an entire block:</p>
-<ol class="arabic simple">
-<li><p>Verify all payments individually;</p></li>
-<li><p>Verify that <span class="math notranslate nohighlight">\(b_t\)</span> correctly hashes <span class="math notranslate nohighlight">\(b_{t-1}\)</span>;</p></li>
-<li><p>Verify the nonce.</p></li>
-</ol>
-<p>For Alice to send money to Bob, a signed transaction is sent to all
-miners. Then, Alice and Bob wait for the next block to be mined.</p>
-<p>What happens if two miners find different nonces for a new block at the
-same time? Two new blocks could be made and there is no longer
-consensus. In this case, the standard protocol is to extend the longest
-chain available: if block <span class="math notranslate nohighlight">\(b_t\)</span> and <span class="math notranslate nohighlight">\(\hat{b}_t\)</span> both extend <span class="math notranslate nohighlight">\(b_{t-1}\)</span>
-but <span class="math notranslate nohighlight">\(b_t\)</span> has a chain to <span class="math notranslate nohighlight">\(b_{t+n}\)</span> while <span class="math notranslate nohighlight">\(\hat{b}_t\)</span> has a chain that
-goes to <span class="math notranslate nohighlight">\(\hat{b}_{t+m}\)</span> for <span class="math notranslate nohighlight">\(m &lt; n\)</span>&lt; then extend <span class="math notranslate nohighlight">\(b_t\)</span> over
-<span class="math notranslate nohighlight">\(\hat{b}_t\)</span>.</p>
-</section>
-<section id="incentive-issues-with-big-miners">
-<h2>Incentive Issues with Big Miners<a class="headerlink" href="#incentive-issues-with-big-miners" title="Link to this heading">#</a></h2>
-<p>Original idea (2000’s): computing power would be distributed about
-equally over all people so each individual miner has a small fraction of
-total power. However, emergent trends in the 2010’s disincentivized
+</div><div class="proof admonition" id="proof">
+<p>Proof.  The cutter’s optimal strategy depends on the chooser’s
+preferences. The chooser directly chooses their outcome.</p>
+</div>
+<p>Why, has this mechanism been used? There is some notion of fairness in
 this:</p>
-<ol class="arabic simple">
-<li><p>Rise of corporations taking over major computing power (the cloud);</p></li>
-<li><p>Crypto-specific hardware that is much more efficient (and
-expensive);</p></li>
-<li><p>Cheaper energy that miners might have access to;</p></li>
-<li><p>Creation of mining pools where professional miners organize to
-reduce variance in gains from mining.</p></li>
-</ol>
-<p>Recall the longest chain rule: if one miner has access to more than half
-of computing resources, they can take advantage of this to “overwrite”
-blocks they don’t like by forcing a fork in the chain. For instance,
-Alice can pay Bob and encode that in a block that is overwritten as a
-result of a fork, causing the payment to not actually go through.</p>
-<p>Even with <span class="math notranslate nohighlight">\(\alpha &lt; 1/2\)</span> of computing power, Alice can try to carry out
-the same attack and rely on luck: if Alice can mine two blocks before
-any other miner extends the blockchain to the block where Bob gets paid,
-Alice successfully avoids needing to pay Bob. Probability this succeeds
-is <span class="math notranslate nohighlight">\(\alpha^2\)</span>. As such, best practice is to wait <span class="math notranslate nohighlight">\(d &gt; 1\)</span> blocks before
-accepting payment.</p>
+<div class="proof definition admonition" id="definition-1">
+<p class="admonition-title"><span class="caption-number">Definition 50 </span></p>
+<section class="definition-content" id="proof-content">
+<p>An allocation is envy-free if no agent envies another agent’s
+allocation.</p>
 </section>
-<section id="selfish-mining">
-<h2>Selfish Mining<a class="headerlink" href="#selfish-mining" title="Link to this heading">#</a></h2>
-<p>Suppose there is a selfish miner who seeks to break the system.
-Furthermore, suppose their connection is so fast that all longest-chain
-ties are broken in their favor. What can they do? Consider the following
-strategy:</p>
+</div><div class="proof proposition admonition" id="proposition-2">
+<p class="admonition-title"><span class="caption-number">Proposition 3 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>The I-cut-you-choose mechanism can always lead to an envy-free
+allocation for both players.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  The cutter can always cut the cake into two pieces that are
+equal in their perspective, so no matter which slice they get the
+allocation is envy-free for them. Then, the choose chooses their
+favorite slice, so it clearly is envy-free for them.</p>
+</div>
+<section id="formalizing-fair-allocations">
+<h2>Formalizing Fair Allocations<a class="headerlink" href="#formalizing-fair-allocations" title="Link to this heading">#</a></h2>
+<p>Goal: from a set of items <span class="math notranslate nohighlight">\(A\)</span>, choose some allocation for each of <span class="math notranslate nohighlight">\(n\)</span>
+agents. Each agent <span class="math notranslate nohighlight">\(i\)</span> has a valuation function
+<span class="math notranslate nohighlight">\(v_i: \mathcal{P}(A) \to \mathbb{R}\)</span>. Then, there are several measures
+of fairness (defined in this setting):</p>
 <ul class="simple">
-<li><p>Mine blocks.</p></li>
-<li><p>If block is mined, do not reveal the new block, but mine follow-ups
-to that block.</p></li>
-<li><p>If another miner mines the next block, reveal the block you have
-already mined.</p></li>
+<li><p>Envy-Free: for all <span class="math notranslate nohighlight">\(i,j\)</span> we have <span class="math notranslate nohighlight">\(v_i(A_i) \geq v_i(A_j)\)</span>;</p></li>
+<li><p>Proportional: for all <span class="math notranslate nohighlight">\(i, v_i(A_i) \geq v_i(A)/n\)</span>;</p></li>
+<li><p>Equitable: for all <span class="math notranslate nohighlight">\(i,j\)</span> we have <span class="math notranslate nohighlight">\(v_i(A_i) = v_j(A_j)\)</span>;</p></li>
+<li><p>Perfect: for all <span class="math notranslate nohighlight">\(i, v_i(A_i) = v_i(A)/n\)</span>.</p></li>
 </ul>
-<p>Nothing is lost by waiting before revealing blocks: since ties are
-broken in favor of the selfish miner, their block is still the block
-that goes through. However, there is some benefit to them: the rest of
-the network wastes time on mining a block that eventually becomes
-orphaned. If the selfish miner has a fraction <span class="math notranslate nohighlight">\(\alpha\)</span> of computing
-power, their <em>effective</em> relative hashrate is
-<span class="math notranslate nohighlight">\(\frac{\alpha}{1-\alpha} &gt; \alpha\)</span> as for every block they mine, other
-honest miners waste a block.</p>
-<p>What if ties were always broken against the selfish miner? In this case,
-the selfish miner risks losing their additional (hidden) progress in
-case of a tie. However, what if the selfish miner can mine two blocks in
-a row to ensure no ties occur? Selfish mining can be profitable in this
-case if <span class="math notranslate nohighlight">\(\alpha &gt; 1/3\)</span> opposed to the previous <span class="math notranslate nohighlight">\(\alpha &gt; 1/2\)</span>.</p>
-<p>This effect becomes more pronounced if the honest miners then respond to
-the selfish miner’s actions: if honest miners know the selfish miner is
-always going to “win”, they might leave the blockchain (to save energy
-or mine other blockchains), leaving the selfish miner with an even
-larger portion of hashrate.</p>
+<p>Another possibility: competitive equilibrium from equal incomes, which
+is similar to competitive equilibrium except give everyone a “fake
+dollar” to spend.</p>
+<p>In cases with indivisible goods, often none of them can be satisfied. In
+particular, if there is a single good (and both individuals gain
+strictly positive utility from it), none of these can be satisfied. A
+compromise:</p>
+<div class="proof axiom admonition" id="axiom-3">
+<p class="admonition-title"><span class="caption-number">Axiom 10 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>Maximin Share (MMS)</p>
+<ol class="arabic simple">
+<li><p>Each agent <span class="math notranslate nohighlight">\(i\)</span> proposes an allocation <span class="math notranslate nohighlight">\(A^1\)</span> to all agents;</p></li>
+<li><p>The MMS condition is $<span class="math notranslate nohighlight">\(v_i(A_i) \geq \max_{A^i} \min_j v_i(A_j^i)\)</span>$.</p></li>
+</ol>
 </section>
-<section id="big-miners-in-practice">
-<h2>Big Miners in Practice<a class="headerlink" href="#big-miners-in-practice" title="Link to this heading">#</a></h2>
-<p>In 2014: <a class="reference external" href="http://GHash.io">GHash.io</a> controlled more than 51% of computing power but did
-not execute attacks. Instead, they encouraged miners to leave to prevent
-the value of bitcoin from dropping. For smaller coins with lower total
-hash rate, the issue is larger since less computational power is needed
-to achieve majority control. Furthermore, attackers may care less about
-the value od smaller coins. The 51% attack happened multiple times to
-“Ethereum Classic”.</p>
+</div><p>Another compromise can be to approximately satisfy these conditions: let
+<span class="math notranslate nohighlight">\(\overline{a}\)</span> be the best item and <span class="math notranslate nohighlight">\(\underline{a}\)</span> be the worst item.
+Then,</p>
+<ol class="arabic simple">
+<li><p>Envy free up to one item:
+<span class="math notranslate nohighlight">\(v_i(A_i) \geq v_i(A_j \setminus \overline{a})\)</span>;</p>
+<ul class="simple">
+<li><p>Can always be satisfied.</p></li>
+</ul>
+</li>
+<li><p>Envy free up to any item:
+<span class="math notranslate nohighlight">\(v_i(A_i) \geq v_i(A_j \setminus \underline{a})\)</span></p>
+<ul class="simple">
+<li><p>Open problem for whether or not this can always be satisfied.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span>-Maximin Share:
+<span class="math notranslate nohighlight">\(v_i(A_i) \geq \alpha \max_{A^i} \min_j v_i(A_j^i)\)</span></p>
+<ul class="simple">
+<li><p>Can always be satisfied for <span class="math notranslate nohighlight">\(\alpha \leq 3/4\)</span>.</p></li>
+</ul>
+</li>
+<li><p>Approximate competitive equilibrium from equal incomes: only require
+approximate equilibrium.</p>
+<ul class="simple">
+<li><p>Can always be satisfied but computationally difficult to compute</p></li>
+</ul>
+</li>
+</ol>
+<p>Finally, we can directly seek to maximize some “fair” measure of overall
+utility. Some examples are:</p>
+<ol class="arabic simple">
+<li><p>Utilitarian/Social Welfare: <span class="math notranslate nohighlight">\(\max_{A_1,...,A_n} \sum_i v_i(A_i)\)</span>;</p></li>
+<li><p>Nash social welfare: <span class="math notranslate nohighlight">\(\max_{A_1,...,A_n} \prod_i v_i(A_i)\)</span>;</p>
+<ul class="simple">
+<li><p>Middle ground between Utilitarian and Egalitarian.</p></li>
+<li><p>Competitive equilibrium from equal incomes maximizes Nash social
+welfare;</p></li>
+</ul>
+</li>
+<li><p>Egalitarian/maximin: <span class="math notranslate nohighlight">\(\max_{A_1,...,A_n} \min_i v_i(A_i)\)</span>.</p></li>
+</ol>
+</section>
+<section id="dominant-resource-fairness">
+<h2>Dominant Resource Fairness<a class="headerlink" href="#dominant-resource-fairness" title="Link to this heading">#</a></h2>
+<p>Suppose there are <span class="math notranslate nohighlight">\(m\)</span> resources with fixed capacities and <span class="math notranslate nohighlight">\(n\)</span> users that
+want to run as many identical tasks as possible. Each task demands some
+vector of resources to run. For now, suppose resources are
+infinitesimally small. How can resources be allocated fairly and
+efficiently without transfers?</p>
+<p>For any allocation, each user has some fraction of total capacity of
+each resource (given by point-wise division of the user’s usage vector
+by the capacity vector). Then, a user’s dominant resource is the
+resource they have the highest fraction of usage of. Dominant resource
+fairness requires equal shares of dominant resources.</p>
+<div class="proof axiom admonition" id="axiom-4">
+<p class="admonition-title"><span class="caption-number">Axiom 11 </span></p>
+<section class="axiom-content" id="proof-content">
+<p>Algorithm to get DRF Allocation</p>
+<ol class="arabic simple">
+<li><p>Every agent submits their ratio of demands;</p></li>
+<li><p>Algorithm computes the maximal allocation subject to DRF.</p></li>
+</ol>
+</section>
+</div><div class="proof proposition admonition" id="proposition-5">
+<p class="admonition-title"><span class="caption-number">Proposition 4 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>Every user prefers the DRF allocation to just getting <span class="math notranslate nohighlight">\(1/n\)</span> of every
+resource.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  As the allocation is maximal, some resource <span class="math notranslate nohighlight">\(j^*\)</span> is exhausted
+so some agent <span class="math notranslate nohighlight">\(i^*\)</span> gets at least <span class="math notranslate nohighlight">\(1/n\)</span> of <span class="math notranslate nohighlight">\(j^*\)</span>. Then, each agent has
+at least <span class="math notranslate nohighlight">\(1/n\)</span> of their dominant resource.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-6">
+<p class="admonition-title"><span class="caption-number">Proposition 5 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>The DRF mechanism is envy-free.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  If <span class="math notranslate nohighlight">\(i\)</span> envies <span class="math notranslate nohighlight">\(j\)</span>, then <span class="math notranslate nohighlight">\(j\)</span> must have more of every resource so
+in particular, <span class="math notranslate nohighlight">\(j\)</span> must have more of <span class="math notranslate nohighlight">\(i\)</span>’s dominant resource than <span class="math notranslate nohighlight">\(i\)</span>
+does, a contradiction.</p>
+</div>
+<div class="proof proposition admonition" id="proposition-7">
+<p class="admonition-title"><span class="caption-number">Proposition 6 </span></p>
+<section class="proposition-content" id="proof-content">
+<p>The DRF mechanism is Pareto-optimal and strategyproof.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof.  Pareto-Optimal: As the allocation is maximal, some resource ie
+exhausted and no agent can be made happier without making some other
+agent sadder.</p>
+<p>Strategyproof: for any misreport, Pareto-optimality of the allocation
+reached by truthful reporting means that less of the dominant resource
+is received.</p>
+</div>
+</section>
+<section id="drf-in-practice">
+<h2>DRF in Practice<a class="headerlink" href="#drf-in-practice" title="Link to this heading">#</a></h2>
+<p>Some of the assumptions made during the setup might break:</p>
+<ol class="arabic simple">
+<li><p>Tasks are not identical, arrive over time, and depart;</p>
+<ul class="simple">
+<li><p>While resources are not exhausted, select user <span class="math notranslate nohighlight">\(i\)</span> with minimal
+dominant share and add their next feasible task. Not
+strategyproof (can clump tasks together) but works well in
+practice.</p></li>
+</ul>
+</li>
+<li><p>Tasks might have flexibility in resource use;</p></li>
+<li><p>Tasks might have more specific criteria;</p></li>
+<li><p>Tasks not infinitesimally small;</p></li>
+<li><p>Users might have different priority levels;</p>
+<ul class="simple">
+<li><p>Weighted DRF.</p></li>
+</ul>
+</li>
+<li><p>Some tasks have zero demand for some resources.</p>
+<ul class="simple">
+<li><p>Find the maximal DRF allocation and then recurse on remaining
+feasible tasks.</p></li>
+</ul>
+</li>
+</ol>
 </section>
 </section>
 
@@ -607,22 +632,13 @@ the value od smaller coins. The 51% attack happened multiple times to
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="lec10_prediction.html"
+       href="lec13_security_markets.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Prediction Markets and Information Cascades</p>
+        <p class="prev-next-title">Security Markets</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="lec12_pos.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Proof of Stake</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -640,10 +656,9 @@ the value od smaller coins. The 51% attack happened multiple times to
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simplified-bitcoin-protocol">(Simplified) Bitcoin Protocol</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-issues-with-big-miners">Incentive Issues with Big Miners</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selfish-mining">Selfish Mining</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#big-miners-in-practice">Big Miners in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formalizing-fair-allocations">Formalizing Fair Allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dominant-resource-fairness">Dominant Resource Fairness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drf-in-practice">DRF in Practice</a></li>
 </ul>
   </nav></div>
 
