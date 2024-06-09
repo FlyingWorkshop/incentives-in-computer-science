@@ -10,7 +10,10 @@ now have two sided preferences. Another difference: dorm assignments are
 all through Stanford's centralized system, but there is nothing stopping
 doctors and hospitals from matching on their own as an outside option.
 
+```{index} Match
+```
 ```{prf:definition} Match
+:label: match
 Consider a two-sided matching market with $I$
 being participants on one side and $J$ being participants on the other
 side. Each $i \in I$ has preferences over $J$ and each $j \in J$ has
@@ -19,12 +22,18 @@ where $M(i) \in J$ is $i$'s match, $M(i) = i$ if $i$ is unmatched; and
 $M(j) \in I$ is $j$'s match, $M(j) = j$ if $j$ is unmatched.
 ```
 
-```{prf:definition} Blocking Pair 
+```{index} Blocking Pair
+```
+```{prf:definition} Blocking Pair
+:label: blocking-pair
 Given a match $M$, the pair (doctor $i$, hospital $j$) forms a blocking pair if they prefer each other to
 their assignment in $M$.
 ```
 
+```{index} Stable Matching
+```
 ```{prf:definition} Stable Matching
+:label: stable-matching
 A matching $M$ is stable if there are no blocking pairs. Equivalently, for every unmatched pair $(i,j)$ it
 must be true that either:
 -   Doctor $i$ prefers Hospital $M(i)$ over Hospital $j$ or;
@@ -39,7 +48,10 @@ In practice, each hospital accepts more than one doctor. For now, we
 assume that each hospital only has one spot (but the algorithm and
 results can be extended into the multiple spots case).
 
+```{index} Deferred Acceptance
+```
 ```{prf:algorithm} Deferred Acceptance
+:label: deferred-acceptance
 While there is an unmatched doctor $i$:
 
 1.  Try to match doctor $i$ with the next-favorite hospital $j$ in their

@@ -26,7 +26,10 @@ a republican wins (so trades are zero-sum). Then, betters can trade via
 a continuous limit order book.
 ```
 
-```{prf:definition}
+```{index} Spread
+```
+```{prf:definition} Spread
+:label: spread
 Let $\mathrm{Bid}$ denote the highest buy order and $\mathrm{Ask}$ denote the lowest sell
 order. Then, buy and sell orders arrive at any time and trade whenever a
 new buy order is greater than $\mathrm{Ask}$ or if a new sell order is less than
@@ -48,7 +51,10 @@ think $R$ is more likely to win over $p_R$
 One challenge in some prediction markets is large bid-ask spreads. This
 leads to poor information aggregation. Why might spreads be large?
 
-```{prf:definition}
+```{index} Liquidity Providers
+```
+```{prf:definition} Liquidity Providers
+:label: liquidity-providers
 People who buy low now and sell high later without caring about the
 final realization. Liquidity providers leave bid/ask resting orders on
 the order book that other investors can buy/sell with at any time. When

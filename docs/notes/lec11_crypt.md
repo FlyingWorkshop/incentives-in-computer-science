@@ -1,6 +1,9 @@
 # Proof-of-Work Blockchains
 
-```{prf:definition}
+```{index} Digital Signature
+```
+```{prf:definition} Digital Signature
+:label: digital-signature
 A digital signature consists of the following:
 
 1.  a public key and a secret key;
@@ -15,7 +18,10 @@ $\mathrm{verify}(x,y, \mathrm{public\_key})$ to make sure the person with the se
 agreed with $x$.
 ```
 
-```{prf:definition}
+```{index} Hash Function
+```
+```{prf:definition} Hash Function
+:label: hash-function
 A hash function $H$ such that given some input $a$, it is easy to
 compute $H(a)$ but given some output $b$, it is difficult to compute
 $H^{-1}(b)$.
@@ -35,7 +41,10 @@ One way Alice may do this is to provide a history of where the \$ has
 been for Bob to track Alice's history of payments and make sure Alice
 has not already spent the dollar.
 
-```{prf:definition}
+```{index} Ledger
+```
+```{prf:definition} Ledger
+:label: ledger
 A ledger is an ordered history of payments. A decentralized ledger is
 not controlled by any one entity and can continue to work even if a bank
 is hacked (Robinhood, etc.). Consensus occurs when all entities agree
@@ -46,7 +55,10 @@ Ledgers are used to verify ownership of capital. In the early 1980's,
 Byzantine protocols (BFT's) can reach consensus if a certain fraction
 (around $1/2$ to $2/3$) of actors are honest. However, who can join?
 
-```{prf:definition}
+```{index} Permissionless
+```
+```{prf:definition} Permissionless
+:label: permissionless
 A network is permissionless if anyone can join or exit at any time.
 ```
 

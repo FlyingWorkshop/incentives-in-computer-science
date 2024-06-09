@@ -19,7 +19,10 @@ choose not to renew. The issue: students might get a room worse than
 their current room if they enter the lottery. This mechanism is not
 strategyproof and leads to sub-optimal assignments.
 
-```{prf:axiom}
+```{index} Top Trading Cycles
+```
+```{prf:algorithm} Top Trading Cycles
+:label: top-trading-cycles
 Top Trading Cycles Input: $n$ students and $n$ rooms; each student has a
 current room and preferences over all $n$ rooms.\
  \
@@ -40,7 +43,10 @@ While there are still unmatched students and rooms:
 We call this problem the *housing assignment problem with
 **incumbency***.
 
-```{prf:definition}
+```{index} Directed Bipartite Graph
+```
+```{prf:definition} Directed Bipartite Graph
+:label: directed-bipartite-graph
 Informally, a directed bipartite graph is a graph with directed edges
 (arrows) and two disjoint groups (the two sides in a market, e.g.,
 students and houses)
@@ -76,7 +82,10 @@ Since each of the $n$ students reports a preference list of length $n$,
 input size is $n^2$ so runtime is linear in input size.
 ```
 
-```{prf:definition}
+```{index} Individually Rational
+```
+```{prf:definition} Individually Rational
+:label: individually-rational
 A mechanism is individually rational if no agent is worse off after
 participating in the mechanism.
 ```
@@ -154,7 +163,10 @@ do not enter the market for new rooms. Similarly, there can be new
 students that do not yet have a room. Solution: combine ideas from TTC
 and RSD to get "You want my house, I get your turn".
 
-```{prf:axiom}
+```{index} Top Trading Cycles With Chains
+```
+```{prf:algorithm} Top Trading Cycles With Chains
+:label: top-trading-cycles-with-chains
 Top Trading Cycles with Chains
 
 1.  Process all students in random order.

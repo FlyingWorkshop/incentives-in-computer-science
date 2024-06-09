@@ -35,7 +35,10 @@ maximize total payoff across all iterations? One modeling choice:
 whether or not agents can or cannot commit to future behavior is
 important.
 
-```{prf:definition}
+```{index} Subgame Perfect Nash Equilibrium
+```
+```{prf:definition} Subgame Perfect Nash Equilibrium
+:label: subgame-perfect-nash-equilibrium
 A Subgame Perfect Nash Equilibrium is a Nash Equilibrium that is also a
 Nash Equilibrium at any subgame of the original game.
 ```

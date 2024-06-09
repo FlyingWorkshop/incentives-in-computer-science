@@ -18,7 +18,10 @@ Used to auction ad slots on websites. Model:
 
 What is the optimal allocation $A$ to maximize $W$?
 
-```{prf:axiom}
+```{index} General Second Price Auction
+```
+```{prf:algorithm} General Second Price Auction
+:label: general-second-price-auction
 General Second Price Auction
 
 1.  Ask each advertiser for a bid $b_i$;
@@ -41,7 +44,10 @@ lower slot at an even lower price than a higher slot at a high price.
 
 ## Vickrey-Clarke-Groves Mechanism
 
-```{prf:definition}
+```{index} Externality
+```
+```{prf:definition} Externality
+:label: externality
 The externality of agent $i$ is the difference in utility for all other
 agents when $i$ is present versus when $i$ is not.
 ```
@@ -56,8 +62,10 @@ $1$'s externality is
 $$(v_2 \alpha_2) - (v_2 \alpha_1 + v_2 \alpha_1).$$
 ```
 
-```{prf:axiom}
-VCG Mechanism
+```{index} Vickrey–Clarke–Groves Mechanism
+```
+```{prf:algorithm} Vickrey–Clarke–Groves Mechanism
+:label: vickrey–clarke–groves-mechanism
 
 1.  Ask each bidder for their valuation;
 
@@ -104,7 +112,10 @@ $$\sum_{k > j} b_{A(k)}(\alpha_{k-1}-\alpha_k).$$
 
 Another nice property of VCG auctions is that it is envy-free:
 
-```{prf:definition}
+```{index} Envy-Free
+```
+```{prf:definition} Envy-Free
+:label: envy-free
 An assignment $(A,p)$ consisting of an allocation rule and prices is
 envy-free if for all advertisers $i,j$, advertiser $i$ does not envy
 advertiser $j$: $i$'s utility is (weakly) greater than $i$'s utility if

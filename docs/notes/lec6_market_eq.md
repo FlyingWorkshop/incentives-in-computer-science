@@ -21,7 +21,6 @@ money.
 3.  Could be issues with permissions (entering donor lists multiple
     times using bots to try to get a match earlier).
 
-```{prf:definition}
 We have covered four types of game equilbiria:
 
 -   Nash
@@ -33,9 +32,12 @@ We have covered four types of game equilbiria:
 -   Subgame Perfect Equilibrium (SPE)
 
 Today, we begin covering *market equilibria*.
-```
 
-```{prf:definition}
+
+```{index} Cardinal And Ordinal Utility
+```
+```{prf:definition} Cardinal And Ordinal Utility
+:label: cardinal-and-ordinal-utility
 There are two main ways to model utility:
 
 -   Cardinal: assigns some numeric value to how much someone likes
@@ -50,7 +52,10 @@ work with when doing expected utility calculations and can be normalized
 to be in terms of (usually but not always) money.
 ```
 
-```{prf:definition}
+```{index} Fungible And Idiosyncratic Goods
+```
+```{prf:definition} Fungible And Idiosyncratic Goods
+:label: fungible-and-idiosyncratic-goods
 There are two types of goods:
 
 -   Fungible goods have many interchangeable units for sale.
@@ -62,7 +67,10 @@ fungible in terms of how the driver doesn't matter too much, but can
 also be idiosyncratic in terms of caring about where you go.
 ```
 
-```{prf:definition}
+```{index} Supply And Demand Curves
+```
+```{prf:definition} Supply And Demand Curves
+:label: supply-and-demand-curves
 From economics,
 
 -   A demand curve plots the total quantity of a good consumers are
@@ -82,7 +90,10 @@ as price decreases). However, this is not always the case (different
 market structures like a monopoly, weird classes of goods).
 ```
 
-```{prf:definition}
+```{index} Market Clearing Price
+```
+```{prf:definition} Market Clearing Price
+:label: market-clearing-price
 The price where the supply and demand curves meet is called the market
 clearing price. At this price, the quantity demanded is equal to
 quantity demanded so all interested buyers and sellers can transact (and
@@ -110,7 +121,10 @@ Setting:
 
 The solution concept we will use:
 
-```{prf:definition}
+```{index} Competitive Equilibrium
+```
+```{prf:definition} Competitive Equilibrium
+:label: competitive-equilibrium
 A competitive equilibrium is a price vector $p = (p_1,...,p_m)$ and a
 matching $M: \{1,2,...,n\} \to \{1,2,...,m\}$ of buyers to goods such
 that:
@@ -137,11 +151,13 @@ $$v_{i,M(i)} - p_i \geq 0.$$
 
 In addition to equilibrium, we also care about welfare:
 
-```{prf:definition}
+```{index} Social Welfare
+```
+```{prf:definition} Social Welfare
+:label: social-welfare
 The social welfare of an allocation $M$ is the sum of buyers' values:
 
 $$U(M) = \sum_i v_{i,M(i)}.$$
-
 ```
 
 ```{prf:remark}

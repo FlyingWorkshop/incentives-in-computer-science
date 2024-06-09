@@ -19,7 +19,10 @@ benefit society?
 We build on the definitions introduced in Section 11 (Prediction Markets
 and Information Cascades).
 
-```{prf:definition}
+```{index} Naive Investors
+```
+```{prf:definition} Naive Investors
+:label: naive-investors
 Individuals who want to buy/sell stock as a means to store or liquidize
 assets. Naive investors do not have a primary goal of profiting from
 private information.
@@ -55,7 +58,10 @@ events. For example:
 
 4.  Reddit: wallstreetbets and Gamestop stock.
 
-```{prf:definition}
+```{index} Snipers
+```
+```{prf:definition} Snipers
+:label: snipers
 Agents that wait for changes in stock values and rush to trade with
 liquidity providers' standing orders before those standing orders can be
 canceled. As such, being faster than competitors can be profitable.
@@ -97,7 +103,10 @@ How can we resolve these market failures?
 
 ## Blockchain Flashboys
 
-```{prf:definition}
+```{index} Smart Contracts
+```
+```{prf:definition} Smart Contracts
+:label: smart-contracts
 Agreement between two agents for one transaction (borrowing) in the
 current period and a second transaction in some future period (paying
 back, perhaps with interest). If the second transaction does not happen,
@@ -108,7 +117,10 @@ agent.
 The collateral needs to be sent simultaneously with the first
 transaction (otherwise one agent can abort after getting money).
 
-```{prf:definition}
+```{index} Atomic Transaction
+```
+```{prf:definition} Atomic Transaction
+:label: atomic-transaction
 A transaction such that either all steps are executed successfully or
 all steps are canceled.
 ```
@@ -117,7 +129,10 @@ One application of smart contracts is in decentralized finance (DeFi):
 cryptocurrencies, stocks, and contracts are traded. Limit order books
 and automatic market makers can be automated via smart contracts.
 
-```{prf:definition}
+```{index} Arbitrage
+```
+```{prf:definition} Arbitrage
+:label: arbitrage
 Simultaneously buying low in one market while selling high in another.
 ```
 
@@ -139,7 +154,10 @@ Arbitrage is especially attractive with decentralized finance:
     contract automated market makers are available. As such, it is easy
     to exploit bugs.
 
-```{prf:definition}
+```{index} Front-Running
+```
+```{prf:definition} Front-Running
+:label: front-running
 Transacting right before another agent to take advantage of the
 distortionary effects of the latter's transaction.
 ```
