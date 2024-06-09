@@ -1,5 +1,12 @@
 # Prediction Markets and Information Cascades
 
+```{figure} ../images/ox.jpg
+:name: school-choice
+:height: 400px
+
+Muskox *(Ovibos moschatus)* male, Dovrefjell National Park, Norway. Photo from Charles J. Sharp on [Wikipedia](https://en.wikipedia.org/wiki/Muskox).
+```
+
 ```{prf:example}
 How much does an Arctic Musk Ox weigh? At a country fair, the average of
 all guesses turned out to be correct. This example motivates using "the

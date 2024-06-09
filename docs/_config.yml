@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Incentives in Computer Science
-author: Eric Gao, Logan Mondal Bhamidipaty, Aviad Rubinstein
+author: Logan Mondal Bhamidipaty, Eric Gao, Aviad Rubinstein
 logo: images/logo.png
 
 # Force re-execution of notebooks on each build.
