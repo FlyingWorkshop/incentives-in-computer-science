@@ -7,8 +7,10 @@ Model:
 We want to assign students to dorms. One possible solution is to
 maximize the sum of utilities:
 
-```{prf:axiom} Utility Maximization
-
+```{index} Utility Maximization
+```
+```{prf:algorithm} Utility Maximization
+:label: utility-maximization
 1.  Create a bipartite graph with one side being students and the other side being residencies with with edges from students to dorm with edge weight equal to how much student $i$ likes dorm $j$
 
 2.  Find the max-weight matching (i.e., [Hungarian Algorithm](https://en.wikipedia.org/wiki/Hungarian_algorithm))
@@ -26,8 +28,10 @@ As such, finding the matching that maximizes happiness was the right
 solution concept, but failed to take incentives into account. Another
 possible algorithm is serial dictatorship:
 
-```{prf:axiom} Serial Dictatorship
-
+```{index} Serial Dictatorship
+```
+```{prf:algorithm} Serial Dictatorship
+:label: serial-dictatorship
 1.  Students are sorted by some fixed order (random, seniority,
     alphabetically, etc.)
 
@@ -37,7 +41,10 @@ possible algorithm is serial dictatorship:
 
 Is this any better? There can still be students who are unhappy with their result under serial dictatorship.
 
-```{prf:definition}
+```{index} Mechanism
+```
+```{prf:definition} Mechanism
+:label: mechanism
 A mechanism consists of three things: a method of collecting inputs from
 agents, an algorithm that acts on the inputs, and an action that is
 taken based on the output of the algorithm.
@@ -51,18 +58,23 @@ respond to the way inputs are collected.
 
 ## Properties of Serial Dictatorship
 
-```{prf:definition}
-:label: strategyproof_label
+```{index} Strategyproof
+```
+```{prf:definition} Strategyproof
+:label: strategyproof
 A mechanism is strategyproof if it is in every agent's best interest to
 act truthfully.
 ```
 
-```{prf:definition}
+```{index} Dominant Strategy Incentive Compatible
+```
+```{prf:definition} Dominant Strategy Incentive Compatible
+:label: dominant-strategy-incentive-compatible
 A mechanism is dominant strategy incentive compatible if it is a dominant strategy for each participant to act truthfully. In particular, this means that being truthful is a best response to any possible strategy profile of other players.
 ```
 
 ```{prf:theorem}
-The Serial Dictatorship mechanism is dominant strategy incentive
+The serial dictatorship mechanism is dominant strategy incentive
 compatible: it is in every student's best interest to choose their
 favorite available dorm in their term.
 ```
@@ -74,13 +86,19 @@ what you get, so it is best to choose your favorite room among available
 options. 
 ```
 
-```{prf:definition}
+```{index} Pareto Improvement
+```
+```{prf:definition} Pareto Improvement
+:label: pareto-improvement
 An outcome $O'$ is a Pareto improvement over outcome $O$ if all agents
 either strictly prefer $O'$ to $O$ or are indifferent between the two,
 with at least one strict preference.
 ```
 
-```{prf:definition}
+```{index} Pareto Optimal
+```
+```{prf:definition} Pareto Optimal
+:label: pareto-optimal
 An outcome $O$ is Pareto optimal if there are no Pareto improvements
 from $O$.[^1]
 ```

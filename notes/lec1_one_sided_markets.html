@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -412,9 +413,9 @@ document.write(`
 </ul>
 <p>We want to assign students to dorms. One possible solution is to
 maximize the sum of utilities:</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 1 </span> (Utility Maximization)</p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="utility-maximization">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Utility Maximization)</p>
+<section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Create a bipartite graph with one side being students and the other side being residencies with with edges from students to dorm with edge weight equal to how much student <span class="math notranslate nohighlight">\(i\)</span> likes dorm <span class="math notranslate nohighlight">\(j\)</span></p></li>
 <li><p>Find the max-weight matching (i.e., <a class="reference external" href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Algorithm</a>)</p></li>
@@ -425,9 +426,9 @@ like their favorite dorm and undercut how much they like other dorms.</p>
 <p>As such, finding the matching that maximizes happiness was the right
 solution concept, but failed to take incentives into account. Another
 possible algorithm is serial dictatorship:</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 2 </span> (Serial Dictatorship)</p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="serial-dictatorship">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Algorithm 2 </span> (Serial Dictatorship)</p>
+<section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Students are sorted by some fixed order (random, seniority,
 alphabetically, etc.)</p></li>
@@ -436,8 +437,8 @@ preferred available dorm</p></li>
 </ol>
 </section>
 </div><p>Is this any better? There can still be students who are unhappy with their result under serial dictatorship.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 1 </span></p>
+<div class="proof definition admonition" id="mechanism">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 1 </span> (Mechanism)</p>
 <section class="definition-content" id="proof-content">
 <p>A mechanism consists of three things: a method of collecting inputs from
 agents, an algorithm that acts on the inputs, and an action that is
@@ -452,21 +453,21 @@ respond to the way inputs are collected.</p>
 </section>
 </div><section id="properties-of-serial-dictatorship">
 <h2>Properties of Serial Dictatorship<a class="headerlink" href="#properties-of-serial-dictatorship" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="strategyproof_label">
-<p class="admonition-title"><span class="caption-number">Definition 2 </span></p>
+<div class="proof definition admonition" id="strategyproof">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 2 </span> (Strategyproof)</p>
 <section class="definition-content" id="proof-content">
 <p>A mechanism is strategyproof if it is in every agent’s best interest to
 act truthfully.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 3 </span></p>
+</div><div class="proof definition admonition" id="dominant-strategy-incentive-compatible">
+<span id="index-4"></span><p class="admonition-title"><span class="caption-number">Definition 3 </span> (Dominant Strategy Incentive Compatible)</p>
 <section class="definition-content" id="proof-content">
 <p>A mechanism is dominant strategy incentive compatible if it is a dominant strategy for each participant to act truthfully. In particular, this means that being truthful is a best response to any possible strategy profile of other players.</p>
 </section>
 </div><div class="proof theorem admonition" id="theorem-6">
 <p class="admonition-title"><span class="caption-number">Theorem 1 </span></p>
 <section class="theorem-content" id="proof-content">
-<p>The Serial Dictatorship mechanism is dominant strategy incentive
+<p>The serial dictatorship mechanism is dominant strategy incentive
 compatible: it is in every student’s best interest to choose their
 favorite available dorm in their term.</p>
 </section>
@@ -476,15 +477,15 @@ the time your turn comes. When it gets to your turn, what you choose is
 what you get, so it is best to choose your favorite room among available
 options.</p>
 </div>
-<div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 4 </span></p>
+<div class="proof definition admonition" id="pareto-improvement">
+<span id="index-5"></span><p class="admonition-title"><span class="caption-number">Definition 4 </span> (Pareto Improvement)</p>
 <section class="definition-content" id="proof-content">
 <p>An outcome <span class="math notranslate nohighlight">\(O'\)</span> is a Pareto improvement over outcome <span class="math notranslate nohighlight">\(O\)</span> if all agents
 either strictly prefer <span class="math notranslate nohighlight">\(O'\)</span> to <span class="math notranslate nohighlight">\(O\)</span> or are indifferent between the two,
 with at least one strict preference.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-8">
-<p class="admonition-title"><span class="caption-number">Definition 5 </span></p>
+</div><div class="proof definition admonition" id="pareto-optimal">
+<span id="index-6"></span><p class="admonition-title"><span class="caption-number">Definition 5 </span> (Pareto Optimal)</p>
 <section class="definition-content" id="proof-content">
 <p>An outcome <span class="math notranslate nohighlight">\(O\)</span> is Pareto optimal if there are no Pareto improvements
 from <span class="math notranslate nohighlight">\(O\)</span>.<a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>

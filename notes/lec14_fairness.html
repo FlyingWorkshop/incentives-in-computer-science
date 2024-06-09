@@ -64,6 +64,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notes/lec14_fairness';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Index" href="../genindex.html" />
     <link rel="prev" title="Security Markets" href="lec13_security_markets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -195,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -426,8 +428,8 @@ preferences. The chooser directly chooses their outcome.</p>
 </div>
 <p>Why, has this mechanism been used? There is some notion of fairness in
 this:</p>
-<div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 50 </span></p>
+<div class="proof definition admonition" id="envy-free-1">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 48 </span> (Envy-Free)</p>
 <section class="definition-content" id="proof-content">
 <p>An allocation is envy-free if no agent envies another agent’s
 allocation.</p>
@@ -463,9 +465,9 @@ dollar” to spend.</p>
 particular, if there is a single good (and both individuals gain
 strictly positive utility from it), none of these can be satisfied. A
 compromise:</p>
-<div class="proof axiom admonition" id="axiom-3">
-<p class="admonition-title"><span class="caption-number">Axiom 10 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="maximin-share">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Algorithm 11 </span> (Maximin Share)</p>
+<section class="algorithm-content" id="proof-content">
 <p>Maximin Share (MMS)</p>
 <ol class="arabic simple">
 <li><p>Each agent <span class="math notranslate nohighlight">\(i\)</span> proposes an allocation <span class="math notranslate nohighlight">\(A^1\)</span> to all agents;</p></li>
@@ -527,9 +529,9 @@ each resource (given by point-wise division of the user’s usage vector
 by the capacity vector). Then, a user’s dominant resource is the
 resource they have the highest fraction of usage of. Dominant resource
 fairness requires equal shares of dominant resources.</p>
-<div class="proof axiom admonition" id="axiom-4">
-<p class="admonition-title"><span class="caption-number">Axiom 11 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="algorithm-4">
+<p class="admonition-title"><span class="caption-number">Algorithm 12 </span></p>
+<section class="algorithm-content" id="proof-content">
 <p>Algorithm to get DRF Allocation</p>
 <ol class="arabic simple">
 <li><p>Every agent submits their ratio of demands;</p></li>
@@ -639,6 +641,15 @@ feasible tasks.</p></li>
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Security Markets</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../genindex.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Index</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -424,9 +425,9 @@ year. However, they can re-enter the lottery at a low priority if they
 choose not to renew. The issue: students might get a room worse than
 their current room if they enter the lottery. This mechanism is not
 strategyproof and leads to sub-optimal assignments.</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 3 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="top-trading-cycles">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Algorithm 4 </span> (Top Trading Cycles)</p>
+<section class="algorithm-content" id="proof-content">
 <p>Top Trading Cycles Input: <span class="math notranslate nohighlight">\(n\)</span> students and <span class="math notranslate nohighlight">\(n\)</span> rooms; each student has a
 current room and preferences over all <span class="math notranslate nohighlight">\(n\)</span> rooms.<br />
 <br />
@@ -443,8 +444,8 @@ available room;</p></li>
 </section>
 </div><p>We call this problem the <em>housing assignment problem with
 <strong>incumbency</strong></em>.</p>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 9 </span></p>
+<div class="proof definition admonition" id="directed-bipartite-graph">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 9 </span> (Directed Bipartite Graph)</p>
 <section class="definition-content" id="proof-content">
 <p>Informally, a directed bipartite graph is a graph with directed edges
 (arrows) and two disjoint groups (the two sides in a market, e.g.,
@@ -480,8 +481,8 @@ students, so at most <span class="math notranslate nohighlight">\(O(n)\)</span> 
 <p>Since each of the <span class="math notranslate nohighlight">\(n\)</span> students reports a preference list of length <span class="math notranslate nohighlight">\(n\)</span>,
 input size is <span class="math notranslate nohighlight">\(n^2\)</span> so runtime is linear in input size.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-5">
-<p class="admonition-title"><span class="caption-number">Definition 10 </span></p>
+</div><div class="proof definition admonition" id="individually-rational">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 10 </span> (Individually Rational)</p>
 <section class="definition-content" id="proof-content">
 <p>A mechanism is individually rational if no agent is worse off after
 participating in the mechanism.</p>
@@ -546,9 +547,9 @@ most preferred room at the time they form a cycle.</p>
 do not enter the market for new rooms. Similarly, there can be new
 students that do not yet have a room. Solution: combine ideas from TTC
 and RSD to get “You want my house, I get your turn”.</p>
-<div class="proof axiom admonition" id="axiom-9">
-<p class="admonition-title"><span class="caption-number">Axiom 4 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="top-trading-cycles-with-chains">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Algorithm 5 </span> (Top Trading Cycles With Chains)</p>
+<section class="algorithm-content" id="proof-content">
 <p>Top Trading Cycles with Chains</p>
 <ol class="arabic simple">
 <li><p>Process all students in random order.</p></li>

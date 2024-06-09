@@ -169,6 +169,8 @@ Notes on market stability from [ECON 136: Market Design](https://flyingworkshop.
 
 ## Information Asymmetries
 
+```{index} Information Asymmetry
+```
 ```{prf:definition} Information Asymmetry
 :label: info_asym_label
 Informally, the seller knows something that the buyer doesn't.
@@ -209,7 +211,10 @@ Other examples where asymmetric information comes up:
     users do not. Creators what to maximize clicks, users want to avoid
     clickbait.
 
+```{index} Moral Hazard
+```
 ```{prf:definition} Moral Hazard
+:label: moral-hazard
 A moral hazards occur when there is an incentive for an agent to risks, because
 they do not bear the full costs of their actions. For example, insurance might encourage
 risky behavior.
@@ -222,7 +227,10 @@ they reportedly stopped doing so because the rate of bike crashes increased, pre
 emboldened new bikers to take more risks.
 ```
 
+```{index} Adverse Selection
+```
 ```{prf:definition} Adverse Selection
+:label: adverse-selection
 **Adverse selection**: situations where only the low quality
 goods/lemons stay in the market.
 ```

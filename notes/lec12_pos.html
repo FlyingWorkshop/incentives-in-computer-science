@@ -196,6 +196,7 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -428,11 +429,14 @@ Amazon (which means it’s not quite decentralized, but if Amazon goes
 down the world is half over anyways).</p>
 <section id="cryptographic-preliminaries">
 <h2>Cryptographic Preliminaries<a class="headerlink" href="#cryptographic-preliminaries" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 41 </span></p>
+<div class="proof definition admonition" id="pseudo-random-function">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 40 </span> (Pseudo-Random Function)</p>
 <section class="definition-content" id="proof-content">
 <p>Deterministic function that you can share code for, but looks like a
 random function for computationally bounded algorithms.</p>
+<p>A function <span class="math notranslate nohighlight">\(f\)</span> that is similar to a hash function (given <span class="math notranslate nohighlight">\(a\)</span>, it is easy
+to verify that <span class="math notranslate nohighlight">\(f^{-1}(a) = b\)</span>) such that parallelization does not help
+speed up how long it takes to find <span class="math notranslate nohighlight">\(a\)</span>.</p>
 </section>
 </div><div class="proof remark admonition" id="remark-1">
 <p class="admonition-title"><span class="caption-number">Remark 13 </span></p>
@@ -440,15 +444,8 @@ random function for computationally bounded algorithms.</p>
 <p>For the purposes of this class, we will treat pseudo-random functions as
 “cryptographic black magic”.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 42 </span></p>
-<section class="definition-content" id="proof-content">
-<p>A function <span class="math notranslate nohighlight">\(f\)</span> that is similar to a Hash function (given <span class="math notranslate nohighlight">\(a\)</span>, it is easy
-to verify that <span class="math notranslate nohighlight">\(f^{-1}(a) = b\)</span>) such that parallelization does not help
-speed up how long it takes to find <span class="math notranslate nohighlight">\(a\)</span>.</p>
-</section>
-</div><div class="proof definition admonition" id="definition-3">
-<p class="admonition-title"><span class="caption-number">Definition 43 </span></p>
+</div><div class="proof definition admonition" id="cryptographic-commitment-scheme">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 41 </span> (Cryptographic Commitment Scheme)</p>
 <section class="definition-content" id="proof-content">
 <p>Prevents people from changing responses ex-post. Inputs: a secret <span class="math notranslate nohighlight">\(x\)</span>
 and a random string <span class="math notranslate nohighlight">\(r\)</span>.</p>

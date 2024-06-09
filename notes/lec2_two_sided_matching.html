@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -414,8 +415,8 @@ hospitals be matched?</p>
 now have two sided preferences. Another difference: dorm assignments are
 all through Stanford’s centralized system, but there is nothing stopping
 doctors and hospitals from matching on their own as an outside option.</p>
-<div class="proof definition admonition" id="definition-0">
-<p class="admonition-title"><span class="caption-number">Definition 6 </span> (Match)</p>
+<div class="proof definition admonition" id="match">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Definition 6 </span> (Match)</p>
 <section class="definition-content" id="proof-content">
 <p>Consider a two-sided matching market with <span class="math notranslate nohighlight">\(I\)</span>
 being participants on one side and <span class="math notranslate nohighlight">\(J\)</span> being participants on the other
@@ -424,14 +425,14 @@ preferences over <span class="math notranslate nohighlight">\(I\)</span>. A matc
 where <span class="math notranslate nohighlight">\(M(i) \in J\)</span> is <span class="math notranslate nohighlight">\(i\)</span>’s match, <span class="math notranslate nohighlight">\(M(i) = i\)</span> if <span class="math notranslate nohighlight">\(i\)</span> is unmatched; and
 <span class="math notranslate nohighlight">\(M(j) \in I\)</span> is <span class="math notranslate nohighlight">\(j\)</span>’s match, <span class="math notranslate nohighlight">\(M(j) = j\)</span> if <span class="math notranslate nohighlight">\(j\)</span> is unmatched.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-1">
-<p class="admonition-title"><span class="caption-number">Definition 7 </span> (Blocking Pair)</p>
+</div><div class="proof definition admonition" id="blocking-pair">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 7 </span> (Blocking Pair)</p>
 <section class="definition-content" id="proof-content">
 <p>Given a match <span class="math notranslate nohighlight">\(M\)</span>, the pair (doctor <span class="math notranslate nohighlight">\(i\)</span>, hospital <span class="math notranslate nohighlight">\(j\)</span>) forms a blocking pair if they prefer each other to
 their assignment in <span class="math notranslate nohighlight">\(M\)</span>.</p>
 </section>
-</div><div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 8 </span> (Stable Matching)</p>
+</div><div class="proof definition admonition" id="stable-matching">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Definition 8 </span> (Stable Matching)</p>
 <section class="definition-content" id="proof-content">
 <p>A matching <span class="math notranslate nohighlight">\(M\)</span> is stable if there are no blocking pairs. Equivalently, for every unmatched pair <span class="math notranslate nohighlight">\((i,j)\)</span> it
 must be true that either:</p>
@@ -447,8 +448,8 @@ favorite choice. If there ever is a blocking pair, switch the matching.
 In practice, each hospital accepts more than one doctor. For now, we
 assume that each hospital only has one spot (but the algorithm and
 results can be extended into the multiple spots case).</p>
-<div class="proof algorithm admonition" id="algorithm-3">
-<p class="admonition-title"><span class="caption-number">Algorithm 1 </span> (Deferred Acceptance)</p>
+<div class="proof algorithm admonition" id="deferred-acceptance">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Algorithm 3 </span> (Deferred Acceptance)</p>
 <section class="algorithm-content" id="proof-content">
 <p>While there is an unmatched doctor <span class="math notranslate nohighlight">\(i\)</span>:</p>
 <ol class="arabic simple">

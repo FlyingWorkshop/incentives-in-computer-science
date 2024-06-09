@@ -27,9 +27,16 @@ down the world is half over anyways).
 
 ## Cryptographic Preliminaries
 
-```{prf:definition}
+```{index} Pseudo-Random Function
+```
+```{prf:definition} Pseudo-Random Function
+:label: pseudo-random-function
 Deterministic function that you can share code for, but looks like a
 random function for computationally bounded algorithms.
+
+A function $f$ that is similar to a hash function (given $a$, it is easy
+to verify that $f^{-1}(a) = b$) such that parallelization does not help
+speed up how long it takes to find $a$.
 ```
 
 ```{prf:remark}
@@ -37,13 +44,10 @@ For the purposes of this class, we will treat pseudo-random functions as
 "cryptographic black magic".
 ```
 
-```{prf:definition}
-A function $f$ that is similar to a Hash function (given $a$, it is easy
-to verify that $f^{-1}(a) = b$) such that parallelization does not help
-speed up how long it takes to find $a$.
+```{index} Cryptographic Commitment Scheme
 ```
-
-```{prf:definition}
+```{prf:definition} Cryptographic Commitment Scheme
+:label: cryptographic-commitment-scheme
 Prevents people from changing responses ex-post. Inputs: a secret $x$
 and a random string $r$.
 

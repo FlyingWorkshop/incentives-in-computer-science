@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -456,9 +457,9 @@ values but has some prior belief over values.</p></li>
 the item and <span class="math notranslate nohighlight">\(-p_i\)</span> otherwise.</p></li>
 </ol>
 <p>We will focus on sealed-bid auctions:</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 5 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="first-price-auction">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Algorithm 6 </span> (First-Price Auction)</p>
+<section class="algorithm-content" id="proof-content">
 <p>First-Price Auction</p>
 <ol class="arabic simple">
 <li><p>Each bidder submits a bid <span class="math notranslate nohighlight">\(b_i\)</span>, which is unobserved by other
@@ -470,9 +471,9 @@ pays <span class="math notranslate nohighlight">\(b_{i^*}\)</span>.</p></li>
 </div><p>Immediately, bidders will bid lower than their value <span class="math notranslate nohighlight">\(v_i\)</span>: for all
 <span class="math notranslate nohighlight">\(i \in I\)</span> we have that <span class="math notranslate nohighlight">\(b_i &lt; v_i\)</span> in equilibrium. Intuitively, we
 expect bids to grow up as competition increases.</p>
-<div class="proof axiom admonition" id="axiom-1">
-<p class="admonition-title"><span class="caption-number">Axiom 6 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="all-pay-auction">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Algorithm 7 </span> (All-Pay Auction)</p>
+<section class="algorithm-content" id="proof-content">
 <p>All-Pay Auction</p>
 <ol class="arabic simple">
 <li><p>Each bidder submits a bid <span class="math notranslate nohighlight">\(b_i\)</span>, which is unobserved by other
@@ -485,9 +486,9 @@ bidders;</p></li>
 situations (interest groups donating to a politician, animals hunting
 for food). In this model, bidders will still bid lower than their value
 and will generally bid lower than their first-price value.</p>
-<div class="proof axiom admonition" id="axiom-2">
-<p class="admonition-title"><span class="caption-number">Axiom 7 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="second-price-auction">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Algorithm 8 </span> (Second-Price Auction)</p>
+<section class="algorithm-content" id="proof-content">
 <p>Second-Price Auction</p>
 <ol class="arabic simple">
 <li><p>Each bidder submits a bid <span class="math notranslate nohighlight">\(b_i\)</span>, which is unobserved by other
@@ -553,8 +554,8 @@ basically equivalent to <span class="math notranslate nohighlight">\(1\)</span>.
 </section>
 </div><p>To analyze the case with uncertainty and Bayesian agents, we need to
 define a new notion of equilibrium.</p>
-<div class="proof definition admonition" id="definition-7">
-<p class="admonition-title"><span class="caption-number">Definition 32 </span></p>
+<div class="proof definition admonition" id="bayesian-nash-equilibrium">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 31 </span> (Bayesian Nash Equilibrium)</p>
 <section class="definition-content" id="proof-content">
 <p>A Bayesian Nash Equilibrium is a strategy profile such that each player
 is maximizing their own payoff with respect to the posterior belief

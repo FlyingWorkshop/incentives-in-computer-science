@@ -28,21 +28,33 @@ As such, neither the kicker nor the goalie has an incentive to deviate
 from their mixed strategies. 
 ```
 
-```{prf:definition}
+```{index} Pure Strategy
+```
+```{prf:definition} Pure Strategy
+:label: pure-strategy
 A pure strategy fully specifies how a player will play a game. Similar
 to a policy in RL and sequential decision making.
 ```
 
-```{prf:definition}
+```{index} Strategy Set
+```
+```{prf:definition} Strategy Set
+:label: strategy-set
 A player's strategy set is the set of pure strategies available to a
 player
 ```
 
-```{prf:definition}
+```{index} Mixed Strategy
+```
+```{prf:definition} Mixed Strategy
+:label: mixed-strategy
 A mixed strategy is a probability distribution over pure strategies.
 ```
 
-```{prf:definition}
+```{index} Nash Equilibrium
+```
+```{prf:definition} Nash Equilibrium
+:label: nash-equilibrium
 A profile of (possibly randomized) strategies such that no player has
 any profitable deviation keeping the other players' strategies fixed.
 Equivalently, a pair of (possibly randomized) strategies, such that
@@ -82,7 +94,10 @@ from the Min-Max Theorem of VNM.
 
 For more, see presentation from KLB at UCB.
 
-```{prf:definition}
+```{index} Extensive Form Game
+```
+```{prf:definition} Extensive Form Game
+:label: extensive-form-game
 Extensive form games have the following:
 
 -   Game Node: possible current states of the game.
@@ -188,7 +203,10 @@ Consider two cars arriving at an intersection. Payoffs are:
     (Wait, Go) with fifty percent chance.
 ```
 
-```{prf:definition}
+```{index} Correlated Equilibrium
+```
+```{prf:definition} Correlated Equilibrium
+:label: correlated-equilibrium
 A correlated distribution of actions that every player would rather
 follow (e.g., a stop light)
 ```
@@ -212,7 +230,10 @@ What happens if there is commitment? EG intersection game except the
 opponent is a dog who will always play go. Then, you will always choose
 to wait for the dog to go first.
 
-```{prf:definition}
+```{index} Stackelberg Equilibrium
+```
+```{prf:definition} Stackelberg Equilibrium
+:label: stackelberg-equilibrium
 Strategy profile (Leader's strategy, Follower's strategy) such that
 
 1.  Follower's strategy is optimal given Leader's strategy;

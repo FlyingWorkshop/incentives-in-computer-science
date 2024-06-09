@@ -23,7 +23,10 @@ preferences. The chooser directly chooses their outcome.
 Why, has this mechanism been used? There is some notion of fairness in
 this:
 
-```{prf:definition}
+```{index} Envy-Free
+```
+```{prf:definition} Envy-Free
+:label: envy-free-1
 An allocation is envy-free if no agent envies another agent's
 allocation.
 ```
@@ -64,7 +67,10 @@ particular, if there is a single good (and both individuals gain
 strictly positive utility from it), none of these can be satisfied. A
 compromise:
 
-```{prf:axiom}
+```{index} Maximin Share
+```
+```{prf:algorithm} Maximin Share
+:label: maximin-share
 Maximin Share (MMS)
 
 1.  Each agent $i$ proposes an allocation $A^1$ to all agents;
@@ -124,7 +130,7 @@ by the capacity vector). Then, a user's dominant resource is the
 resource they have the highest fraction of usage of. Dominant resource
 fairness requires equal shares of dominant resources.
 
-```{prf:axiom}
+```{prf:algorithm}
 Algorithm to get DRF Allocation
 
 1.  Every agent submits their ratio of demands;

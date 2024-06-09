@@ -196,6 +196,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lec12_pos.html">Proof of Stake</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec13_security_markets.html">Security Markets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lec14_fairness.html">Envy and Fairness</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
 </ul>
 
     </div>
@@ -422,9 +423,9 @@ to the <span class="math notranslate nohighlight">\(A(i)\)</span>th advertiser;<
 </li>
 </ol>
 <p>What is the optimal allocation <span class="math notranslate nohighlight">\(A\)</span> to maximize <span class="math notranslate nohighlight">\(W\)</span>?</p>
-<div class="proof axiom admonition" id="axiom-0">
-<p class="admonition-title"><span class="caption-number">Axiom 8 </span></p>
-<section class="axiom-content" id="proof-content">
+<div class="proof algorithm admonition" id="general-second-price-auction">
+<span id="index-0"></span><p class="admonition-title"><span class="caption-number">Algorithm 9 </span> (General Second Price Auction)</p>
+<section class="algorithm-content" id="proof-content">
 <p>General Second Price Auction</p>
 <ol class="arabic simple">
 <li><p>Ask each advertiser for a bid <span class="math notranslate nohighlight">\(b_i\)</span>;</p></li>
@@ -445,8 +446,8 @@ However, GSP is not strategyproof: some advertisers may prefer to win a
 lower slot at an even lower price than a higher slot at a high price.</p>
 <section id="vickrey-clarke-groves-mechanism">
 <h2>Vickrey-Clarke-Groves Mechanism<a class="headerlink" href="#vickrey-clarke-groves-mechanism" title="Link to this heading">#</a></h2>
-<div class="proof definition admonition" id="definition-2">
-<p class="admonition-title"><span class="caption-number">Definition 33 </span></p>
+<div class="proof definition admonition" id="externality">
+<span id="index-1"></span><p class="admonition-title"><span class="caption-number">Definition 32 </span> (Externality)</p>
 <section class="definition-content" id="proof-content">
 <p>The externality of agent <span class="math notranslate nohighlight">\(i\)</span> is the difference in utility for all other
 agents when <span class="math notranslate nohighlight">\(i\)</span> is present versus when <span class="math notranslate nohighlight">\(i\)</span> is not.</p>
@@ -462,10 +463,9 @@ present, <span class="math notranslate nohighlight">\(2\)</span> gets <span clas
 <div class="math notranslate nohighlight">
 \[(v_2 \alpha_2) - (v_2 \alpha_1 + v_2 \alpha_1).\]</div>
 </section>
-</div><div class="proof axiom admonition" id="axiom-4">
-<p class="admonition-title"><span class="caption-number">Axiom 9 </span></p>
-<section class="axiom-content" id="proof-content">
-<p>VCG Mechanism</p>
+</div><div class="proof algorithm admonition" id="vickrey–clarke–groves-mechanism">
+<span id="index-2"></span><p class="admonition-title"><span class="caption-number">Algorithm 10 </span> (Vickrey–Clarke–Groves Mechanism)</p>
+<section class="algorithm-content" id="proof-content">
 <ol class="arabic simple">
 <li><p>Ask each bidder for their valuation;</p></li>
 <li><p>Find the welfare-maximizing allocation with respect to solicited
@@ -507,8 +507,8 @@ advertiser <span class="math notranslate nohighlight">\(A(j)\)</span> pays</p>
 <div class="math notranslate nohighlight">
 \[\sum_{k &gt; j} b_{A(k)}(\alpha_{k-1}-\alpha_k).\]</div>
 <p>Another nice property of VCG auctions is that it is envy-free:</p>
-<div class="proof definition admonition" id="definition-6">
-<p class="admonition-title"><span class="caption-number">Definition 34 </span></p>
+<div class="proof definition admonition" id="envy-free">
+<span id="index-3"></span><p class="admonition-title"><span class="caption-number">Definition 33 </span> (Envy-Free)</p>
 <section class="definition-content" id="proof-content">
 <p>An assignment <span class="math notranslate nohighlight">\((A,p)\)</span> consisting of an allocation rule and prices is
 envy-free if for all advertisers <span class="math notranslate nohighlight">\(i,j\)</span>, advertiser <span class="math notranslate nohighlight">\(i\)</span> does not envy
