@@ -1,6 +1,6 @@
 # CS269I: Incentives in Computer Science
 
-Online course reader for Stanford's CS269I based on notes from the amazing [Eric Gao](https://twitter.com/gaoooric) and lectures from [Aviad Rubinstein](https://cs.stanford.edu/~aviad/). This course covers many topics across algorithmic game theory (AGT).
+Online course reader for Stanford's CS269I based on notes from the amazing [Eric Gao](https://sites.google.com/view/gaoric/home?authuser=0) and lectures from [Aviad Rubinstein](https://cs.stanford.edu/~aviad/). This course covers many topics across algorithmic game theory (AGT).
 
 
 ## Additional Resources
